@@ -46,10 +46,10 @@ License: For each use you must have a valid license purchased only from above li
 		<?php include 'layout/_default.php' ?>
 		<?php include 'partials/_scrolltop.php' ?>
 		<!--begin::Modals-->
-		<?php include 'partials/modals/_upgrade-plan.php' ?>
+		<?php #include 'partials/modals/_upgrade-plan.php' ?>
 		<?php include 'partials/modals/_view-users.php' ?>
 		<?php include 'partials/modals/users-search/_main.php' ?>
-		<?php include 'partials/modals/_invite-friends.php' ?>
+		<?php #include 'partials/modals/_invite-friends.php' ?>
 		<!--end::Modals-->
 		<!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
