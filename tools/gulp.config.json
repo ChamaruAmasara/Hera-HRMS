@@ -4,7 +4,7 @@
       "src": "../{demo}/src"
     },
     "dist": [
-      "../{demo}/dist/assets"
+      "../project/assets"
     ]
   }
 }
