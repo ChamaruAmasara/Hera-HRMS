@@ -1,3 +1,7 @@
+<?php
+	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
+?>
+
 <!--begin::Page title-->
 <div data-kt-swapper="true" data-kt-swapper-mode="{default: 'prepend', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_content_container', lg: '#kt_app_header_wrapper'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
 	<!--begin::Title-->
@@ -19,8 +23,10 @@
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-muted">Dashboards</li>
+		<li class="breadcrumb-item text-muted"><?php if ($page == 'index') { echo 'Dashboard'; } else { echo ucfirst($page); } ?></li>
 		<!--end::Item-->
+
+		
 	</ul>
 	<!--end::Breadcrumb-->
 </div>
