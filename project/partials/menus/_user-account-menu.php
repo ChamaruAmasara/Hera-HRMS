@@ -29,7 +29,7 @@
 	<!--end::Menu item-->
 	<!--begin::Menu item-->
 	<div class="menu-item px-5">
-		<a href="?page=Employment_Info" class="menu-link px-5">
+		<a href="?page=Employment-Info" class="menu-link px-5">
 			<span class="menu-text">Employment Info</span>			
 		</a>
 	</div>

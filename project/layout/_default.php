@@ -20,25 +20,25 @@
 	                    include 'layout/partials/_content.php  '; 
 					}
 					else if ($page == 'Personal-Info') {
-						include '..\project\pages\User_Profile\PersonalInfo.php';
+						include '..\project\pages\user\profile.php';
 					}
-					else if ($page == 'Employment_Info') {
-						include '..\project\pages\User_Profile\Employment_Info.php';
+					else if ($page == 'Employment-Info') {
+						include '..\project\pages\user\employment.php';
 					}
-					else if ($page == 'Leave_Aplication') {
-						include '..\project\pages\Absence\Leave_Aplication.php';
+					else if ($page == 'Leave-Application') {
+						include '..\project\pages\leave\application.php';
 					}
-					else if ($page == 'Leave_Details') {
-						include '..\project\pages\Absence\Leave_Details.php';
+					else if ($page == 'Leave-Details') {
+						include '..\project\pages\leave\details.php';
 					}
-					else if ($page == 'Employee_Details') {
-						include '..\project\pages\Employees\Employee_Details.php';
+					else if ($page == 'Employee-Details') {
+						include '..\project\pages\employee\details.php';
 					}
-					else if ($page == 'Add_Employee') {
-						include '..\project\pages\Employees\Add_Employee.php';
+					else if ($page == 'Add-Employee') {
+						include '..\project\pages\employee\add.php';
 					}
-					else if ($page == 'Leave_Aproval') {
-						include '..\project\pages\Employees\Leave_Aproval.php';
+					else if ($page == 'Leave-Approval') {
+						include '..\project\pages\employee\leaveApproval.php';
 					}
 					
 					?>

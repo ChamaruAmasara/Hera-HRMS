@@ -53,7 +53,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Employment_Info") { echo 'active'; } ?> href="?page=Employment_Info">
+						<a class="menu-link" <?php if ($page == "Employment-Info") { echo 'active'; } ?> href="?page=Employment-Info">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -88,7 +88,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Leave_Aplication") { echo 'active'; } ?> href="?page=Leave_Aplication">
+						<a class="menu-link" <?php if ($page == "Leave-Application") { echo 'active'; } ?> href="?page=Leave-Application">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -100,7 +100,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Leave_Details") { echo 'active'; } ?> href="?page=Leave_Details">
+						<a class="menu-link" <?php if ($page == "Leave-Details") { echo 'active'; } ?> href="?page=Leave-Details">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -136,7 +136,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Employee_Details") { echo 'active'; } ?> href="?page=Employee_Details">
+						<a class="menu-link" <?php if ($page == "Employee-Details") { echo 'active'; } ?> href="?page=Employee-Details">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -148,7 +148,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Add_Employee") { echo 'active'; } ?> href="?page=Add_Employee">
+						<a class="menu-link" <?php if ($page == "Add-Employee") { echo 'active'; } ?> href="?page=Add-Employee">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -160,7 +160,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Leave_Aproval") { echo 'active'; } ?> href="?page=Leave_Aproval">
+						<a class="menu-link" <?php if ($page == "Leave-Approval") { echo 'active'; } ?> href="?page=Leave-Approval">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>

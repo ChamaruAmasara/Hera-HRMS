@@ -4,7 +4,8 @@
 	<a href="?page=index">
 		<!-- <img alt="Logo" src="assets/media/logos/HERA-logo.png" class="h-25px app-sidebar-logo-default" />
 		<img alt="Logo" src="assets/media/logos/HERA-logo.png" class="h-20px app-sidebar-logo-minimize" /> -->
-		<div class="OrganizationName"><div class="fw-bold text-primary ">Jupiter</div></div>
+		<div class="OrganizationName"><div class="fw-bold text-primary h-25px app-sidebar-logo-default">Jupiter</div></div>
+		<div class="OrganizationName"><div class="fw-bold text-primary h-20px app-sidebar-logo-minimize">J</div></div>
 	</a>
 	<!--end::Logo image-->
 	<!--begin::Sidebar toggle-->
