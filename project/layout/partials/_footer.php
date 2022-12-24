@@ -1,7 +1,17 @@
 <!--begin::Footer-->
-<div id="kt_app_footer" class="app-footer col align-self-center">
+<div id="kt_app_footer" class="app-footer">
 	<!--begin::Footer container-->
-	<div class="fw-light text-center text-black-50">Powered By Hera</div>
+	<div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
+		<!--begin::Copyright-->
+		<div class="text-dark order-2 order-md-1">
+			<span class="text-muted fw-semibold me-1">2022  &copy;</span>
+			<a href="http://hera.chamaru.me/" target="_blank" class="text-gray-800 text-hover-primary">Team 11 at DBMS Project</a>
+		</div>
+		<!--end::Copyright-->
+		<!--begin::Menu-->
+	
+		<!--end::Menu-->
+	</div>
 	<!--end::Footer container-->
 </div>
 <!--end::Footer-->
