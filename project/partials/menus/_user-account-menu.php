@@ -33,6 +33,11 @@
 			<span class="menu-text">Employment Info</span>			
 		</a>
 	</div>
+	<div class="menu-item px-5">
+		<a href="?page=Employment-Info" class="menu-link px-5">
+			<span class="menu-text">Sign Out</span>			
+		</a>
+	</div>
 	<!--end::Menu item-->
 	
 </div>
