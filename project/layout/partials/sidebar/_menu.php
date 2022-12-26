@@ -3,10 +3,11 @@
 ?>
 
 
+
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 	<!--begin::Menu wrapper-->
-	<div style = "position:relative; top:200px;" id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"  data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
+	<div style = "position:relative; top:0px;" id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"  data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
 		<!--begin::Menu-->
 		<div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
 			<!--begin:Menu item-->
@@ -19,9 +20,9 @@
 			</div>
 			<!--end:Menu item-->
 			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Personal-Info" or $page == "Employment-Info") { echo ' hover show'; } ?>">
 				<!--begin:Menu link-->
-				<span class="menu-link">
+				<span class="menu-link <?php if ($page == "Personal-Info" or $page == "Employment-Info") { echo 'active'; } ?>">
 					<span class="menu-icon">
 						<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
 						<span class="svg-icon svg-icon-2">
@@ -41,7 +42,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Personal-Info") { echo 'active'; } ?> href="?page=Personal-Info">
+						<a class="menu-link <?php if ($page == "Personal-Info") { echo 'active'; } ?>"  href="?page=Personal-Info">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -53,7 +54,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Employment-Info") { echo 'active'; } ?> href="?page=Employment-Info">
+						<a class="menu-link <?php if ($page == "Employment-Info") { echo 'active'; } ?>"  href="?page=Employment-Info">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -66,9 +67,9 @@
 				<!--end:Menu sub-->
 			</div>
 			<!--end:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Leave-Application" or $page == "Leave-Details") { echo ' hover show'; } ?>">
 				<!--begin:Menu link-->
-				<span class="menu-link">
+				<span class="menu-link <?php if ($page == "Leave-Application" or $page == "Leave-Details") { echo ' active'; } ?>">
 					<span class="menu-icon">
 						<!--begin::Svg Icon | path: icons/duotune/files/fil003.svg-->
 						<span class="svg-icon svg-icon-2">
@@ -88,7 +89,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Leave-Application") { echo 'active'; } ?> href="?page=Leave-Application">
+						<a class="menu-link <?php if ($page == "Leave-Application") { echo 'active'; } ?>"  href="?page=Leave-Application">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -100,7 +101,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Leave-Details") { echo 'active'; } ?> href="?page=Leave-Details">
+						<a class="menu-link <?php if ($page == "Leave-Details") { echo 'active'; } ?>"  href="?page=Leave-Details">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -114,9 +115,9 @@
 			</div>
 
 			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval") { echo ' hover show'; } ?>">
 				<!--begin:Menu link-->
-				<span class="menu-link">
+				<span class="menu-link <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval") { echo 'active'; } ?>">
 					<span class="menu-icon">
 						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
 						<span class="svg-icon svg-icon-2">
@@ -136,7 +137,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Employee-Details") { echo 'active'; } ?> href="?page=Employee-Details">
+						<a class="menu-link <?php if ($page == "Employee-Details") { echo 'active'; } ?>"  href="?page=Employee-Details">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -148,7 +149,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Add-Employee") { echo 'active'; } ?> href="?page=Add-Employee">
+						<a class="menu-link <?php if ($page == "Add-Employee") { echo 'active'; } ?>"  href="?page=Add-Employee">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -160,7 +161,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" <?php if ($page == "Leave-Approval") { echo 'active'; } ?> href="?page=Leave-Approval">
+						<a class="menu-link <?php if ($page == "Leave-Approval") { echo 'active'; } ?>"  href="?page=Leave-Approval">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -181,3 +182,9 @@
 	<!--end::Menu wrapper-->
 </div>
 <!--end::sidebar menu-->
+
+
+
+
+
+
