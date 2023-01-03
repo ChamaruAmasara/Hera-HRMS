@@ -31,7 +31,7 @@ var KTAccountSettingsProfileDetails = function () {
                     company: {
                         validators: {
                             notEmpty: {
-                                message: 'Company name is required'
+                                message: 'Email is required'
                             }
                         }
                     },
