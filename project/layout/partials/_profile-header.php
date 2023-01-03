@@ -1,6 +1,27 @@
 <?php
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 ?>
+<?php
+	include PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
+	//include '../../includes/dbconfig.inc.php';
+	$connection=openDatabaseConnection();
+	$sql= "SELECT * FROM employee WHERE EmployeeID=0";
+	$result = mysqli_query($connection,$sql);
+
+	$employeeDetails= mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+	$fullName = htmlspecialchars($employeeDetails['Name']);
+	
+	$jibTitleID = htmlspecialchars($employeeDetails['JobTitleID']);
+	$sqlJT= "SELECT JobTitleName FROM jobtitle WHERE JobTitleID=$jibTitleID";
+	$resultJT = mysqli_query($connection,$sqlJT);
+	$rowJT= mysqli_fetch_array($resultJT,MYSQLI_ASSOC);
+	$jobTitle = htmlspecialchars($rowJT['JobTitleName']);
+
+	$address= htmlspecialchars($employeeDetails['Address']);
+
+	//print_r($arrayy);	
+?>
 
 <div class="card mb-5 mb-xl-10">
 										<div class="card-body pt-9 pb-0">
@@ -22,7 +43,7 @@
 														<div class="d-flex flex-column">
 															<!--begin::Name-->
 															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="display-1 color">Max Smith</a>
+																<a href="#" class="display-1 color"><?php echo $fullName ?></a>
 																<a href="#">
 																	<!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
 																	<span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -47,7 +68,7 @@
 																		<rect x="7" y="6" width="4" height="4" rx="2" fill="currentColor" />
 																	</svg>
 																</span>
-																<!--end::Svg Icon-->Developer</a>
+																<!--end::Svg Icon--><?php echo $jobTitle ?></a>
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																<!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
 																<span class="svg-icon svg-icon-4 me-1">
@@ -56,7 +77,7 @@
 																		<path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="currentColor" />
 																	</svg>
 																</span>
-																<!--end::Svg Icon-->SF, Bay Area</a>
+																<!--end::Svg Icon--><?php echo $address ?></a>
 																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 																<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
 																<span class="svg-icon svg-icon-4 me-1">

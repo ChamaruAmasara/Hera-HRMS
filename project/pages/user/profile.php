@@ -1,3 +1,4 @@
+
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
 	<!--begin::Content container-->
@@ -25,7 +26,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800">Max Smith</span>
+													<span class="fw-bold fs-6 text-gray-800"><?php echo $fullName ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
