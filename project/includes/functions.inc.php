@@ -13,6 +13,35 @@ function emptyInputLogin($email,$pwd){
 }
 
 
+function emailDoesNotExists($connection, $username){
+
+
+    $sql="SELECT * FROM useraccount WHERE Username = ?;";
+    $statement = mysqli_stmt_init($connection);
+    if (!mysqli_stmt_prepare($statement,$sql)){
+        header("location: ../?page=Add-Employee&error=usernameDoesNotExists");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement,"s",$username);
+    mysqli_stmt_execute($statement);
+
+    $resultData = mysqli_stmt_get_result($statement);
+
+    if ($row = mysqli_fetch_assoc($resultData)){
+        echo $row;
+        return $row;
+
+    }
+    else{
+        return false;
+
+    }
+    mysqli_stmt_close($statement);
+
+}
+
+
 //create user functions
 function emptyInputCreateUser($name,$email,$username,$pwd,$pwdRepeat){
     $result=false;
@@ -39,7 +68,7 @@ function usernameExists($connection, $username){
 
     $sql="SELECT * FROM useraccount WHERE Username = ?;";
     $statement = mysqli_stmt_init($connection);
-    if (!mysqli_stmt_prepare($statement.$sql)){
+    if (!mysqli_stmt_prepare($statement,$sql)){
         header("location: ../?page=Add-Employee&error=usernameExists");
         exit();
     }

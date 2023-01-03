@@ -13,6 +13,12 @@ if (isset($_POST["submit"])){
         header("location: ../auth/index.php?error=emptyInput");
         exit();
     }
+
+    if (emailDoesNotExists($email)!==true){
+        header("location: ../auth/index.php?error=emailDoesNotExists");
+        exit();
+    }
+
     $connection=openDatabaseConnection();
     loginUser($connection,$email,$password);
 
