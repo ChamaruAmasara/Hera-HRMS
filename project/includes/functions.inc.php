@@ -44,7 +44,7 @@ function usernameExists($connection, $username){
         exit();
     }
 
-    mysqli_stmt_bind_param($statement,"ss",$username);
+    mysqli_stmt_bind_param($statement,"s",$username);
     mysqli_stmt_execute($statement);
 
     $resultData = mysqli_stmt_get_result($statement);

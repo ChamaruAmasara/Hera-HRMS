@@ -1,17 +1,25 @@
-<?php 
+<?php
 
-$serverName = "localhost";
-$userName = "root";
-$password = "";
-$dbName = "hera";
-$port = 3306;
+function openDatabaseConnection()
+{
+    $serverName = "localhost";
+    $userName = "root";
+    $password = "";
+    $dbName = "hera";
+    $port = 3306;
 
 
 // Create connection
-$connection = mysqli_connect($serverName, $userName, $password);
+    $connection = mysqli_connect($serverName, $userName, $password, $dbName, $port);
 
 // Check connection
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
+    if (!$connection) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    echo "Connected successfully";
+    return $connection;
 }
-echo "Connected successfully";
+
+function closeDatabaseConnection($connection){
+    $connection->close();
+}
