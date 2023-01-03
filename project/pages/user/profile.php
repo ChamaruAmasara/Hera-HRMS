@@ -1,3 +1,12 @@
+<?php
+
+?>
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+	<!--begin::Content container-->
+	<div id="kt_app_content_container" class="app-container container-fluid">
+
 <?php include '..\project\layout\partials\_profile-header.php'; ?>
 <!--begin::details View-->
 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
@@ -106,3 +115,6 @@
 										<!--end::Card body-->
 									</div>
 									<!--end::details View-->
+
+	</div>
+</div>

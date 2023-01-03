@@ -1,3 +1,18 @@
+<?php
+
+require 'vendor/autoload.php';
+
+
+session_cache_limiter(false);
+session_start();
+
+ini_set('display_errors','On');
+
+
+ 
+
+?>
+
 <!DOCTYPE html>
 <!--
 Author: Keenthemes
@@ -38,7 +53,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 
-		<link rel="stylesheet" href="Style/style.css">
+		<link rel="stylesheet" href="assets/css/custom.css">
 		<link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
 		<!-- Link to custom css file -->
 	</head>
@@ -50,11 +65,27 @@ License: For each use you must have a valid license purchased only from above li
 		<?php include 'layout/_default.php' ?>
 		<?php include 'partials/_scrolltop.php' ?>
 		<!--begin::Modals-->
-		<?php #include 'partials/modals/_upgrade-plan.php' ?>
+		<?php include 'partials/modals/_upgrade-plan.php' ?>
 		<?php include 'partials/modals/_view-users.php' ?>
 		<?php include 'partials/modals/users-search/_main.php' ?>
 		<?php #include 'partials/modals/_invite-friends.php' ?>
 		<!--end::Modals-->
+
+
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+			<span class="svg-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
+					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="currentColor" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+		<!--end::Scrolltop-->
+
+
 		<!--begin::Javascript-->
 		
 		<script>var hostUrl = "assets/";</script>

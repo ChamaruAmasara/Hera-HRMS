@@ -7,6 +7,12 @@ var KTProjectSettings = function () {
     var handleForm = function () {
         // Init Datepicker --- For more info, please check Flatpickr's official documentation: https://flatpickr.js.org/
         $("#kt_datepicker_1").flatpickr();
+        $("#kt_datepicker_2").flatpickr();
+        $("#kt_datepicker_3").flatpickr({
+            "plugins": [new rangePlugin({ input: "#secondRangeInput"})]
+        });
+        
+        
 
         // Form validation
         var validation;
