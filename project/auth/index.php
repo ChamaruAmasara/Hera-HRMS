@@ -51,8 +51,8 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Aside-->
 					<div class="d-flex flex-center flex-lg-start flex-column">
 						<!--begin::Logo-->
-						<a href="../../demo1/dist/index.html" class="mb-7">
-							<img alt="Logo" src="assets/media/logos/custom-3.svg" />
+						<a href="#" class="mb-7">
+							<img alt="Logo" src="assets/media/logos/HERA-logo.png" width="200px" height="auto"/>
 						</a>
 						<!--end::Logo-->
 						<!--begin::Title-->
@@ -69,7 +69,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Card body-->
 						<div class="card-body p-10 p-lg-20">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="../../demo1/dist/index.html" action="#">
+							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="../" action="#">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
