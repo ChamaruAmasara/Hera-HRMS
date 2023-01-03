@@ -4,6 +4,7 @@
         "phpmailer/phpmailer": "^6.7",
         "hassankhan/config": "^3.1",
         "alexgarrett/violin": "*",
-        "ircmaxell/random-lib": "*"
+        "ircmaxell/random-lib": "*",
+        "slim/slim": "*"
     }
 }
