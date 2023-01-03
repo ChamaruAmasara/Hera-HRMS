@@ -38,7 +38,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 
-		<link rel="stylesheet" href="Style/style.css">
+		<link rel="stylesheet" href="assets/css/custom.css">
 		<link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
 		<!-- Link to custom css file -->
 	</head>
