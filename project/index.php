@@ -8,6 +8,7 @@ session_start();
 
 ini_set('display_errors','On');
 
+define('PROJECT_ROOT_PATH', __DIR__);
 
  
 
