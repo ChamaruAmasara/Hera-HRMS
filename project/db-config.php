@@ -18,4 +18,3 @@ catch(PDOEXception $e){
     echo "Error in connection ".$e->getMessage();
 
 }
-?>
