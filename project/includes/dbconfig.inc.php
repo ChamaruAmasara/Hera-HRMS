@@ -16,3 +16,28 @@ define("DB_NAME", "login");
 define("DB_USER", "doadmin");
 define("DB_PASS", "AVNS_SqQq7e2rtynUogz4zyy");
 define("DB_PORT", "25060");
+
+
+function openDatabaseConnection()
+{
+    $serverName = DB_HOST;
+    $userName = DB_USER;
+    $password = DB_PASS;
+    $dbName = DB_NAME;
+    $port = DB_PORT;
+
+
+// Create connection
+    $connection = mysqli_connect($serverName, $userName, $password, $dbName, $port);
+
+// Check connection
+    if (!$connection) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    echo "Connected successfully";
+    return $connection;
+}
+
+function closeDatabaseConnection($connection){
+    $connection->close();
+}
