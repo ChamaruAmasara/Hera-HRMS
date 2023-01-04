@@ -40,7 +40,9 @@
 					else if ($page == 'Leave-Approval') {
 						include '..\project\pages\employee\leaveApproval.php';
 					}
-					
+					else if ($page == 'Edit-Organization') {
+						include '..\project\pages\employee\editorganization.php';
+					}
 					?>
 				
 				</div>
