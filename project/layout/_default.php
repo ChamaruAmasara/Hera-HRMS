@@ -43,9 +43,6 @@
 					else if ($page == 'Edit-Organization') {
 						include '..\project\pages\employee\editorganization.php';
 					}
-					else if ($page == 'Edit-Employee-Details') {
-						include '..\project\pages\employee\editemployee.php';
-					}
 					?>
 				
 				</div>
