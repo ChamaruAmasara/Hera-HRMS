@@ -37,10 +37,12 @@
 					else if ($page == 'Add-Employee') {
 						include '..\project\pages\employee\add.php';
 					}
-					else if ($page == 'Leave-Approval') {
-						include '..\project\pages\employee\leaveApproval.php';
+					else if ($page == 'Edit-Organization') {
+						include '..\project\pages\employee\editorganization.php';
 					}
-					
+					else if ($page == 'Edit-Employee-Details') {
+						include '..\project\pages\employee\editemployee.php';
+					}
 					?>
 				
 				</div>
