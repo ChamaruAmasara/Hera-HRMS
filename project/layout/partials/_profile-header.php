@@ -2,25 +2,7 @@
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 ?>
 <?php
-	include PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
-	//include '../../includes/dbconfig.inc.php';
-	$connection=openDatabaseConnection();
-	$sql= "SELECT * FROM employee WHERE EmployeeID=0";
-	$result = mysqli_query($connection,$sql);
-
-	$employeeDetails= mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-	$fullName = htmlspecialchars($employeeDetails['Name']);
-	
-	$jibTitleID = htmlspecialchars($employeeDetails['JobTitleID']);
-	$sqlJT= "SELECT JobTitleName FROM jobtitle WHERE JobTitleID=$jibTitleID";
-	$resultJT = mysqli_query($connection,$sqlJT);
-	$rowJT= mysqli_fetch_array($resultJT,MYSQLI_ASSOC);
-	$jobTitle = htmlspecialchars($rowJT['JobTitleName']);
-
-	$address= htmlspecialchars($employeeDetails['Address']);
-
-	//print_r($arrayy);	
+	include PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 ?>
 
 <div class="card mb-5 mb-xl-10">
@@ -86,7 +68,7 @@
 																		<path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="currentColor" />
 																	</svg>
 																</span>
-																<!--end::Svg Icon-->max@kt.com</a>
+																<!--end::Svg Icon--><?php echo $userName ?></a>
 															</div>
 															<!--end::Info-->
 														</div>

@@ -26,7 +26,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800">Software Engineer</span>
+													<span class="fw-bold fs-6 text-gray-800"><?php echo $jobTitle  ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -38,7 +38,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<span class="fw-semibold text-gray-800 fs-6">Level 2</span>
+													<span class="fw-semibold text-gray-800 fs-6"><?php echo $payGrade  ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -50,7 +50,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 d-flex align-items-center">
-													<span class="fw-bold fs-6 text-gray-800 me-2">Contract-Fulltime</span>
+													<span class="fw-bold fs-6 text-gray-800 me-2"><?php echo $empStat  ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -62,7 +62,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 d-flex align-items-center">
-													<span class="fw-bold fs-6 text-gray-800 me-2">Brad Smith</span>
+													<span class="fw-bold fs-6 text-gray-800 me-2"><?php echo $supervisorName  ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
