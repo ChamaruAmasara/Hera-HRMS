@@ -11,7 +11,7 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: 207.180.228.139
+        server: 188.166.189.115
         username: hera
         password: My1stPassword
         local-dir: project/
