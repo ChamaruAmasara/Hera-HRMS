@@ -4,7 +4,7 @@ function openDatabaseConnection()
 {
     $serverName = "localhost";
     $userName = "root";
-    $password = "";
+    $password = "123456789";
     $dbName = "hera";
     $port = 3306;
 
