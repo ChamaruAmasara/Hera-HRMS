@@ -8,6 +8,12 @@ function openDatabaseConnection()
     $dbName = "hera";
     $port = 25060;
 
+    // $serverName = "localhost";
+    // $userName = "root";
+    // $password = "123456789";
+    // $dbName = "hera";
+    // $port = 25060;
+
 
 // Create connection
     $connection = mysqli_connect($serverName, $userName, $password, $dbName, $port);
