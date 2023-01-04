@@ -5,7 +5,7 @@
 
 
     // get employee id using user id
-	$sqlUser="SELECT * FROM useraccount WHERE UserID=1";
+	$sqlUser="SELECT * FROM useraccount WHERE UserID=2";
 	$resultUser = mysqli_query($connection,$sqlUser);
 	$rowUser= mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	$EmployeeID = htmlspecialchars($rowUser['EmployeeID']);
@@ -18,6 +18,9 @@
  
     // get Name
 	$fullName = htmlspecialchars($employeeDetails['Name']);
+
+    // get Email
+    $email = htmlspecialchars($rowUser['Email']);
 
     // get JobTitleName
 	$jibTitleID = htmlspecialchars($employeeDetails['JobTitleID']);
