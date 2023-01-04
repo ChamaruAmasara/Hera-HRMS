@@ -3,6 +3,13 @@
 ?>
 <?php
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+
+	$fullName = $userDetails->getFullName();
+	$profilePic = $userDetails->getProfilePic();
+	$jobTitle = $userDetails->getJobTitle();
+	$address = $userDetails->getAddress();
+	$email = $userDetails->getEmail();
+
 ?>
 
 <div class="card mb-5 mb-xl-10">

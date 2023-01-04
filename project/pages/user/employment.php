@@ -3,7 +3,11 @@
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
-<?php include '..\project\layout\partials\_profile-header.php'; ?>
+<?php include '..\project\layout\partials\_profile-header.php'; 
+	$payGrade = $userDetails->getPayGrade();
+	$empStat = $userDetails->getEmpStat();
+	$supervisorName = $userDetails->getSupervisorName();
+?>
 
 <!--begin::details View-->
 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">

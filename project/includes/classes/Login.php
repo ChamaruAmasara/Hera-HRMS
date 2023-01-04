@@ -1,5 +1,6 @@
 <?php
 
+include_once PROJECT_ROOT_PATH . '/includes/userdetails.inc.php';
 /**
  * Class login
  * handles the user's login and logout process
@@ -87,6 +88,7 @@ class Login
                         $_SESSION['Username'] = $result_row->Username;
                         $_SESSION['Email'] = $result_row->Email;
                         $_SESSION['UserLoginStatus'] = 1;
+                        $_SESSION['User'] = new UserDetails(UID:$result_row->UserID);
 
                     } else {
                         $this->errors[] = "Wrong password. Try again.";

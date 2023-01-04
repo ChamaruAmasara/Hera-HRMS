@@ -1,5 +1,9 @@
 <?php
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	$empCountSQL="SELECT COUNT(EmployeeID) AS empCount FROM employee";
+	$empCountResult=mysqli_query($connection,$empCountSQL);
+	$empCountRow=mysqli_fetch_assoc($empCountResult);
+	$empCount=htmlspecialchars($empCountRow['empCount']);
 ?>
 
 <html lang="en">
@@ -427,39 +431,40 @@
 																<!--begin::Body-->
 																<tbody class="fs-7">
 																	<?php
-																		
-																		<tr>
-																			<td>
-																				<!--begin::User-->
-																				<div class="d-flex align-items-center">
-																					<!--begin::Wrapper-->
-																					<div class="me-5 position-relative">
-																						<!--begin::Avatar-->
-																						<div class="symbol symbol-35px symbol-circle">
-																							<img alt="Pic" src="assets/media/avatars/300-6.jpg" />
-																						</div>
-																						<!--end::Avatar-->
-																					</div>
-																					<!--end::Wrapper-->
-																					<!--begin::Info-->
-																					<div class="d-flex flex-column justify-content-center">
-																						<a href="" class="mb-1 text-gray-800 text-hover-primary">Emma Smith</a>
-																						<div class="fw-semibold fs-6 text-gray-400">smith@kpmg.com</div>
-																					</div>
-																					<!--end::Info-->
-																				</div>
-																				<!--end::User-->
-																			</td>
-																			<td>Jun 20, 2022</td>
-																			<td>$796.00</td>
-																			<td>
-																				<span class="badge badge-light-success fw-bold px-4 py-3">Approved</span>
-																			</td>
-																			<td class="text-end">
-																				<a href="#" class="btn btn-light btn-sm">Edit</a>
-																			</td>
-																			<td>Human Resource</td>
-																		</tr>
+
+																		// foreach
+																		// <tr>
+																		// 	<td>
+																		// 		<!--begin::User-->
+																		// 		<div class="d-flex align-items-center">
+																		// 			<!--begin::Wrapper-->
+																		// 			<div class="me-5 position-relative">
+																		// 				<!--begin::Avatar-->
+																		// 				<div class="symbol symbol-35px symbol-circle">
+																		// 					<img alt="Pic" src="assets/media/avatars/300-6.jpg" />
+																		// 				</div>
+																		// 				<!--end::Avatar-->
+																		// 			</div>
+																		// 			<!--end::Wrapper-->
+																		// 			<!--begin::Info-->
+																		// 			<div class="d-flex flex-column justify-content-center">
+																		// 				<a href="" class="mb-1 text-gray-800 text-hover-primary">Emma Smith</a>
+																		// 				<div class="fw-semibold fs-6 text-gray-400">smith@kpmg.com</div>
+																		// 			</div>
+																		// 			<!--end::Info-->
+																		// 		</div>
+																		// 		<!--end::User-->
+																		// 	</td>
+																		// 	<td>Jun 20, 2022</td>
+																		// 	<td>$796.00</td>
+																		// 	<td>
+																		// 		<span class="badge badge-light-success fw-bold px-4 py-3">Approved</span>
+																		// 	</td>
+																		// 	<td class="text-end">
+																		// 		<a href="#" class="btn btn-light btn-sm">Edit</a>
+																		// 	</td>
+																		// 	<td>Human Resource</td>
+																		// </tr>
 																	?>
 																	<tr>
 																		<td>
