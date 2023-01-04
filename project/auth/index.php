@@ -1,3 +1,19 @@
+<?php
+// show potential errors / feedback (from login object)
+if (isset($login)) {
+    if ($login->errors) {
+        foreach ($login->errors as $error) {
+            echo $error;
+        }
+    }
+    if ($login->messages) {
+        foreach ($login->messages as $message) {
+            echo $message;
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <!--
 Author: Keenthemes
@@ -51,12 +67,12 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Aside-->
 					<div class="d-flex flex-center flex-lg-start flex-column">
 						<!--begin::Logo-->
-						<a href="../../demo1/dist/index.html" class="mb-7">
-							<img alt="Logo" src="assets/media/logos/custom-3.svg" />
+						<a href="#" class="mb-7">
+							<img alt="Logo" src="assets/media/logos/HERA-logo.png" width="200px" height="auto"/>
 						</a>
 						<!--end::Logo-->
 						<!--begin::Title-->
-						<h2 class="text-white fw-normal m-0">Branding tools designed for your business</h2>
+						<h2 class="text-white fw-normal m-0">The Human Resource Management System</h2>
 						<!--end::Title-->
 					</div>
 					<!--begin::Aside-->
@@ -69,53 +85,27 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Card body-->
 						<div class="card-body p-10 p-lg-20">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="../../demo1/dist/index.html" action="#">
+							<form  method="post" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="index.php">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
 									<h1 class="text-dark fw-bolder mb-3">Sign In</h1>
 									<!--end::Title-->
 									<!--begin::Subtitle-->
-									<div class="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div>
+									<div class="text-gray-500 fw-semibold fs-6">to access HERA</div>
 									<!--end::Subtitle=-->
 								</div>
 								<!--begin::Heading-->
-								<!--begin::Login options-->
-								<div class="row g-3 mb-9">
-									<!--begin::Col-->
-									<div class="col-md-6">
-										<!--begin::Google link=-->
-										<a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-										<img alt="Logo" src="assets/media/svg/brand-logos/google-icon.svg" class="h-15px me-3" />Sign in with Google</a>
-										<!--end::Google link=-->
-									</div>
-									<!--end::Col-->
-									<!--begin::Col-->
-									<div class="col-md-6">
-										<!--begin::Google link=-->
-										<a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-										<img alt="Logo" src="assets/media/svg/brand-logos/apple-black.svg" class="theme-light-show h-15px me-3" />
-										<img alt="Logo" src="assets/media/svg/brand-logos/apple-black-dark.svg" class="theme-dark-show h-15px me-3" />Sign in with Apple</a>
-										<!--end::Google link=-->
-									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Login options-->
-								<!--begin::Separator-->
-								<div class="separator separator-content my-14">
-									<span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
-								</div>
-								<!--end::Separator-->
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+									<input type="text" placeholder="User Name" name="user_name" autocomplete="on" class="form-control bg-transparent" id="login_input_username" required/>
 									<!--end::Email-->
 								</div>
 								<!--end::Input group=-->
 								<div class="fv-row mb-3">
 									<!--begin::Password-->
-									<input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
+									<input type="password" placeholder="Password" name="user_password" autocomplete="on" class="form-control bg-transparent" d="login_input_password" required/>
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
@@ -129,7 +119,8 @@ License: For each use you must have a valid license purchased only from above li
 								<!--end::Wrapper-->
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
-									<button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+									<input type="submit"  name="login" value="Log in" />
+									<button type="submit" id="kt_sign_in_submit" name="login" class="btn btn-primary">
 										<!--begin::Indicator label-->
 										<span class="indicator-label">Sign In</span>
 										<!--end::Indicator label-->
