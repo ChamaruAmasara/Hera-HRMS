@@ -5,7 +5,7 @@
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
 <?php 
-	include_once PROJECT_ROOT_PATH.'/layout/partials/_profile-header.php';
+	require_once PROJECT_ROOT_PATH.'/layout/partials/_profile-header.php';
 	//include '/../../layout/partials/_profile-header.php';
 ?>
 

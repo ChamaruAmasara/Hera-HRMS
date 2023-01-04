@@ -1,5 +1,5 @@
 <?php
-    include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+    require_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 ?>
 
 <!--begin::User account menu-->

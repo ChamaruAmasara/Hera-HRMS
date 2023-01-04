@@ -6,7 +6,7 @@ if (isset($_POST["submit"])){
 
     $password = $_POST["password"];
 
-    include_once PROJECT_ROOT_PATH .'/includes/dbconfig.inc.php';
+    require_once PROJECT_ROOT_PATH .'/includes/dbconfig.inc.php';
     require_once 'functions.inc.php';
 
     if (emptyInputLogin($email,$password)!==false){
