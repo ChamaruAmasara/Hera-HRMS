@@ -9,7 +9,7 @@
 	<?php
 		if ($page == "Leave-Application" or $page == "Leave-Details") { echo 'Absence'; }
 		elseif($page == "Personal-Info" or $page == "Employment-Info") { echo 'User Profile'; } 
-		elseif($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval") { echo "Employees"; }
+		elseif($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval" or $page == "Edit-Organization") { echo "Employees"; }
 	
 	?>
 	</h1>
