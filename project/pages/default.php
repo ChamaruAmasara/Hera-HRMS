@@ -45,14 +45,14 @@ License: For each use you must have a valid license purchased only from above li
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_app_body" data-kt-app-page-loading-enabled="true" data-kt-app-page-loading="on" data-kt-app-layout="dark-sidebar" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" class="app-default">
-		<?php include 'partials/theme-mode/_init.php' ?>
-		<?php include 'layout/partials/_page-loader.php' ?>
-		<?php include 'layout/_default.php' ?>
-		<?php include 'partials/_scrolltop.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/partials/theme-mode/_init.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/layout/partials/_page-loader.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/layout/_default.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/partials/_scrolltop.php' ?>
 		<!--begin::Modals-->
-		<?php include 'partials/modals/_upgrade-plan.php' ?>
-		<?php include 'partials/modals/_view-users.php' ?>
-		<?php include 'partials/modals/users-search/_main.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/partials/modals/_upgrade-plan.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/partials/modals/_view-users.php' ?>
+		<?php include PROJECT_ROOT_PATH.'/partials/modals/users-search/_main.php' ?>
 		<?php #include 'partials/modals/_invite-friends.php' ?>
 		<!--end::Modals-->
 

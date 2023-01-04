@@ -17,31 +17,31 @@
 					
 					<?php 
 					if ($page == 'index') {
-	                    include 'layout/partials/_content.php  '; 
+	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
 					}
 					else if ($page == 'Personal-Info') {
-						include '..\project\pages\user\profile.php';
+						include PROJECT_ROOT_PATH.'\pages\user\profile.php';
 					}
 					else if ($page == 'Employment-Info') {
-						include '..\project\pages\user\employment.php';
+						include PROJECT_ROOT_PATH.'\pages\user\employment.php';
 					}
 					else if ($page == 'Leave-Application') {
-						include '..\project\pages\leave\application.php';
+						include PROJECT_ROOT_PATH.'\pages\leave\application.php';
 					}
 					else if ($page == 'Leave-Details') {
-						include '..\project\pages\leave\details.php';
+						include PROJECT_ROOT_PATH.'\pages\leave\details.php';
 					}
 					else if ($page == 'Employee-Details') {
-						include '..\project\pages\employee\details.php';
+						include PROJECT_ROOT_PATH.'\pages\employee\details.php';
 					}
 					else if ($page == 'Add-Employee') {
-						include '..\project\pages\employee\add.php';
+						include PROJECT_ROOT_PATH.'\pages\employee\add.php';
 					}
 					else if ($page == 'Leave-Approval') {
-						include '..\project\pages\employee\leaveApproval.php';
+						include PROJECT_ROOT_PATH.'\pages\employee\leaveApproval.php';
 					}
 					else if ($page == 'Edit-Organization') {
-						include '..\project\pages\employee\editorganization.php';
+						include PROJECT_ROOT_PATH.'\pages\employee\editorganization.php';
 					}
 					?>
 				
