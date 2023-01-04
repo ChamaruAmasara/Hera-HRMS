@@ -67,7 +67,7 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
-                $sql = "SELECT Username, Email, PasswordHash
+                $sql = "SELECT UserID, Username, Email, PasswordHash
                         FROM useraccount
                         WHERE Username = '" . $user_name . "' OR Email = '" . $user_name . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
@@ -83,9 +83,10 @@ class Login
                     if (password_verify($_POST['user_password'], $result_row->PasswordHash)) {
 
                         // write user data into PHP SESSION (a file on your server)
-                        $_SESSION['user_name'] = $result_row->Username;
-                        $_SESSION['user_email'] = $result_row->Email;
-                        $_SESSION['user_login_status'] = 1;
+                        $_SESSION['UserID'] = $result_row->UserID;
+                        $_SESSION['Username'] = $result_row->Username;
+                        $_SESSION['Email'] = $result_row->Email;
+                        $_SESSION['UserLoginStatus'] = 1;
 
                     } else {
                         $this->errors[] = "Wrong password. Try again.";
@@ -118,7 +119,7 @@ class Login
      */
     public function isUserLoggedIn()
     {
-        if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1) {
+        if (isset($_SESSION['UserLoginStatus']) AND $_SESSION['UserLoginStatus'] == 1) {
             return true;
         }
         // default return
