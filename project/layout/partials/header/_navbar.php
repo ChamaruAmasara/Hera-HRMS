@@ -1,3 +1,7 @@
+<?php
+	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+?>
+
 <!--begin::Navbar-->
 <div class="app-navbar flex-shrink-0">
 	<!--begin::Theme mode-->
@@ -9,7 +13,7 @@
 	<div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">
 		<!--begin::Menu wrapper-->
 		<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-			<img src="assets/media/avatars/300-1.jpg" alt="user" />
+			<img src="<?php echo $profilePic  ?>" alt="user" />
 		</div>
 		<?php include 'partials/menus/_user-account-menu.php' ?>
 		<!--end::Menu wrapper-->

@@ -115,9 +115,9 @@
 			</div>
 
 			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval" or $page == "Edit-Organization" or $page == "Edit-Employee-Details") { echo ' hover show'; } ?>">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval") { echo ' hover show'; } ?>">
 				<!--begin:Menu link-->
-				<span class="menu-link <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval" or $page == "Edit-Organization" or $page == "Edit-Employee-Details") { echo 'active'; } ?>">
+				<span class="menu-link <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval") { echo 'active'; } ?>">
 					<span class="menu-icon">
 						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
 						<span class="svg-icon svg-icon-2">
@@ -170,20 +170,6 @@
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
-
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Edit-Organization") { echo 'active'; } ?>"  href="?page=Edit-Organization">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Edit Organization</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-
 
 				</div>
 				<!--end:Menu sub-->
