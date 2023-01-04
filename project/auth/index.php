@@ -1,3 +1,19 @@
+<?php
+// show potential errors / feedback (from login object)
+if (isset($login)) {
+    if ($login->errors) {
+        foreach ($login->errors as $error) {
+            echo $error;
+        }
+    }
+    if ($login->messages) {
+        foreach ($login->messages as $message) {
+            echo $message;
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <!--
 Author: Keenthemes
@@ -69,7 +85,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Card body-->
 						<div class="card-body p-10 p-lg-20">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="#" action="../includes/login.inc.php">
+							<form  method="post" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="index.php">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
@@ -83,13 +99,13 @@ License: For each use you must have a valid license purchased only from above li
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="on" class="form-control bg-transparent" />
+									<input type="text" placeholder="User Name" name="user_name" autocomplete="on" class="form-control bg-transparent" id="login_input_username" required/>
 									<!--end::Email-->
 								</div>
 								<!--end::Input group=-->
 								<div class="fv-row mb-3">
 									<!--begin::Password-->
-									<input type="password" placeholder="Password" name="password" autocomplete="on" class="form-control bg-transparent" />
+									<input type="password" placeholder="Password" name="user_password" autocomplete="on" class="form-control bg-transparent" d="login_input_password" required/>
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
@@ -103,7 +119,8 @@ License: For each use you must have a valid license purchased only from above li
 								<!--end::Wrapper-->
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
-									<button type="submit" id="kt_sign_in_submit" name="submit" class="btn btn-primary">
+									<input type="submit"  name="login" value="Log in" />
+									<button type="submit" id="kt_sign_in_submit" name="login" class="btn btn-primary">
 										<!--begin::Indicator label-->
 										<span class="indicator-label">Sign In</span>
 										<!--end::Indicator label-->
