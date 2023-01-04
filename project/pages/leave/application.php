@@ -1,5 +1,5 @@
 <?php
-	include PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
+	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 ?>
 
 <!--begin::Content-->
