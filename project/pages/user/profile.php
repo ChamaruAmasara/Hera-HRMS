@@ -7,6 +7,13 @@
 <?php 
 	require_once PROJECT_ROOT_PATH.'/layout/partials/_profile-header.php';
 	//include '/../../layout/partials/_profile-header.php';
+
+	$orgName = $userDetails->getOrgName();
+	$userName = $userDetails->getUserName();
+	$bDay = $userDetails->getBDay();
+	$emgContName = $userDetails->getEmgContName();
+	$emgContPhone = $userDetails->getEmgContPhone();
+	$maritalStat = $userDetails->getMaritalStat();
 ?>
 
 

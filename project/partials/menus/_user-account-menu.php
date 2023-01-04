@@ -1,5 +1,9 @@
 <?php
-    require_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+  include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	$userDetails = new UserDetails($_SESSION['UserID']);
+	$fullName = $userDetails->getFullName();
+	$email = $userDetails->getEmail();
+	$profilePic = $userDetails->getProfilePic();
 ?>
 
 <!--begin::User account menu-->

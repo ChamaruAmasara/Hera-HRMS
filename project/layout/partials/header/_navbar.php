@@ -1,5 +1,9 @@
 <?php
-	require_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+
+	$userDetails = $_SESSION['User'];
+	$profilePic = $userDetails->getProfilePic();
+
 ?>
 
 <!--begin::Navbar-->
