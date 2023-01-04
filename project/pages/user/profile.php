@@ -5,7 +5,7 @@
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
 <?php 
-	include PROJECT_ROOT_PATH.'\layout\partials\_profile-header.php';
+	include_once PROJECT_ROOT_PATH.'\layout\partials\_profile-header.php';
 	//include '/../../layout/partials/_profile-header.php';
 ?>
 
@@ -43,7 +43,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<span class="fw-semibold text-gray-800 fs-6">Jupiter</span>
+													<span class="fw-semibold text-gray-800 fs-6"><?php echo $orgName ?></span>
 												</div>
 												<!--end::Col-->
 											</div>

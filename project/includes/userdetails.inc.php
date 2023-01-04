@@ -5,7 +5,7 @@
 
 
     // get employee id using user id
-	$sqlUser="SELECT * FROM useraccount WHERE UserID=5";
+	$sqlUser="SELECT * FROM useraccount WHERE UserID=1";
 	$resultUser = mysqli_query($connection,$sqlUser);
 	$rowUser= mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	$EmployeeID = htmlspecialchars($rowUser['EmployeeID']);
@@ -50,18 +50,36 @@
     $payGradeDetails=mysqli_fetch_assoc($payGradeResult);
     $payGrade=htmlspecialchars($payGradeDetails['PayGradeName']);
 
-    print_r($payGradeDetails);
-    // // get EmploymentStatus
-    // $empStatID=htmlspecialchars($employeeDetails['EmploymentStatusID']);
-    // $empStatSql="SELECT * FROM employmentstatus WHERE EmploymentStatusID =$empStatID";
-    // $empStatResult=mysqli_query($connection,$empStatSql);
-    // $empStatDetails=mysqli_fetch_assoc($empStatResult);
-    // $empStat=htmlspecialchars($empStatDetails['EmploymentStatusName']);
+    // get EmploymentStatus
+    $empStatID=htmlspecialchars($employeeDetails['EmploymentStatusID']);
+    $empStatSql="SELECT * FROM employmentstatus WHERE EmploymentStatusID =$empStatID";
+    $empStatResult=mysqli_query($connection,$empStatSql);
+    $empStatDetails=mysqli_fetch_assoc($empStatResult);
+    $empStat=htmlspecialchars($empStatDetails['EmploymentStatusName']);
 
-    // // get Supervisor Name
-    // $supervisorID=htmlspecialchars($employeeDetails['SupervisorID']);
-    // $supervisorSql="SELECT * FROM employee WHERE EmployeeID =$supervisorID";
-    // $supervisorResult=mysqli_query($connection,$supervisorSql);
-    // $supervisorDetails=mysqli_fetch_assoc($supervisorResult);
-    // $supervisorName=htmlspecialchars($supervisorDetails['Name']);
+    // get Supervisor Name
+    $supervisorID=htmlspecialchars($employeeDetails['SupervisorID']);
+    if ($supervisorID!=null) {
+        $supervisorSql="SELECT * FROM employee WHERE EmployeeID =$supervisorID";
+        $supervisorResult=mysqli_query($connection,$supervisorSql);
+        $supervisorDetails=mysqli_fetch_assoc($supervisorResult);
+        $supervisorName=htmlspecialchars($supervisorDetails['Name']);
+    }
+    else{
+        $supervisorName="No Supervisor";
+    }
+    
+    // get Organization Name
+    $branchID=htmlspecialchars($employeeDetails['BranchID']);
+    $branchSql="SELECT * FROM branch WHERE BranchID =$branchID";
+    $branchResult=mysqli_query($connection,$branchSql);
+    $branchDetails=mysqli_fetch_assoc($branchResult);
+    $orgID=htmlspecialchars($branchDetails['OrganizationID']);
+    $orgSql="SELECT * FROM organization WHERE OrganizationID =$orgID";
+    $orgResult=mysqli_query($connection,$orgSql);
+    $orgDetails=mysqli_fetch_assoc($orgResult);
+    $orgName=htmlspecialchars($orgDetails['Name']);
+
+    // get Profile Picture
+    $profilePic=htmlspecialchars($rowUser['ProfilePhoto']);
 ?>

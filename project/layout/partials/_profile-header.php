@@ -2,7 +2,7 @@
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 ?>
 <?php
-	include PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 ?>
 
 <div class="card mb-5 mb-xl-10">
@@ -12,7 +12,7 @@
 												<!--begin: Pic-->
 												<div class="me-7 mb-4">
 													<div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-														<img src="assets/media/avatars/300-1.jpg" alt="image" />
+														<img src="<?php echo $profilePic  ?>" alt="image" />
 														<div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
 													</div>
 												</div>
