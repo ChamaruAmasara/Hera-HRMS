@@ -123,7 +123,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `hera`.`emergencycontact` (
   `EmergencyContactID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(20) NULL DEFAULT NULL,
-  `PrimaryPhoneNumber` INT NULL DEFAULT NULL,
+  `PrimaryPhoneNumber` VARCHAR(20) NULL DEFAULT NULL,
   `Address` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`EmergencyContactID`),
   UNIQUE INDEX `EmergencyContactID_UNIQUE` (`EmergencyContactID` ASC) VISIBLE)

@@ -1,3 +1,7 @@
+<?php
+	// include PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
+?>
 
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
