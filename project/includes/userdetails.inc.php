@@ -2,8 +2,7 @@
 include_once PROJECT_ROOT_PATH . '/includes/dbconfig.inc.php';
 
 class UserDetails
-{
-    
+{   
     private $fullName;
     private $EmployeeID;
     private $userName;
@@ -188,6 +187,3 @@ class UserDetails
         return $this->profilePic;
     }
 }
-
-
-?>

@@ -3,6 +3,7 @@
 
 	$userDetails = $_SESSION['User'];
 	$profilePic = $userDetails->getProfilePic();
+
 ?>
 
 <!--begin::Navbar-->
