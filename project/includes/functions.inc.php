@@ -2,13 +2,19 @@
 
 //login functions
 
-function loginUser($connection,$email,$password){
-    
 
+function emptyInputLogin($email,$pwd){
+    
+}
+
+function emailDoesNotExists($connection,$email){
 
 }
 
-function emptyInputLogin($email,$pwd){
+
+function loginUser($connection,$email,$password){
+    
+
 
 }
 
@@ -64,9 +70,8 @@ function invalidUsername($username){
 
 
 function usernameExists($connection, $username){
-
-
     $sql="SELECT * FROM useraccount WHERE Username = ?;";
+<<<<<<< Updated upstream
     $statement = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($statement,$sql)){
         header("location: ../?page=Add-Employee&error=usernameExists");
@@ -88,8 +93,12 @@ function usernameExists($connection, $username){
     }
     mysqli_stmt_close($statement);
 
+=======
+    $result = runSQL($connection, $sql, "s", "location: ../?page=Add-Employee&error=usernameExists", $username);
+    return $result;
+>>>>>>> Stashed changes
 }
 
 function createUser($connection, $name, $email, $username, $pwd){
-
+    
 }

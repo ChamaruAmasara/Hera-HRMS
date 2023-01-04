@@ -27,6 +27,9 @@
 					}
 					else if ($page == 'Leave-Application') {
 						include '..\project\pages\leave\application.php';
+					}	
+					else if ($page == 'Leave-Approval') {
+						include '..\project\pages\employee\leaveApproval.php';
 					}
 					else if ($page == 'Leave-Details') {
 						include '..\project\pages\leave\details.php';
