@@ -12,9 +12,9 @@
  * DB_PASS: the password of the above user
  */
 define("DB_HOST", "dbaas-db-8540606-do-user-13235486-0.b.db.ondigitalocean.com");
-define("DB_NAME", "login");
-define("DB_USER", "doadmin");
-define("DB_PASS", "AVNS_SqQq7e2rtynUogz4zyy");
+define("DB_NAME", "hera");
+define("DB_USER", "hera");
+define("DB_PASS", "AVNS_D75G6G_2s2Gk5MnkZY9");
 define("DB_PORT", "25060");
 
 

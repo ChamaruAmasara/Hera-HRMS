@@ -1,11 +1,11 @@
 <?php
-	include PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
+	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 	//include '../../includes/dbconfig.inc.php';
 	$connection=openDatabaseConnection();
 
 
     // get employee id using user id
-	$sqlUser="SELECT * FROM useraccount WHERE UserID=5";
+	$sqlUser="SELECT * FROM useraccount WHERE UserID=1";
 	$resultUser = mysqli_query($connection,$sqlUser);
 	$rowUser= mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	$EmployeeID = htmlspecialchars($rowUser['EmployeeID']);
@@ -51,12 +51,12 @@
     $payGrade=htmlspecialchars($payGradeDetails['PayGradeName']);
 
     print_r($payGradeDetails);
-    // // get EmploymentStatus
-    // $empStatID=htmlspecialchars($employeeDetails['EmploymentStatusID']);
-    // $empStatSql="SELECT * FROM employmentstatus WHERE EmploymentStatusID =$empStatID";
-    // $empStatResult=mysqli_query($connection,$empStatSql);
-    // $empStatDetails=mysqli_fetch_assoc($empStatResult);
-    // $empStat=htmlspecialchars($empStatDetails['EmploymentStatusName']);
+    // get EmploymentStatus
+    $empStatID=htmlspecialchars($employeeDetails['EmploymentStatusID']);
+    $empStatSql="SELECT * FROM employmentstatus WHERE EmploymentStatusID =$empStatID";
+    $empStatResult=mysqli_query($connection,$empStatSql);
+    $empStatDetails=mysqli_fetch_assoc($empStatResult);
+    $empStat=htmlspecialchars($empStatDetails['EmploymentStatusName']);
 
     // // get Supervisor Name
     // $supervisorID=htmlspecialchars($employeeDetails['SupervisorID']);
@@ -64,4 +64,5 @@
     // $supervisorResult=mysqli_query($connection,$supervisorSql);
     // $supervisorDetails=mysqli_fetch_assoc($supervisorResult);
     // $supervisorName=htmlspecialchars($supervisorDetails['Name']);
+
 ?>

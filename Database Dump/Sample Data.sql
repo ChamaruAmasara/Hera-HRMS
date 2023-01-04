@@ -6,7 +6,7 @@ INSERT INTO `hera`.`department` (`DepartmentName`) VALUES ('Engineering');
 INSERT INTO `hera`.`department` (`DepartmentName`) VALUES ('HR');
 INSERT INTO `hera`.`jobtitle` (`JobTitleName`) VALUES ('Software Engineer');
 INSERT INTO `hera`.`jobtitle` (`JobTitleName`) VALUES ('Accuntant');
-INSERT INTO `hera`.`paygrade` (`ApprovedAnnualLeaveCount`, `ApprovedCasualLeaveCount`, `ApprovedMaternityLeaveCount`, `ApprovedPayLeaveCount`) VALUES ('5', '6', '7', '8');
+INSERT INTO `hera`.`paygrade` (`PayGradeName`,`ApprovedAnnualLeaveCount`, `ApprovedCasualLeaveCount`, `ApprovedMaternityLeaveCount`, `ApprovedPayLeaveCount`) VALUES ('Level 1','5', '6', '7', '8');
 INSERT INTO `hera`.`paygrade` (`PayGradeName`, `ApprovedAnnualLeaveCount`, `ApprovedCasualLeaveCount`, `ApprovedMaternityLeaveCount`, `ApprovedPayLeaveCount`) VALUES ('Level 3', '3', '2', '1', '1');
 INSERT INTO `hera`.`employee` (`Name`, `BirthDate`, `MaritalStatus`, `Address`, `EmergencyContactID`, `DepartmentID`, `JobTitleID`, `PayGradeID`, `EmploymentStatusID`) VALUES ('Ginushmal Wikumjith', '2000/08/16','Married', 'Moratuwa,Srilanka.', '1', '1', '1', '1', '1');
 INSERT INTO `hera`.`employee` (`Name`, `BirthDate`, `MaritalStatus`, `Address`, `EmergencyContactID`, `DepartmentID`, `JobTitleID`, `PayGradeID`, `EmploymentStatusID`, `SupervisorID`) VALUES ('Nadun Kumarasingha', '1999/04/01', 'Unmarried', 'Puththalama,Srilanka.', '2', '2', '2', '2', '2', '1');

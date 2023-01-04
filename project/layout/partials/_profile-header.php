@@ -2,7 +2,7 @@
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 ?>
 <?php
-	include PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 ?>
 
 <div class="card mb-5 mb-xl-10">
