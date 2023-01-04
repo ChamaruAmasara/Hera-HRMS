@@ -122,3 +122,5 @@
 		
 	</div>
 	<!--end::Content container-->
+	
+	<script src="assets/js/custom/apps/projects/settings/settings.js"></script>
