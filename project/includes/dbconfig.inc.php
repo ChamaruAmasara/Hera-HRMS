@@ -2,11 +2,11 @@
 
 function openDatabaseConnection()
 {
-    $serverName = "localhost";
-    $userName = "root";
-    $password = "123456789";
+    $serverName = "dbaas-db-8540606-do-user-13235486-0.b.db.ondigitalocean.com";
+    $userName = "hera";
+    $password = "AVNS_D75G6G_2s2Gk5MnkZY9";
     $dbName = "hera";
-    $port = 3306;
+    $port = 25060;
 
 
 // Create connection
