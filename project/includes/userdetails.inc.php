@@ -5,20 +5,20 @@
 
 
     // get employee id using user id
-	$sqlUser="SELECT * FROM useraccount WHERE UserID=1";
+	$sqlUser="SELECT * FROM useraccount WHERE UserID=5";
 	$resultUser = mysqli_query($connection,$sqlUser);
 	$rowUser= mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	$EmployeeID = htmlspecialchars($rowUser['EmployeeID']);
 	$userName= htmlspecialchars($rowUser['Username']);
-
+    
     // get employee details using employee id
 	$sql= "SELECT * FROM employee WHERE EmployeeID=$EmployeeID";
 	$result = mysqli_query($connection,$sql);
 	$employeeDetails= mysqli_fetch_array($result,MYSQLI_ASSOC);
-
+ 
     // get Name
 	$fullName = htmlspecialchars($employeeDetails['Name']);
-	
+
     // get JobTitleName
 	$jibTitleID = htmlspecialchars($employeeDetails['JobTitleID']);
 	$sqlJT= "SELECT JobTitleName FROM jobtitle WHERE JobTitleID=$jibTitleID";
@@ -50,17 +50,18 @@
     $payGradeDetails=mysqli_fetch_assoc($payGradeResult);
     $payGrade=htmlspecialchars($payGradeDetails['PayGradeName']);
 
-    // get EmploymentStatus
-    $empStatID=htmlspecialchars($employeeDetails['EmploymentStatusID']);
-    $empStatSql="SELECT * FROM employmentstatus WHERE EmploymentStatusID =$empStatID";
-    $empStatResult=mysqli_query($connection,$empStatSql);
-    $empStatDetails=mysqli_fetch_assoc($empStatResult);
-    $empStat=htmlspecialchars($empStatDetails['EmploymentStatusName']);
+    print_r($payGradeDetails);
+    // // get EmploymentStatus
+    // $empStatID=htmlspecialchars($employeeDetails['EmploymentStatusID']);
+    // $empStatSql="SELECT * FROM employmentstatus WHERE EmploymentStatusID =$empStatID";
+    // $empStatResult=mysqli_query($connection,$empStatSql);
+    // $empStatDetails=mysqli_fetch_assoc($empStatResult);
+    // $empStat=htmlspecialchars($empStatDetails['EmploymentStatusName']);
 
-    // get Supervisor Name
-    $supervisorID=htmlspecialchars($employeeDetails['SupervisorID']);
-    $supervisorSql="SELECT * FROM employee WHERE EmployeeID =$supervisorID";
-    $supervisorResult=mysqli_query($connection,$supervisorSql);
-    $supervisorDetails=mysqli_fetch_assoc($supervisorResult);
-    $supervisorName=htmlspecialchars($supervisorDetails['Name']);
+    // // get Supervisor Name
+    // $supervisorID=htmlspecialchars($employeeDetails['SupervisorID']);
+    // $supervisorSql="SELECT * FROM employee WHERE EmployeeID =$supervisorID";
+    // $supervisorResult=mysqli_query($connection,$supervisorSql);
+    // $supervisorDetails=mysqli_fetch_assoc($supervisorResult);
+    // $supervisorName=htmlspecialchars($supervisorDetails['Name']);
 ?>
