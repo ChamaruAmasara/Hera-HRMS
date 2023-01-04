@@ -43,7 +43,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 fv-row">
-													<span class="fw-semibold text-gray-800 fs-6">Jupiter</span>
+													<span class="fw-semibold text-gray-800 fs-6"><?php echo $orgName ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
