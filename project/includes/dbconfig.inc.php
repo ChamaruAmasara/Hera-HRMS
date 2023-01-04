@@ -1,18 +1,30 @@
 <?php
 
+/**
+ * Configuration for: Database Connection
+ *
+ * For more information about constants please @see http://php.net/manual/en/function.define.php
+ * If you want to know why we use "define" instead of "const" @see http://stackoverflow.com/q/2447791/1114320
+ *
+ * DB_HOST: database host, usually it's "127.0.0.1" or "localhost", some servers also need port info
+ * DB_NAME: name of the database. please note: database and database table are not the same thing
+ * DB_USER: user for your database. the user needs to have rights for SELECT, UPDATE, DELETE and INSERT.
+ * DB_PASS: the password of the above user
+ */
+define("DB_HOST", "dbaas-db-8540606-do-user-13235486-0.b.db.ondigitalocean.com");
+define("DB_NAME", "login");
+define("DB_USER", "doadmin");
+define("DB_PASS", "AVNS_SqQq7e2rtynUogz4zyy");
+define("DB_PORT", "25060");
+
+
 function openDatabaseConnection()
 {
-    $serverName = "dbaas-db-8540606-do-user-13235486-0.b.db.ondigitalocean.com";
-    $userName = "hera";
-    $password = "AVNS_D75G6G_2s2Gk5MnkZY9";
-    $dbName = "hera";
-    $port = 25060;
-
-    // $serverName = "localhost";
-    // $userName = "root";
-    // $password = "123456789";
-    // $dbName = "hera";
-    // $port = 3306;
+    $serverName = DB_HOST;
+    $userName = DB_USER;
+    $password = DB_PASS;
+    $dbName = DB_NAME;
+    $port = DB_PORT;
 
 
 // Create connection
