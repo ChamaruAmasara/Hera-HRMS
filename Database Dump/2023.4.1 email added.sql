@@ -37,12 +37,16 @@ CREATE TABLE IF NOT EXISTS `hera`.`branch` (
   `BranchID` INT NOT NULL AUTO_INCREMENT,
   `BranchName` VARCHAR(20) NULL DEFAULT NULL,
   `CountryID` INT NULL DEFAULT NULL,
+  `OrganizationID` INT NOT NULL,
   PRIMARY KEY (`BranchID`),
   INDEX `CountryID` (`CountryID` ASC) VISIBLE,
   UNIQUE INDEX `BranchID_UNIQUE` (`BranchID` ASC) VISIBLE,
   CONSTRAINT `branch_ibfk_1`
     FOREIGN KEY (`CountryID`)
-    REFERENCES `hera`.`country` (`CountryID`))
+    REFERENCES `hera`.`country` (`CountryID`),
+  CONSTRAINT `organization_ibfk_1`
+    FOREIGN KEY (`OrganizationID`)
+    REFERENCES `hera`.`organization` (`OrganizationID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
