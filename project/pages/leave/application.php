@@ -22,11 +22,6 @@
 					<!--begin::Card body-->
 					<div class="card-body border-top p-9">
 						
-						
-						
-					
-						
-						
 						<!--begin::Input group-->
 						<div class="row mb-6">
 							<!--begin::Label-->
