@@ -83,7 +83,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`employmentstatus` (
   `EmploymentStatusID` INT NOT NULL AUTO_INCREMENT,
-  `EmploymentStatusName` VARCHAR(20) NULL DEFAULT NULL,
+  `EmploymentStatusName` ENUM('Intern Fulltime', 'Intern Parttime', 'Contract Fulltime', 'Contract Parttime', 'Permanent', 'Freelance') NULL DEFAULT NULL ,
   PRIMARY KEY (`EmploymentStatusID`),
   UNIQUE INDEX `EmploymentStatusID_UNIQUE` (`EmploymentStatusID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -96,7 +96,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`paygrade` (
   `PayGradeID` INT NOT NULL AUTO_INCREMENT,
-  `PayGradeName` VARCHAR(20) NULL DEFAULT NULL,
+  `PayGradeName` ENUM('Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6') NULL DEFAULT NULL ,
   `ApprovedAnnualLeaveCount` INT NULL DEFAULT NULL,
   `ApprovedCasualLeaveCount` INT NULL DEFAULT NULL,
   `ApprovedMaternityLeaveCount` INT NULL DEFAULT NULL,
@@ -113,7 +113,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`jobtitle` (
   `JobTitleID` INT NOT NULL AUTO_INCREMENT,
-  `JobTitleName` VARCHAR(20) NULL DEFAULT NULL,
+  `JobTitleName` ENUM('HR Manager', 'Accuntant', 'Software Engineer', 'QA Engineer') NULL DEFAULT NULL,
   PRIMARY KEY (`JobTitleID`),
   UNIQUE INDEX `JobTitleID_UNIQUE` (`JobTitleID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -145,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `hera`.`employee` (
   `BirthDate` DATE NULL DEFAULT NULL,
   `Gender` ENUM('Male', 'Female') NULL DEFAULT NULL,
   `MaritalStatus` ENUM('Married', 'Unmarried') NULL DEFAULT NULL,
+  `Address` VARCHAR(45) NULL DEFAULT NULL,
   `EmergencyContactID` INT NULL DEFAULT NULL,
   `DepartmentID` INT NULL DEFAULT NULL,
   `JobTitleID` INT NULL DEFAULT NULL,
@@ -282,7 +283,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
   `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
-  `UserAccountLevelName` VARCHAR(20) NULL DEFAULT NULL,
+  `UserAccountLevelName` ENUM('Admin', 'Second Management', 'HR Manager', 'Employee') NULL DEFAULT NULL ,
   `OwnProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') NULL DEFAULT NULL,
   `EveryProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') NULL DEFAULT NULL,
   `CreateProfile` TINYINT(1) NULL DEFAULT NULL,
