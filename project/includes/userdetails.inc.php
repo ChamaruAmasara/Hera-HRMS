@@ -3,9 +3,10 @@
 	//include '../../includes/dbconfig.inc.php';
 	$connection=openDatabaseConnection();
 
+    $UID = $_SESSION['UserID'];
 
     // get employee id using user id
-	$sqlUser="SELECT * FROM useraccount WHERE UserID=2";
+	$sqlUser="SELECT * FROM useraccount WHERE UserID=$UID";
 	$resultUser = mysqli_query($connection,$sqlUser);
 	$rowUser= mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	$EmployeeID = htmlspecialchars($rowUser['EmployeeID']);
