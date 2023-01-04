@@ -1,4 +1,5 @@
 <?php
+   
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 	//include '../../includes/dbconfig.inc.php';
 	$connection=openDatabaseConnection();

@@ -33,8 +33,9 @@ function openDatabaseConnection()
 // Check connection
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
-    }
-    echo "Connected successfully";
+    }?>
+    <div class="text-success" >Connected successfully</div>
+    <?php
     return $connection;
 }
 
