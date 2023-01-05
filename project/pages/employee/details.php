@@ -2,10 +2,17 @@
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 	$connection=openDatabaseConnection();
-	$empCountSQL="SELECT COUNT(EmployeeID) AS empCount FROM employee";
-	$empCountResult=mysqli_query($connection,$empCountSQL);
-	$empCountRow=mysqli_fetch_assoc($empCountResult);
-	$empCount=htmlspecialchars($empCountRow['empCount']);
+	
+	$allEmployeesSql="SELECT * FROM employee";
+	$allEmployeesResult=mysqli_query($connection, $allEmployeesSql);
+	$allEmployees=mysqli_fetch_all($allEmployeesResult, MYSQLI_ASSOC);
+
+	$empCountSql="SELECT COUNT(EmployeeID) FROM employee";
+	$empCountResult=mysqli_query($connection, $empCountSql);
+	$empCount=mysqli_fetch_array($empCountResult, MYSQLI_NUM);
+	$empCount=$empCount[0];
+
+
 ?>
 
 
@@ -39,115 +46,71 @@
 													<!--begin::Border-->
 													<div class="separator separator-dashed my-8"></div>
 													<!--end::Border-->
+
+
 													<!--begin::Input group-->
 													<div class="mb-5">
-														<label class="fs-6 form-label fw-bold text-dark">Team Type</label>
+														<label class="fs-6 form-label fw-bold text-dark">Department</label>
 														<!--begin::Select-->
 														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
-															<option value=""></option>
-															<option value="1">Not Started</option>
-															<option value="2" selected="selected">In Progress</option>
-															<option value="3">Done</option>
+															<option value="1" selected="selected">Not Selected</option>
+															<option value="2">Engineering</option>
+															<option value="3">HR</option>
+															<option value="4">Accounting</option>
 														</select>
 														<!--end::Select-->
 													</div>
 													<!--end::Input group-->
+
 													<!--begin::Input group-->
 													<div class="mb-5">
-														<label class="fs-6 form-label fw-bold text-dark">Team Name</label>
-														<input type="text" class="form-control form-control form-control-solid" name="city" />
+														<label class="fs-6 form-label fw-bold text-dark">Job Title</label>
+														<!--begin::Select-->
+														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="1" selected="selected">Not Selected</option>
+															<option value="2" >Software Engineer</option>
+															<option value="3">QA Engineer</option>
+															<option value="4">Accuntant</option>
+														</select>
+														<!--end::Select-->
 													</div>
 													<!--end::Input group-->
+
 													<!--begin::Input group-->
 													<div class="mb-5">
-														<label class="fs-6 form-label fw-bold text-dark">Team Size</label>
-														<!--begin::Radio group-->
-														<div class="nav-group nav-group-fluid">
-															<!--begin::Option-->
-															<label>
-																<input type="radio" class="btn-check" name="type" value="has" checked="checked" />
-																<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bold px-4">1-5</span>
-															</label>
-															<!--end::Option-->
-															<!--begin::Option-->
-															<label>
-																<input type="radio" class="btn-check" name="type" value="users" />
-																<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bold px-4">5-10</span>
-															</label>
-															<!--end::Option-->
-															<!--begin::Option-->
-															<label>
-																<input type="radio" class="btn-check" name="type" value="orders" />
-																<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bold px-4">10++</span>
-															</label>
-															<!--end::Option-->
-														</div>
-														<!--end::Radio group-->
+														<label class="fs-6 form-label fw-bold text-dark">Paygrade</label>
+														<!--begin::Select-->
+														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="1" selected="selected">Not Selected</option>
+															<option value="2" >Level 1</option>
+															<option value="3">Level 2</option>
+															<option value="4">Level 3</option>
+														</select>
+														<!--end::Select-->
 													</div>
 													<!--end::Input group-->
+
 													<!--begin::Input group-->
 													<div class="mb-5">
-														<label class="fs-6 form-label fw-bold text-dark">Max. Amount</label>
-														<!--begin::Dialer-->
-														<div class="position-relative" data-kt-dialer="true" data-kt-dialer-min="1000" data-kt-dialer-max="50000" data-kt-dialer-step="1000" data-kt-dialer-prefix="$" data-kt-dialer-decimals="2">
-															<!--begin::Decrease control-->
-															<button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
-																<!--begin::Svg Icon | path: icons/duotune/general/gen042.svg-->
-																<span class="svg-icon svg-icon-1">
-																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																		<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-																		<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-																	</svg>
-																</span>
-																<!--end::Svg Icon-->
-															</button>
-															<!--end::Decrease control-->
-															<!--begin::Input control-->
-															<input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="$50" />
-															<!--end::Input control-->
-															<!--begin::Increase control-->
-															<button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
-																<!--begin::Svg Icon | path: icons/duotune/general/gen041.svg-->
-																<span class="svg-icon svg-icon-1">
-																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																		<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-																		<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
-																		<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-																	</svg>
-																</span>
-																<!--end::Svg Icon-->
-															</button>
-															<!--end::Increase control-->
-														</div>
-														<!--end::Dialer-->
+														<label class="fs-6 form-label fw-bold text-dark">Employment status</label>
+														<!--begin::Select-->
+														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="1" selected="selected">Not Selected</option>
+															<option value="2" >Intern Fulltime</option>
+															<option value="3">Intern Parttime</option>
+															<option value="4">Contract Fulltime</option>
+															<option value="5">Contract Parttime</option>
+															<option value="6">Permanent</option>
+															<option value="7">Freelance</option>
+														</select>
+														<!--end::Select-->
 													</div>
 													<!--end::Input group-->
-													<!--begin::Input group-->
-													<div class="mb-10">
-														<label class="fs-6 form-label fw-bold text-dark mb-5">Categories</label>
-														<!--begin::Checkbox-->
-														<div class="form-check form-check-custom form-check-solid mb-5">
-															<input class="form-check-input" type="checkbox" id="kt_search_category_1" />
-															<label class="form-check-label flex-grow-1 fw-semibold text-gray-700 fs-6" for="kt_search_category_1">Electronics</label>
-															<span class="text-gray-400 fw-bold">28</span>
-														</div>
-														<!--end::Checkbox-->
-														<!--begin::Checkbox-->
-														<div class="form-check form-check-custom form-check-solid mb-5">
-															<input class="form-check-input" type="checkbox" id="kt_search_category_2" checked="checked" />
-															<label class="form-check-label flex-grow-1 fw-semibold text-gray-700 fs-6" for="kt_search_category_2">Sport Equipments</label>
-															<span class="text-gray-400 fw-bold">307</span>
-														</div>
-														<!--end::Checkbox-->
-														<!--begin::Checkbox-->
-														<div class="form-check form-check-custom form-check-solid">
-															<input class="form-check-input" type="checkbox" id="kt_search_category_3" />
-															<label class="form-check-label flex-grow-1 fw-semibold text-gray-700 fs-6" for="kt_search_category_3">Furnuture</label>
-															<span class="text-gray-400 fw-bold">54</span>
-														</div>
-														<!--end::Checkbox-->
-													</div>
-													<!--end::Input group-->
+
+													
+
+
+
 													<!--begin::Action-->
 													<div class="d-flex align-items-center justify-content-end">
 														<a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">Discard</a>
@@ -399,74 +362,47 @@
 																<!--begin::Body-->
 																<tbody class="fs-7">
 																	<?php
-
-																		// foreach
-																		// <tr>
-																		// 	<td>
-																		// 		<!--begin::User-->
-																		// 		<div class="d-flex align-items-center">
-																		// 			<!--begin::Wrapper-->
-																		// 			<div class="me-5 position-relative">
-																		// 				<!--begin::Avatar-->
-																		// 				<div class="symbol symbol-35px symbol-circle">
-																		// 					<img alt="Pic" src="assets/media/avatars/300-6.jpg" />
-																		// 				</div>
-																		// 				<!--end::Avatar-->
-																		// 			</div>
-																		// 			<!--end::Wrapper-->
-																		// 			<!--begin::Info-->
-																		// 			<div class="d-flex flex-column justify-content-center">
-																		// 				<a href="" class="mb-1 text-gray-800 text-hover-primary">Emma Smith</a>
-																		// 				<div class="fw-semibold fs-6 text-gray-400">smith@kpmg.com</div>
-																		// 			</div>
-																		// 			<!--end::Info-->
-																		// 		</div>
-																		// 		<!--end::User-->
-																		// 	</td>
-																		// 	<td>Jun 20, 2022</td>
-																		// 	<td>$796.00</td>
-																		// 	<td>
-																		// 		<span class="badge badge-light-success fw-bold px-4 py-3">Approved</span>
-																		// 	</td>
-																		// 	<td class="text-end">
-																		// 		<a href="#" class="btn btn-light btn-sm">Edit</a>
-																		// 	</td>
-																		// 	<td>Human Resource</td>
-																		// </tr>
-																	?>
-																	<tr>
-																		<td>
-																			<!--begin::User-->
-																			<div class="d-flex align-items-center">
-																				<!--begin::Wrapper-->
-																				<div class="me-5 position-relative">
-																					<!--begin::Avatar-->
-																					<div class="symbol symbol-35px symbol-circle">
-																						<img alt="Pic" src="assets/media/avatars/300-6.jpg" />
-																					</div>
-																					<!--end::Avatar-->
-																				</div>
-																				<!--end::Wrapper-->
-																				<!--begin::Info-->
-																				<div class="d-flex flex-column justify-content-center">
-																					<a href="" class="mb-1 text-gray-800 text-hover-primary">Emma Smith</a>
-																					<div class="fw-semibold fs-6 text-gray-400">smith@kpmg.com</div>
-																				</div>
-																				<!--end::Info-->
-																			</div>
-																			<!--end::User-->
-																		</td>
-																		<td>Jun 20, 2022</td>
-																		<td>$6.00</td>
-																		<td>
-																			<span class="badge badge-light-success fw-bold px-4 py-3">Approved</span>
-																		</td>
-																		<td class="text-end">
-																			<a href="#" class="btn btn-light btn-sm">Edit</a>
-																		</td>
-																		<td>Engineering</td>
-																	</tr>
 																	
+																	for ($i = 0; $i < sizeof($allEmployees); $i++) {
+																		
+																	    $empID=$allEmployees[$i]['EmployeeID'];
+
+																		$empDetails=new UserDetails(EmployeeID:$empID); 
+																		?>
+																		<tr>
+																			<td>
+																				<!--begin::User-->
+																				<div class="d-flex align-items-center">
+																					<!--begin::Wrapper-->
+																					<div class="me-5 position-relative">
+																						<!--begin::Avatar-->
+																						<div class="symbol symbol-35px symbol-circle">
+																							<img alt="Pic" src=<?php echo $empDetails->getProfilePic() ?> />
+																						</div>
+																						<!--end::Avatar-->
+																					</div>
+																					<!--end::Wrapper-->
+																					<!--begin::Info-->
+																					<div class="d-flex flex-column justify-content-center">
+																						<a href="" class="mb-1 text-gray-800 text-hover-primary"><?php echo $empDetails->getFullName() ?></a>
+																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $empDetails->getEmail() ?></div>
+																					</div>
+																					<!--end::Info-->
+																				</div>
+																				<!--end::User-->
+																			</td>
+																			<td><?php echo $empDetails->getBDay() ?></td>
+																			<td><?php echo $empDetails->getJobTitle() ?></td>
+																			<td><?php echo $empDetails->getPayGrade() ?></td>
+																			<td class="text-end">
+																				<a href="#" class="btn btn-light btn-sm">Edit</a>
+																			</td>
+																			<td><?php echo $empDetails->getDeptName() ?></td>
+																		</tr>
+																		<?php
+																	}
+																	?>
+															
 																	</tbody>
 																<!--end::Body-->
 															</table>

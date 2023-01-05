@@ -21,6 +21,7 @@ class UserDetails
     private $profilePic;
     private $connection;
     private $rowUser;
+    private $deptName;
 
 
     public function __construct($UID=-1, $EmployeeID=-1)
@@ -41,10 +42,25 @@ class UserDetails
             $this->EmployeeID = $EmployeeID;
 
             // get user id using employee id
-            $sqlEmp= "SELECT * FROM useraccount WHERE EmployeeID=$EmployeeID";
-            $resultEmp = mysqli_query($this->connection, $sqlEmp);
-            $rowEmp = mysqli_fetch_array($resultEmp, MYSQLI_ASSOC);
-            $this->UID = htmlspecialchars($rowEmp['UserID']);
+            $sqlGetUID= "SELECT * FROM useraccount WHERE EmployeeID=$EmployeeID";
+            $resultGetUID = mysqli_query($this->connection, $sqlGetUID);
+            $rowGetUID = mysqli_fetch_array($resultGetUID, MYSQLI_ASSOC);
+            if($rowGetUID == NULL){
+                $this->UID = NULL;
+            }
+            else{
+                $this->UID = htmlspecialchars($rowGetUID['UserID']);
+            }
+
+            if($this->UID != NULL){
+                $sqlUser = "SELECT * FROM useraccount WHERE UserID=$this->UID";
+                $resultUser = mysqli_query($this->connection, $sqlUser);
+                $this->rowUser = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
+            }
+            else{
+                $this->rowUser = NULL;
+            }
+            
         }
 
         $this->getUserDetail();
@@ -61,7 +77,11 @@ class UserDetails
         $this->fullName = htmlspecialchars($employeeDetails['Name']);
 
         // get Email
-        $this->email = htmlspecialchars($this->rowUser['Email']);
+        if($this->rowUser == NULL|| $this->rowUser['Email'] == NULL){
+            $this->email = "Not Set";}
+        else{
+            $this->email = htmlspecialchars($this->rowUser['Email']);
+        }
 
         // get JobTitleName
         $jobTitleID = htmlspecialchars($employeeDetails['JobTitleID']);
@@ -124,7 +144,23 @@ class UserDetails
         $this->orgName = htmlspecialchars($orgDetails['Name']);
 
         // get Profile Picture
-        $this->profilePic = htmlspecialchars($this->rowUser['ProfilePhoto']);
+        if($this->rowUser == NULL||$this->rowUser['ProfilePhoto'] == NULL ){
+            $this->profilePic = "assets\media\avatars\defult.jpg";}
+        else{
+            $this->profilePic = htmlspecialchars($this->rowUser['ProfilePhoto']);
+        }
+
+        // get Department Name
+        $deptID = htmlspecialchars($employeeDetails['DepartmentID']);
+        $deptSql = "SELECT * FROM department WHERE DepartmentID =$deptID";
+        try {
+            $deptResult = mysqli_query($this->connection, $deptSql);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        $deptResult = mysqli_query($this->connection, $deptSql);
+        $deptDetails = mysqli_fetch_array($deptResult, MYSQLI_ASSOC);
+        $this->deptName = htmlspecialchars($deptDetails['DepartmentName']);
     }
     function getFullName()
     {
@@ -185,5 +221,61 @@ class UserDetails
     function getProfilePic()
     {
         return $this->profilePic;
+    }
+    function getDeptName()
+    {
+        return $this->deptName;
+    }
+}
+
+class Employees{
+    private $connection;
+    private $deptFillterRow=array();
+    private $jobTitleFillterRow=array();
+    private $paygradeFillterRow=array();
+    private $empStatusFillterRow=array();
+
+
+    function __construct($connection)
+    {
+        $this->connection = $connection;
+    }
+
+    // get employeed grouped by given filters
+    function getEmployees($deptID=null,$jobTitleID=null,$paygradeID=null,$empStatusID=null){
+        // get employee array by given department   
+        if ($deptID != null) {
+            $this->deptFillterRow=$this->getEmployeeRow("DepartmentID=$deptID");
+        }
+
+        // get employee array by given job title
+        if ($jobTitleID != null) {
+            $this->jobTitleFillterRow=$this->getEmployeeRow("JobTitleID=$jobTitleID");
+        }
+
+        // get employee array by given paygrade
+        if ($paygradeID != null) {
+            $this->paygradeFillterRow=$this->getEmployeeRow("PayGradeID=$paygradeID");
+        }
+
+        // get employee array by given employment status
+        if ($empStatusID != null) {
+            $this->empStatusFillterRow=$this->getEmployeeRow("EmploymentStatusID=$empStatusID");
+        }
+
+
+        $this->combineRows();
+    }
+    private function getEmployeeRow($whereClause){
+        $sql = "SELECT * FROM employee WHERE $whereClause";
+        $result = mysqli_query($this->connection, $sql);
+        $employees = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $employees;
+    }
+
+    private function combineRows(){
+        $employees = array_unique(array_merge($this->deptFillterRow,$this->jobTitleFillterRow,$this->paygradeFillterRow,$this->empStatusFillterRow));
+        return $employees;
     }
 }

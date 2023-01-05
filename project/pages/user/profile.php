@@ -7,6 +7,7 @@
 <?php 
 	require_once PROJECT_ROOT_PATH.'/layout/partials/_profile-header.php';
 	//include '/../../layout/partials/_profile-header.php';
+	$userDetails= $_SESSION['User'];
 
 	$orgName = $userDetails->getOrgName();
 	$userName = $userDetails->getUserName();

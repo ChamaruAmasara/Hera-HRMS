@@ -20,3 +20,10 @@ INSERT INTO `hera`.`country` (`CountryName`) VALUES ('Pakistan');
 INSERT INTO `hera`.`organization` (`Name`, `Address`, `RegistrationNumber`) VALUES ('Jupitar', 'Moratuwa,Srilanka', '12345');
 INSERT INTO `hera`.`branch` (`BranchName`, `CountryID`, `OrganizationID`) VALUES ('Galle Branch', '1', '1');
 INSERT INTO `hera`.`branch` (`BranchName`, `CountryID`, `OrganizationID`) VALUES ('Colombo Branch', '1', '1');
+INSERT INTO `hera`.`emergencycontact` (`Name`, `PrimaryPhoneNumber`, `Address`) VALUES ('Akka', '01187718817', 'thangalla,srilanka');
+INSERT INTO `hera`.`employee` (`Name`, `BirthDate`, `Gender`, `MaritalStatus`, `Address`, `EmergencyContactID`, `DepartmentID`, `BranchID`, `JobTitleID`, `PayGradeID`, `EmploymentStatusID`, `SupervisorID`) VALUES ('Dilshan Rakshitha', '2000-01-02', 'Male', 'Unmarried', 'Padurak Asse,Hambanthota.', '3', '2', '1', '2', '2', '2', '6');
+UPDATE `hera`.`employee` SET `Gender` = 'Male' WHERE (`EmployeeID` = '1');
+UPDATE `hera`.`employee` SET `Gender` = 'Male' WHERE (`EmployeeID` = '2');
+UPDATE `hera`.`employee` SET `Gender` = 'Male' WHERE (`EmployeeID` = '3');
+ALTER TABLE `hera`.`department` 
+CHANGE COLUMN `DeapartmentID` `DepartmentID` INT NOT NULL AUTO_INCREMENT ;

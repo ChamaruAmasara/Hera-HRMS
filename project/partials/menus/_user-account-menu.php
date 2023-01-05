@@ -1,6 +1,6 @@
 <?php
   include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
-	$userDetails = new UserDetails($_SESSION['UserID']);
+	$userDetails = $_SESSION['User'];
 	$fullName = $userDetails->getFullName();
 	$email = $userDetails->getEmail();
 	$profilePic = $userDetails->getProfilePic();
