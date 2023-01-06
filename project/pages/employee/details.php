@@ -1,7 +1,31 @@
 <?php
+	
+	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0');
+
+	// Handle submitions
+	if(isset($_POST['submit'])){
+		echo "submitted";
+		$filter['Department'] = $_POST['Department'];
+		$filter['Job_Title'] = $_POST['Job_Title'];
+		$filter['Paygrade'] = $_POST['Paygrade'];
+		$filter['Employment_status'] = $_POST['Employment_status'];
+		
+
+	}
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
-	$connection=openDatabaseConnection();
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	$allEmployeesSql="SELECT * FROM employee";
 	$allEmployeesResult=mysqli_query($connection, $allEmployeesSql);
@@ -25,7 +49,7 @@
 									<!--begin::Aside-->
 									<div class="flex-column flex-lg-row-auto w-100 w-lg-250px w-xxl-325px mb-8 mb-lg-0 me-lg-9 me-5">
 										<!--begin::Form-->
-										<form action="employeeFilter.php" method="post">
+										<form  href="?page=Employee-Details" method="POST">
 											<!--begin::Card-->
 											<div class="card">
 												<!--begin::Body-->
@@ -52,11 +76,11 @@
 													<div class="mb-5">
 														<label class="fs-6 form-label fw-bold text-dark">Department</label>
 														<!--begin::Select-->
-														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
-															<option value="1" selected="selected">Not Selected</option>
-															<option value="2">Engineering</option>
-															<option value="3">HR</option>
-															<option value="4">Accounting</option>
+														<select name="Department" class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="0"   <?php if ($filter['Department']=='0') {echo 'selected="selected"';}  ?>>Not Selected</option>
+															<option value="Engineering" <?php if ($filter['Department']=="Engineering") {echo 'selected="selected"';}  ?>>Engineering</option>
+															<option value="HR" <?php if ($filter['Department']=="HR") {echo 'selected="selected"';}  ?>>HR</option>
+															<option value="Accounting" <?php if ($filter['Department']=="Accounting") {echo 'selected="selected"';}  ?>>Accounting</option>
 														</select>
 														<!--end::Select-->
 													</div>
@@ -66,11 +90,11 @@
 													<div class="mb-5">
 														<label class="fs-6 form-label fw-bold text-dark">Job Title</label>
 														<!--begin::Select-->
-														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
-															<option value="1" selected="selected">Not Selected</option>
-															<option value="2" >Software Engineer</option>
-															<option value="3">QA Engineer</option>
-															<option value="4">Accuntant</option>
+														<select name="Job_Title" class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="0" <?php if ($filter['Job_Title']=='0') {echo 'selected="selected"';}  ?>>Not Selected</option>
+															<option value="Software_Engineer" <?php if ($filter['Job_Title']=='Software_Engineer') {echo 'selected="selected"';}  ?>>Software Engineer</option>
+															<option value="QA_Engineer" <?php if ($filter['Job_Title']=='QA_Engineer') {echo 'selected="selected"';}  ?>>QA Engineer</option>
+															<option value="Accuntant" <?php if ($filter['Job_Title']=='Accuntant') {echo 'selected="selected"';}  ?>>Accuntant</option>
 														</select>
 														<!--end::Select-->
 													</div>
@@ -80,11 +104,11 @@
 													<div class="mb-5">
 														<label class="fs-6 form-label fw-bold text-dark">Paygrade</label>
 														<!--begin::Select-->
-														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
-															<option value="1" selected="selected">Not Selected</option>
-															<option value="2" >Level 1</option>
-															<option value="3">Level 2</option>
-															<option value="4">Level 3</option>
+														<select name="Paygrade" class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="0" <?php if ($filter['Paygrade']=='0') {echo 'selected="selected"';}  ?>>Not Selected</option>
+															<option value="Level_1" <?php if ($filter['Paygrade']=='Level_1') {echo 'selected="selected"';}  ?>>Level 1</option>
+															<option value="Level_2" <?php if ($filter['Paygrade']=='Level_2') {echo 'selected="selected"';}  ?>>Level 2</option>
+															<option value="Level_3" <?php if ($filter['Paygrade']=='Level_3') {echo 'selected="selected"';}  ?>>Level 3</option>
 														</select>
 														<!--end::Select-->
 													</div>
@@ -94,14 +118,14 @@
 													<div class="mb-5">
 														<label class="fs-6 form-label fw-bold text-dark">Employment status</label>
 														<!--begin::Select-->
-														<select class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
-															<option value="1" selected="selected">Not Selected</option>
-															<option value="2" >Intern Fulltime</option>
-															<option value="3">Intern Parttime</option>
-															<option value="4">Contract Fulltime</option>
-															<option value="5">Contract Parttime</option>
-															<option value="6">Permanent</option>
-															<option value="7">Freelance</option>
+														<select name="Employment_status" class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+															<option value="0" <?php if ($filter['Employment_status']=='0') {echo 'selected="selected"';}  ?>>Not Selected</option>
+															<option value="Intern_Fulltime" <?php if ($filter['Employment_status']=='Intern_Fulltime') {echo 'selected="selected"';}  ?>>Intern Fulltime</option>
+															<option value="Intern_Parttime" <?php if ($filter['Employment_status']=='Intern_Parttime') {echo 'selected="selected"';}  ?>>Intern Parttime</option>
+															<option value="Contract_Fulltime" <?php if ($filter['Employment_status']=='Contract_Fulltime') {echo 'selected="selected"';}  ?>>Contract Fulltime</option>
+															<option value="Contract_Parttime" <?php if ($filter['Employment_status']=='Contract_Parttime') {echo 'selected="selected"';}  ?>>Contract Parttime</option>
+															<option value="Permanent" <?php if ($filter['Employment_status']=='Permanent') {echo 'selected="selected"';}  ?>>Permanent</option>
+															<option value="Freelance" <?php if ($filter['Employment_status']=='Freelance') {echo 'selected="selected"';}  ?>>Freelance</option>
 														</select>
 														<!--end::Select-->
 													</div>
@@ -114,7 +138,7 @@
 													<!--begin::Action-->
 													<div class="d-flex align-items-center justify-content-end">
 														<a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">Discard</a>
-														<a href="#" class="btn btn-primary">Search</a>
+														<input type="submit" name="submit" class="btn btn-primary">
 													</div>
 													<!--end::Action-->
 												</div>
@@ -362,12 +386,9 @@
 																<!--begin::Body-->
 																<tbody class="fs-7">
 																	<?php
-																	
-																	for ($i = 0; $i < sizeof($allEmployees); $i++) {
-																		
-																	    $empID=$allEmployees[$i]['EmployeeID'];
-
-																		$empDetails=new UserDetails(EmployeeID:$empID); 
+																	$empDetails = new UserDetails();
+																	$allEmployees = $empDetails->getAllDetailsSql();
+																	while ($row = $allEmployees->fetch_assoc()) {
 																		?>
 																		<tr>
 																			<td>
@@ -377,27 +398,34 @@
 																					<div class="me-5 position-relative">
 																						<!--begin::Avatar-->
 																						<div class="symbol symbol-35px symbol-circle">
-																							<img alt="Pic" src=<?php echo $empDetails->getProfilePic() ?> />
+																							<img alt="Pic" src=<?php 
+																							if ($row['ProfilePhoto']!=null) {
+																								echo $row['ProfilePhoto']; 
+																							}else{
+																								echo "'assets\media\avatars\defult.jpg'";
+																							}
+																							
+																							?> />
 																						</div>
 																						<!--end::Avatar-->
 																					</div>
 																					<!--end::Wrapper-->
 																					<!--begin::Info-->
 																					<div class="d-flex flex-column justify-content-center">
-																						<a href="" class="mb-1 text-gray-800 text-hover-primary"><?php echo $empDetails->getFullName() ?></a>
-																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $empDetails->getEmail() ?></div>
+																						<a href="" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
+																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $row['Email'] ?></div>
 																					</div>
 																					<!--end::Info-->
 																				</div>
 																				<!--end::User-->
 																			</td>
-																			<td><?php echo $empDetails->getBDay() ?></td>
-																			<td><?php echo $empDetails->getJobTitle() ?></td>
-																			<td><?php echo $empDetails->getPayGrade() ?></td>
+																			<td><?php echo $row['BirthDate'] ?></td>
+																			<td><?php echo $row['JobTitle'] ?></td>
+																			<td><?php echo $row['PayGrade'] ?></td>
 																			<td class="text-end">
 																				<a href="#" class="btn btn-light btn-sm">Edit</a>
 																			</td>
-																			<td><?php echo $empDetails->getDeptName() ?></td>
+																			<td><?php echo $row['DepartmentName'] ?></td>
 																		</tr>
 																		<?php
 																	}

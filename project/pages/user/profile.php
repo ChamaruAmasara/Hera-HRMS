@@ -6,6 +6,7 @@
 
 <?php 
 	require_once PROJECT_ROOT_PATH.'/layout/partials/_profile-header.php';
+	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 	//include '/../../layout/partials/_profile-header.php';
 	$userDetails= $_SESSION['User'];
 
@@ -15,6 +16,15 @@
 	$emgContName = $userDetails->getEmgContName();
 	$emgContPhone = $userDetails->getEmgContPhone();
 	$maritalStat = $userDetails->getMaritalStat();
+
+	$empDetails = new UserDetails();
+	$allEmployees = $empDetails->getAllDetailsSql();
+	while ($row = $allEmployees->fetch_assoc()) {
+		print_r($row);
+	}
+
+		
+
 ?>
 
 

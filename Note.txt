@@ -6,3 +6,5 @@ profilrer pic link ekk oonamee leave ekee patanganna dawasai iwara wena dawasai 
 Add new user implement(convert emp to user)
 
 make leave counts cofigureable
+
+employee add karana kota prof pic ekata defult ekai , email ekat anot given kiyalai auto set karanna oona
