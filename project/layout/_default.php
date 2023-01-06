@@ -1,6 +1,7 @@
 <?php
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
-?>
+	$HiddenPage=isset($_GET['HiddenPage']) ? $_GET['HiddenPage'] : '';
+	?>
 
 <!--begin::App-->
 <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -19,6 +20,9 @@
 					if ($page == 'index') {
 	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
 					}
+					else if ($HiddenPage == 'Employee-Info' AND $page == 'Employee-Details') {
+						include PROJECT_ROOT_PATH.'\pages\employee\info.php';
+					}
 					else if ($page == 'Personal-Info') {
 						include PROJECT_ROOT_PATH.'/pages/user/profile.php';
 					}
@@ -30,7 +34,7 @@
 					}
 					else if ($page == 'Leave-Details') {
 						include PROJECT_ROOT_PATH.'/pages/leave/details.php';
-					}
+					}					
 					else if ($page == 'Employee-Details') {
 						include PROJECT_ROOT_PATH.'/pages/employee/details.php';
 					}
@@ -43,6 +47,7 @@
 					else if ($page == 'Edit-Organization') {
 						include PROJECT_ROOT_PATH.'/pages/employee/editorganization.php';
 					}
+					
 					?>
 				
 				</div>

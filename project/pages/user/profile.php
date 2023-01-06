@@ -17,15 +17,7 @@
 	$emgContName = $userDetailsArray['EmergencyContactName'];
 	$emgContPhone = $userDetailsArray['EmergencyContactPhoneNum'];
 	$maritalStat = $userDetailsArray['MaritalStatus'];
-
-	$empDetails = new UserDetails();
-	$allEmployees = $empDetails->getAllDetailsSql();
-	while ($row = $allEmployees->fetch_assoc()) {
-		print_r($row);
-	}
-
 		
-
 ?>
 
 

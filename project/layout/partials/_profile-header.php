@@ -2,6 +2,12 @@
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	// if (isset($_GET['ID'])) {
+	// 	$id=$_GET['ID'];
+	// 	$userDetails = new UserDetails(EmployeeID:$id);
+	// 	unset($_GET['ID']);
+	// }
+
 	$userDetailsArray = $userDetails->getUserDetailArray();
 
 	$fullName = $userDetailsArray['Name'];
@@ -101,7 +107,7 @@
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
 												<!--begin::Nav item-->
 												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 <?php if ($page == "Personal-Info") {echo("active");}  ?>" href="?page=Personal-Info">Personal Info</a>
+													<a class="nav-link text-active-primary ms-0 me-10 py-5 <?php if ($page == "Personal-Info") {echo("active");}  ?>href="?page=Personal-Info>Personal Info</a>
 												</li>
 												<!--end::Nav item-->
 												<!--begin::Nav item-->
