@@ -1,7 +1,7 @@
 <?php
 	
 	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0');
-
+	$conditions = array('1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
 	if(isset($_POST['submit'])){
 		echo "submitted";
@@ -9,9 +9,85 @@
 		$filter['Job_Title'] = $_POST['Job_Title'];
 		$filter['Paygrade'] = $_POST['Paygrade'];
 		$filter['Employment_status'] = $_POST['Employment_status'];
-		
-
 	}
+
+
+	switch ($filter['Department']) {
+		case '0':
+			break;
+		case 'Engineering':
+			$conditions[0] = "Department = 'Engineering'";
+			break;
+		case 'HR':
+			$conditions[0] = "Department = 'HR'";
+			break;
+		case 'Accounting':
+			$conditions[0] = "Department = 'Accounting'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Job_Title']){
+		case '0':
+			break;
+		case 'Software_Engineer':
+			$conditions[1] = "JobTitle = ''Software Engineer''";
+			break;
+		case 'QA_Engineer':
+			$conditions[1] = "JobTitle = 'QA Engineer'";
+			break;
+		case 'Accountant':
+			$conditions[1] = "JobTitle = 'Accountant'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Paygrade']){
+		case '0':
+			break;
+		case 'Level_1':
+			$conditions[2] = "PayGrade = 'Level 1'";
+			break;
+		case 'Level_2':
+			$conditions[2] = "PayGrade = 'Level 2'";
+			break;
+		case 'Level_3':
+			$conditions[2] = "PayGrade = 'Level 3'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Employment_status']){
+		case '0':
+			break;
+		case 'Intern_Fulltime':
+			$conditions[3] = "EmploymentStatus = 'Intern Fulltime'";
+			break;
+		case 'Intern_Parttime':
+			$conditions[3] = "EmploymentStatus = 'Intern Parttime'";
+			break;
+		case 'Contract_Fulltime':
+			$conditions[3] = "EmploymentStatus = 'Contract Fulltime'";
+			break;
+		case 'Contract_Parttime':
+			$conditions[3] = "EmploymentStatus = 'Contract Parttime'";
+			break;
+		case 'Permanent':
+			$conditions[3] = "EmploymentStatus = 'Permanent'";
+			break;
+		case 'Freelance':
+			$conditions[3] = "EmploymentStatus = 'Freelance'";
+			break;
+		default:
+			break;
+	}
+	$condition = implode(' AND ', $conditions);
+	
+
+
+
+
+
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 
@@ -387,7 +463,7 @@
 																<tbody class="fs-7">
 																	<?php
 																	$empDetails = new UserDetails();
-																	$allEmployees = $empDetails->getAllDetailsSql();
+																	$allEmployees = $empDetails->getAllemployeeSql();
 																	while ($row = $allEmployees->fetch_assoc()) {
 																		?>
 																		<tr>
