@@ -9,13 +9,14 @@
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 	//include '/../../layout/partials/_profile-header.php';
 	$userDetails= $_SESSION['User'];
+	$userDetailsArray = $userDetails->getUserDetailArray();
 
-	$orgName = $userDetails->getOrgName();
-	$userName = $userDetails->getUserName();
-	$bDay = $userDetails->getBDay();
-	$emgContName = $userDetails->getEmgContName();
-	$emgContPhone = $userDetails->getEmgContPhone();
-	$maritalStat = $userDetails->getMaritalStat();
+	$orgName = $userDetailsArray['OrganizationName'];
+	$userName = $userDetailsArray['Name'];;
+	$bDay = $userDetailsArray['BirthDate'];
+	$emgContName = $userDetailsArray['EmergencyContactName'];
+	$emgContPhone = $userDetailsArray['EmergencyContactPhoneNum'];
+	$maritalStat = $userDetailsArray['MaritalStatus'];
 
 	$empDetails = new UserDetails();
 	$allEmployees = $empDetails->getAllDetailsSql();

@@ -1,9 +1,12 @@
 <?php
   include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	$userDetails = $_SESSION['User'];
-	$fullName = $userDetails->getFullName();
-	$email = $userDetails->getEmail();
-	$profilePic = $userDetails->getProfilePic();
+	$userDetailsArray = $userDetails->getUserDetailArray();
+
+
+	$fullName = $userDetailsArray['Name'];
+	$email = $userDetailsArray['Email'];
+	$profilePic = $userDetailsArray['ProfilePhoto'];
 ?>
 
 <!--begin::User account menu-->

@@ -25,7 +25,7 @@ var KTSigninGeneral = function() {
 							}
 						}
 					},
-                    'password': {
+                    'user_password': {
                         validators: {
                             notEmpty: {
                                 message: 'The password is required'

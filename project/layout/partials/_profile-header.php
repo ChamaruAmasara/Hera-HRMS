@@ -2,12 +2,13 @@
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	$userDetailsArray = $userDetails->getUserDetailArray();
 
-	$fullName = $userDetails->getFullName();
-	$profilePic = $userDetails->getProfilePic();
-	$jobTitle = $userDetails->getJobTitle();
-	$address = $userDetails->getAddress();
-	$email = $userDetails->getEmail();
+	$fullName = $userDetailsArray['Name'];
+	$profilePic = $userDetailsArray['ProfilePhoto'];
+	$jobTitle = $userDetailsArray['JobTitle'];
+	$address = $userDetailsArray['Address'];
+	$email = $userDetailsArray['Email'];
 
 ?>
 

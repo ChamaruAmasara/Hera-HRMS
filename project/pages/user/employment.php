@@ -4,9 +4,14 @@
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
 <?php include '..\project\layout\partials\_profile-header.php'; 
-	$payGrade = $userDetails->getPayGrade();
-	$empStat = $userDetails->getEmpStat();
-	$supervisorName = $userDetails->getSupervisorName();
+	
+	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	$userDetailsArray = $userDetails->getUserDetailArray();
+
+	$fullName = $userDetailsArray['Name'];
+	$payGrade = $userDetailsArray['PayGrade'];
+	$empStat = $userDetailsArray['EmploymentStatus']; 
+	$supervisorName =$userDetailsArray['SupervisorName']; 
 ?>
 
 

@@ -36,7 +36,7 @@ class UserDetails
         if ($UID!=-1) {
             $this->UID = $UID;
 
-            $where = "UserID=$UID";
+            $where = "WHERE UserID=$UID";
 
             $Empsql="SELECT * FROM EmployeeDetails $where";
             $res = $mysqli->query($Empsql); 
@@ -45,7 +45,7 @@ class UserDetails
         elseif ($EmployeeID!=-1) {
             $this->EmployeeID = $EmployeeID;
 
-            $where = "EmployeeID=$EmployeeID";
+            $where = "WHERE EmployeeID=$EmployeeID";
 
             $Empsql="SELECT * FROM EmployeeDetails $where";
             $res = $mysqli->query($Empsql);  
@@ -56,120 +56,18 @@ class UserDetails
             $Empsql="SELECT * FROM EmployeeDetails $where";
             $this->res = $mysqli->query($Empsql);  
         }
+        
 
     }
+    function getUserDetailArray(){
+        return $this->EmpRow ;
+    }
+
     function getAllDetailsSql()
     {
         return $this->res;
     }
-    function getUserDetail()
-    {
 
-        // get Name
-        $this->fullName = htmlspecialchars($this->EmpRow['Name']);
-
-        // get Email
-        $this->email = htmlspecialchars($this->EmpRow['Email']);
-
-        // get JobTitleName
-        $this->jobTitle = htmlspecialchars($this->EmpRow['JobTitle']);
-
-        //  get Address
-        $this->address = htmlspecialchars($this->EmpRow['Address']);
-
-        // get BirthDate
-        $this->bDay = htmlspecialchars($this->EmpRow['BirthDate']);
-
-        // get EmergencyContact
-        $this->emgContName = htmlspecialchars($this->EmpRow['EmergencyContactName']);
-        $this->emgContPhone = htmlspecialchars($this->EmpRow['EmergencyContactPhoneNum']);
-
-        // get MaritalStatus
-        $this->maritalStat = htmlspecialchars($this->EmpRow['MaritalStatus']);
-
-        // get payGrade
-        $this->payGrade = htmlspecialchars($this->EmpRow['PayGrade']);	
-
-        // get EmploymentStatus
-        $this->empStat = htmlspecialchars($this->EmpRow['EmploymentStatus']);
-
-        // get Supervisor Name
-        $this->supervisorName = htmlspecialchars($this->EmpRow['SupervisorName']);
-
-        // get Organization Name
-        $this->orgName = htmlspecialchars($this->EmpRow['OrganizationName']);
-
-        // get Profile Picture
-        $this->profilePic = htmlspecialchars($this->EmpRow['ProfilePhoto']);
-
-        // get Department Name
-        $this->deptName = htmlspecialchars($this->EmpRow['DepartmentName']);
-    }
-
-    function getFullName()
-    {
-        return $this->fullName;
-    }
-    function getEmployeeID()
-    {
-        return $this->EmployeeID;
-    }
-    function getUserName()
-    {
-        return $this->userName;
-    }
-    function getEmail()
-    {
-        return $this->email;
-    }
-    function getJobTitle()
-    {
-        return $this->jobTitle;
-    }
-    function getAddress()
-    {
-        return $this->address;
-    }
-    function getBDay()
-    {
-        return $this->bDay;
-    }
-    function getEmgContName()
-    {
-        return $this->emgContName;
-    }
-    function getEmgContPhone()
-    {
-        return $this->emgContPhone;
-    }
-    function getMaritalStat()
-    {
-        return $this->maritalStat;
-    }
-    function getPayGrade()
-    {
-        return $this->payGrade;
-    }
-    function getEmpStat()
-    {
-        return $this->empStat;
-    }
-    function getSupervisorName()
-    {
-        return $this->supervisorName;
-    }
-    function getOrgName()
-    {
-        return $this->orgName;
-    }
-    function getProfilePic()
-    {
-        return $this->profilePic;
-    }
-    function getDeptName()
-    {
-        return $this->deptName;
-    }
 }
 
 class Employees{
