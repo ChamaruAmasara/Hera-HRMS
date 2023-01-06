@@ -293,9 +293,9 @@
 																			<th class="min-w-250px">Employee</th>
 																			<th class="min-w-150px">Birth Date</th>
 																			<th class="min-w-90px">Job Title</th>
-																			<th class="min-w-90px">Paygrade</th>									
-																			<th class="min-w-50px text-end">Details</th>
+																			<th class="min-w-90px">Paygrade</th>		
 																			<th class="min-w-90px">Department</th>
+																			<th class="min-w-50px text-end">Details</th>
 																	</tr>
 																</thead>
 																<!--end::Head-->
@@ -340,10 +340,11 @@
 																			<td><?php echo $row['BirthDate'] ?></td>
 																			<td><?php echo $row['JobTitle'] ?></td>
 																			<td><?php echo $row['PayGrade'] ?></td>
+																			
+																			<td><?php echo $row['DepartmentName'] ?></td>
 																			<td class="text-end">
 																				<a href="#" class="btn btn-light btn-sm">Edit</a>
 																			</td>
-																			<td><?php echo $row['DepartmentName'] ?></td>
 																		</tr>
 																		<?php
 																	}

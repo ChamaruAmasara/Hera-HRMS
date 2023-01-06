@@ -24,7 +24,7 @@ var KTProjectUsers = function () {
             "info": false,
             'order': [],
             "columnDefs": [{
-                "targets": 4,
+                "targets": 5,
                 "orderable": false
             }]
         });

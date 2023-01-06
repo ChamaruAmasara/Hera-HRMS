@@ -18,7 +18,7 @@
 
 ?>
 
-<div class="card mb-5 mb-xl-10">
+										<div class="card mb-5 mb-xl-10">
 										<div class="card-body pt-9 pb-0">
 											<!--begin::Details-->
 											<div class="d-flex flex-wrap flex-sm-nowrap mb-3">

@@ -20,7 +20,7 @@
 										
 										
 											<!--begin::Form-->
-											<form id="kt_account_profile_details_form" class="form">
+											<form method="POST" action="" id="kt_account_profile_details_form" class="form">
 												<!--begin::Card body-->
 												<div class="card-body border-top p-9">
 													<!--begin::Input group-->
@@ -386,7 +386,7 @@
 												<!--begin::Actions-->
 												<div class="card-footer d-flex justify-content-end py-6 px-9">
 													
-													<button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
+													<button type="submit" name="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
 												</div>
 												<!--end::Actions-->
 											</form>
