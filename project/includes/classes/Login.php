@@ -68,10 +68,16 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
+
+                #avoided sql injections
+
                 $sql = "SELECT UserID, Username, Email, PasswordHash
                         FROM useraccount
-                        WHERE Username = '" . $user_name . "' OR Email = '" . $user_name . "';";
-                $result_of_login_check = $this->db_connection->query($sql);
+                        WHERE Username = ? OR Email = ?;";
+                $statement = $this->db_connection->prepare($sql);
+                $statement -> bind_param('ss',$user_name,$user_name);
+                $statement -> execute();
+                $result_of_login_check = $statement->get_result();
 
                 // if this user exists
                 if ($result_of_login_check->num_rows == 1) {
