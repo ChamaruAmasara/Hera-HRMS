@@ -6,11 +6,12 @@
 								<div id="kt_app_content_container" class="app-container container-fluid">
 <?php
 
+require_once(PROJECT_ROOT_PATH ."/includes/getDBTablePrimaryData.php");
 
 if (isset($_POST["submit"])) { 
     if ($_POST["submit"]=="addEmployee"){
         // load the leave application class
-        require_once("includes/classes/addEmployee.php");
+        require_once(PROJECT_ROOT_PATH ."/includes/classes/AddEmployee.php");
 
         $addEmployee = new AddEmployee();
 
@@ -25,7 +26,7 @@ if (isset($_POST["submit"])) {
 										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 											<!--begin::Card title-->
 											<div class="card-title m-0" font="20">
-												<h1 class="fw-bold m-0" font="20">Personal info</h1>
+												<h1 class="fw-bold m-0" font="20">Add Employee</h1>
 											</div>
 											<!--end::Card title-->
 										</div>
@@ -43,51 +44,71 @@ if (isset($_POST["submit"])) {
 														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Full Name</label>
 														<!--end::Label-->
 														<!--begin::Col-->
-														<div class="col-lg-8">
-															<!--begin::Row-->
-															<div class="row">
-																<!--begin::Col-->
-																<div class="col-lg-6 fv-row">
-																	<input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name"  />
+														<div class="col-lg-8 fv-row">
+															<input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="Full Name"  required/>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+													
+													<!--begin::Input group-->
+													<div class="row mb-6">
+															<!--begin::Label-->
+															<label class="col-lg-4 col-form-label required fw-semibold fs-6">Gender</label>
+															<!--end::Label-->
+															<!--begin::Col-->
+															<div class="col-lg-8 fv-row">
+																<!--begin::Options-->
+																<div class="d-flex align-items-center mt-3">
+																	<!--begin::Option-->
+																	<label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+																		<input class="form-check-input" name="gender[]" type="radio" value="male" required/>
+																		<span class="fw-semibold ps-2 fs-6">Male</span>
+																	</label>
+																	<!--end::Option-->
+																	<!--begin::Option-->
+																	<label class="form-check form-check-custom form-check-inline form-check-solid">
+																		<input class="form-check-input" name="gender[]" type="radio" value="Female" />
+																		<span class="fw-semibold ps-2 fs-6">Female</span>
+																	</label>
+																	<!--end::Option-->
 																</div>
-																<!--end::Col-->
-																<!--begin::Col-->
-																<div class="col-lg-6 fv-row">
-																	<input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name"  />
-																</div>
-																<!--end::Col-->
+																<!--end::Options-->
 															</div>
-															<!--end::Row-->
+															<!--end::Col-->
 														</div>
-														<!--end::Col-->
-													</div>
-													<!--end::Input group-->
+														<!--end::Input group-->
 
+													
 													<!--begin::Input group-->
 													<div class="row mb-6">
-														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Company</label>
-														<!--end::Label-->
-														<!--begin::Col-->
-														<div class="col-lg-8 fv-row">
-															<input type="text" name="company" class="form-control form-control-lg form-control-solid" placeholder="Company"  />
+															<!--begin::Label-->
+															<label class="col-lg-4 col-form-label required fw-semibold fs-6">Marital Status</label>
+															<!--end::Label-->
+															<!--begin::Col-->
+															<div class="col-lg-8 fv-row">
+																<!--begin::Options-->
+																<div class="d-flex align-items-center mt-3">
+																	<!--begin::Option-->
+																	<label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+																		<input class="form-check-input" name="marital[]" type="radio" value="married" required/>
+																		<span class="fw-semibold ps-2 fs-6">Married</span>
+																	</label>
+																	<!--end::Option-->
+																	<!--begin::Option-->
+																	<label class="form-check form-check-custom form-check-inline form-check-solid">
+																		<input class="form-check-input" name="marital[]" type="radio" value="unmarried" />
+																		<span class="fw-semibold ps-2 fs-6">Unmarried</span>
+																	</label>
+																	<!--end::Option-->
+																</div>
+																<!--end::Options-->
+															</div>
+															<!--end::Col-->
 														</div>
-														<!--end::Col-->
-													</div>
-													<!--end::Input group-->
+														<!--end::Input group-->
 
-													<!--begin::Input group-->
-													<div class="row mb-6">
-														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Email Address</label>
-														<!--end::Label-->
-														<!--begin::Col-->
-														<div class="col-lg-8 fv-row">
-															<input type="text" name="email" class="form-control form-control-lg form-control-solid" placeholder="Email Address"  />
-														</div>
-														<!--end::Col-->
-													</div>
-													<!--end::Input group-->
+													
 
 													<!--brgin::Input gropu-->
 													<!--begin::Row-->
@@ -107,7 +128,7 @@ if (isset($_POST["submit"])) {
 																</svg>
 															</span>
 															<!--end::Svg Icon-->
-															<input class="form-control form-control-solid ps-12" name="date" placeholder="Enter birthdate" id="kt_datepicker_1" />
+															<input class="form-control form-control-solid ps-12" name="date" placeholder="Enter birthdate" id="kt_datepicker_1" required/>
 														</div>
 													</div>
 													<!--begin::Col-->
@@ -115,20 +136,20 @@ if (isset($_POST["submit"])) {
 												<!--end::Row-->
 												<!--end::Input group-->
 
-
 												
-												<!--begin::Input group-->
-												<div class="row mb-6">
+													<!--begin::Input group-->
+													<div class="row mb-6">
 														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Emergancy Contact Number</label>
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Address</label>
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<input type="text" name="emergancy" class="form-control form-control-lg form-control-solid" placeholder="Emergancy Contact Number"  />
+														<textarea name = "address" placeholder="Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
 														</div>
 														<!--end::Col-->
 													</div>
 													<!--end::Input group-->
+
 
 											<!--begin::Input group-->
 											<div class="row mb-6">
@@ -137,7 +158,7 @@ if (isset($_POST["submit"])) {
 													<!--end::Label-->
 													<!--begin::Col-->
 													<div class="col-lg-8 fv-row">
-														<select id="kt_docs_select2_country" name="country" aria-label="Select a Country..." data-placeholder="Select a Country..." class="form-select form-select-solid form-select-lg">
+														<select id="kt_docs_select2_country" name="country" aria-label="Select a Country..." data-placeholder="Select a Country..." class="form-select form-select-solid form-select-lg" required>
 															<option value="">Select a Country...</option>
 															<option value="AF" data-kt-select2-country="assets/media/flags/afghanistan.svg">Afghanistan</option>
 															<option value="AX" data-kt-select2-country="assets/media/flags/aland-islands.svg">Aland Islands</option>
@@ -366,41 +387,167 @@ if (isset($_POST["submit"])) {
 														</select>
 														<!--end::Select-->
 													</div>
+											</div>
 													<!--end::Input group-->
 
-															<!--begin::Input group-->
-																<div class="row mb-6">
-																	<!--begin::Label-->
-																	<label class="col-lg-4 col-form-label required fw-semibold fs-6">Marital Status</label>
-																	<!--end::Label-->
-																	<!--begin::Col-->
-																	<div class="col-lg-8 fv-row">
-																		<!--begin::Options-->
-																		<div class="d-flex align-items-center mt-3">
-																			<!--begin::Option-->
-																			<label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-																				<input class="form-check-input" name="communication[]" type="radio" value="1" />
-																				<span class="fw-semibold ps-2 fs-6">Married</span>
-																			</label>
-																			<!--end::Option-->
-																			<!--begin::Option-->
-																			<label class="form-check form-check-custom form-check-inline form-check-solid">
-																				<input class="form-check-input" name="communication[]" type="radio" value="2" />
-																				<span class="fw-semibold ps-2 fs-6">Unmarried</span>
-																			</label>
-																			<!--end::Option-->
-																		</div>
-																		<!--end::Options-->
-																	</div>
-																	<!--end::Col-->
-																</div>
-																<!--end::Input group-->
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Branch</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+														<select name="branch" aria-label="Select the Branch" data-control="select2" data-placeholder="Select the Branch" class="form-select form-select-solid form-select-lg" required>
+																<option value="">Select the Branch</option>
+																<?php 
+																	$sqlResult=getDBTablePrimaryData("branch","BranchID","BranchName");
+																	
+																	while(($row =  $sqlResult->fetch_assoc())) {
+																	   //store $ID and $name as an key value pair
+																	   echo "<option value=\"".$row["BranchID"]."\">".$row["BranchName"]."</option>";
+																	}
+																	
+																?>	
+															</select>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Department</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<select name="department" aria-label="Select the Department" data-control="select2" data-placeholder="Select the Department" class="form-select form-select-solid form-select-lg" required>
+																<option value="">Select the Department</option>
+																<?php 
+																	$sqlResult=getDBTablePrimaryData("department","DepartmentID","DepartmentName");
+																	
+																	while(($row =  $sqlResult->fetch_assoc())) {
+																	   //store $ID and $name as an key value pair
+																	   echo "<option value=\"".$row["DepartmentID"]."\">".$row["DepartmentName"]."</option>";
+																	}
+																	
+																?>	
+															</select>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+													
+
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Job Title</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<select name="job_title" aria-label="Select the Job Title" data-control="select2" data-placeholder="Select the Job Title" class="form-select form-select-solid form-select-lg" required>
+																<option value="">Select the Job Title</option>
+																<?php 
+																	$sqlResult=getDBTablePrimaryData("jobtitle","JobTitleID","JobTitleName");
+																	
+																	while(($row =  $sqlResult->fetch_assoc())) {
+																	   //store $ID and $name as an key value pair
+																	   echo "<option value=\"".$row["JobTitleID"]."\">".$row["JobTitleName"]."</option>";
+																	}
+																	
+																?>	
+															</select>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+													
+
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Pay Grade</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<select name="pay_grade" aria-label="Select the Pay Grade" data-control="select2" data-placeholder="Select the Pay Grade" class="form-select form-select-solid form-select-lg" required>
+																<option value="">Select the Pay Grade</option>
+																<?php 
+																	$sqlResult=getDBTablePrimaryData("paygrade","PayGradeID","PayGradeName");
+																	
+																	while(($row =  $sqlResult->fetch_assoc())) {
+																	   //store $ID and $name as an key value pair
+																	   echo "<option value=\"".$row["PayGradeID"]."\">".$row["PayGradeName"]."</option>";
+																	}
+																	
+																?>	
+															</select>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+													
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label fw-semibold fs-6 required">Employment Status</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<select name="employment_status" aria-label="Select the Employment Status" data-control="select2" data-placeholder="Select the Employment Status" class="form-select form-select-solid form-select-lg" required>
+																<option value="">Select the Employment Status</option>
+																<?php 
+																	$sqlResult=getDBTablePrimaryData("employmentstatus","EmploymentStatusID","EmploymentStatusName");
+																	
+																	while(($row =  $sqlResult->fetch_assoc())) {
+																	   //store $ID and $name as an key value pair
+																	   echo "<option value=\"".$row["EmploymentStatusID"]."\">".$row["EmploymentStatusName"]."</option>";
+																	}
+																	
+																?>	
+															</select>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+												
+												<!--begin::Input group-->
+												<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Emergency Contact Name</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<input type="text" name="emergency_contact_name" class="form-control form-control-lg form-control-solid" placeholder="Emergency Contact Name"  required/>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+												<!--begin::Input group-->
+												<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Emergancy Contact Number</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<input type="text" name="emergancy" class="form-control form-control-lg form-control-solid" placeholder="Emergancy Contact Number"  required/>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+
 																
 												
 												<!--begin::Actions-->
 												<div class="card-footer d-flex justify-content-end py-6 px-9">
-													
-													<button type="submit" name="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
+													<input type="add_employee" value="Add Employee" name="submit" class="btn btn-primary">
 												</div>
 												<!--end::Actions-->
 											</form>

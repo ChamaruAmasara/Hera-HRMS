@@ -39,7 +39,7 @@ function usernameExists($connection, $username){
 
     $sql="SELECT * FROM useraccount WHERE Username = ?;";
     $statement = mysqli_stmt_init($connection);
-    if (!mysqli_stmt_prepare($statement.$sql)){
+    if (!mysqli_stmt_prepare($statement,$sql)){
         header("location: ../?page=Add-Employee&error=usernameExists");
         exit();
     }

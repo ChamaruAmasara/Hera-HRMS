@@ -96,7 +96,7 @@ if (isset($_POST["submit"])) {
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-							<textarea name = "reason" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea>
+							<textarea name = "reason" placeholder="Reason" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea>
 							
 							
 							</textarea>
