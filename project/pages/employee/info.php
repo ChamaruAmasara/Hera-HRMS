@@ -1,4 +1,10 @@
 
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+	<!--begin::Content container-->
+	<div id="kt_app_content_container" class="app-container container-fluid">
+
+
 <?php
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	if (isset($_GET['ID'])) {
@@ -25,6 +31,8 @@
 	$supervisorName =$userDetailsArray['SupervisorName']; 
 
 ?>
+
+
 <!--begin::header details View-->
 <div class="card mb-5 mb-xl-10">
     <div class="card-body pt-9 pb-0">
@@ -300,3 +308,5 @@
 </div>
 <!--end::Employeement details View-->
 
+</div>
+</div>
