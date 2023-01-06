@@ -32,37 +32,6 @@ $login = new Login();
 // ... ask if we are logged in here:
 if ($login->isUserLoggedIn() == true) {
     // the user is logged in. you can do whatever you want here.
-
-    if (isset($_POST["submit"])) { 
-        if ($_POST["submit"]=="LeaveApplication"){
-    
-            // show potential errors / feedback (from registration object)
-            if (isset($leave_application)) {
-                if ($leave_application->errors) {
-                    foreach ($leave_application->errors as $error) {
-                        echo $error;
-                    }
-                }
-                if ($leave_application->messages) {
-                    foreach ($leave_application->messages as $message) {
-                        echo $message;
-                    }
-                }
-            }
-            
-    
-            // load the leave application class
-            require_once("includes/classes/LeaveApplication.php");
-    
-            $leave_application = new LeaveApplication();
-    
-    
-        }
-    }
-
-
-
-
     // for demonstration purposes, we simply show the "you are logged in" view.
     include("pages/default.php");
 
