@@ -1,6 +1,6 @@
 <?php
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
-	$HiddenPage=isset($_GET['HiddenPage']) ? $_GET['HiddenPage'] : '';
+	$SubPage=isset($_GET['SubPage']) ? $_GET['SubPage'] : '';
 	?>
 
 <!--begin::App-->
@@ -20,7 +20,7 @@
 					if ($page == 'index') {
 	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
 					}
-					else if ($HiddenPage == 'Employee-Info' AND $page == 'Employee-Details') {
+					else if ($SubPage == 'Employee-Info' AND $page == 'Employee-Details') {
 						include PROJECT_ROOT_PATH.'\pages\employee\info.php';
 					}
 					else if ($page == 'Personal-Info') {
@@ -40,6 +40,9 @@
 					}
 					else if ($page == 'Add-Employee') {
 						include PROJECT_ROOT_PATH.'/pages/employee/add.php';
+					}
+					else if ($page == 'Leave-Approval' AND $SubPage == 'ViewLeaveAplication') {
+						include PROJECT_ROOT_PATH.'\pages\employee\ViewLeaveAplication.php';
 					}
 					else if ($page == 'Leave-Approval') {
 						include PROJECT_ROOT_PATH.'/pages/employee/leaveApproval.php';

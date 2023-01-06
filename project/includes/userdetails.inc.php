@@ -21,7 +21,7 @@ class UserDetails
     private $profilePic;
     private $connection;
     private $EmpRow;
-    private $deptName;
+
     private $res;
     private $mysqli;
 
@@ -69,4 +69,30 @@ class UserDetails
 
 }
 
+class Leavedetails
+{
+    private $mysqli;
+    public function __construct(){
+        $this->mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);        
+    }
+
+    public function getLeaveDetails($where = "1=1")
+    {
+        $sql = "SELECT * FROM EmployeeLeaveData WHERE $where";
+        $res = $this->mysqli->query($sql);
+        return $res;
+    }
+
+    public function getUserLeaveCounts($where="1=1")
+    {
+        $sql = "SELECT l.EmployeeID,e.Name ,l.LeaveType,count(l.LeaveID) As LeaveCount
+                FROM hera.leave l 
+                RIGHT JOIN employee e ON e.EmployeeID=l.EmployeeID
+                where  l.Approved=1
+                GROUP BY l.LeaveType,l.EmployeeID 
+                WHERE $where";
+        $res = $this->mysqli->query($sql);
+        return $res;
+    }
+}
 ?>

@@ -334,7 +334,7 @@
 																					<!--end::Wrapper-->
 																					<!--begin::Info-->
 																					<div class="d-flex flex-column justify-content-center">
-																						<a href="?page=Employee-Details&HiddenPage=Employee-Info&ID=<?php echo $row['EmployeeID']; ?>" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
+																						<a href="?page=Employee-Details&SubPage=Employee-Info&ID=<?php echo $row['EmployeeID']; ?>" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
 																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $row['Email'] ?></div>
 																					</div>
 																					<!--end::Info-->
