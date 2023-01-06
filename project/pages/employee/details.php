@@ -304,9 +304,9 @@
 																	<?php
 																	// $empDetails = new UserDetails();
 																	// $allEmployees = $empDetails->getAllemployeeSql($where);
-																	$i = 0;
+
+
 																	while ($row = $allEmployees->fetch_assoc()) {
-																		$i = $i + 1;
 																		?>
 																		<tr>
 																			<td>
@@ -330,7 +330,7 @@
 																					<!--end::Wrapper-->
 																					<!--begin::Info-->
 																					<div class="d-flex flex-column justify-content-center">
-																						<a href="" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
+																						<a href="?page=Employee-Details&HiddenPage=Employee-Info&ID=<?php echo $row['EmployeeID']; ?>" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
 																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $row['Email'] ?></div>
 																					</div>
 																					<!--end::Info-->
