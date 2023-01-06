@@ -9,45 +9,7 @@
 
 if (isset($_POST["submit"])) { 
     if ($_POST["submit"]=="LeaveApplication"){
-
-        // show potential errors / feedback (from registration object)
-        if (isset($leave_application)) {
-			if ($leave_application->success) {
-                foreach ($leave_application->success as $success1) {
-					echo <<<EOT
-						<div class="alert alert-primary" role="alert">
-						A simple primary alert—check it out!
-						</div>
-						EOT;
-					echo $success1;
-                }
-            }
-            if ($leave_application->errors) {
-                foreach ($leave_application->errors as $error) {
-					echo <<<EOT
-						<div class="alert alert-primary" role="alert">
-						A simple primary alert—check it out!
-						</div>
-						EOT;
-                    
-					echo $error;
-                }
-            }
-            if ($leave_application->messages) {
-                foreach ($leave_application->messages as $message) {
-                    
-                    echo <<< EOT
-						<div class="alert alert-primary" role="alert">
-						A simple primary alert—check it out!
-						</div>
-						EOT;
-					echo $message;
-                }
-            }
-        }
-        
-
-        // load the leave application class
+            // load the leave application class
         require_once("includes/classes/LeaveApplication.php");
 
         $leave_application = new LeaveApplication();
