@@ -22,7 +22,6 @@ class UserDetails
     private $connection;
     private $EmpRow;
     private $deptName;
-    private $res;
 
 
     public function __construct($UID=-1, $EmployeeID=-1)
@@ -39,8 +38,7 @@ class UserDetails
             $where = "UserID=$UID";
 
             $Empsql="SELECT * FROM EmployeeDetails $where";
-            $res = $mysqli->query($Empsql); 
-            $this->EmpRow = $res->fetch_assoc();
+            $res = $mysqli->query($Empsql);      
         }
         elseif ($EmployeeID!=-1) {
             $this->EmployeeID = $EmployeeID;
@@ -49,18 +47,16 @@ class UserDetails
 
             $Empsql="SELECT * FROM EmployeeDetails $where";
             $res = $mysqli->query($Empsql);  
-            $this->EmpRow = $res->fetch_assoc();
             
         }
         else {
             $Empsql="SELECT * FROM EmployeeDetails $where";
-            $this->res = $mysqli->query($Empsql);  
+            $res = $mysqli->query($Empsql);  
         }
 
-    }
-    function getAllDetailsSql()
-    {
-        return $this->res;
+        $this->EmpRow = $res->fetch_assoc();
+
+        $this->getUserDetail();
     }
     function getUserDetail()
     {
@@ -105,7 +101,6 @@ class UserDetails
         // get Department Name
         $this->deptName = htmlspecialchars($this->EmpRow['DepartmentName']);
     }
-
     function getFullName()
     {
         return $this->fullName;
