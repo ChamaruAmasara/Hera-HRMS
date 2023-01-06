@@ -1,26 +1,15 @@
+
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+	<!--begin::Content container-->
+	<div id="kt_app_content_container" class="app-container container-fluid">
 <?php
 
 
 if (isset($_POST["submit"])) { 
-	echo "submitted";
     if ($_POST["submit"]=="LeaveApplication"){
-
-        // show potential errors / feedback (from registration object)
-        if (isset($leave_application)) {
-            if ($leave_application->errors) {
-                foreach ($leave_application->errors as $error) {
-                    echo "<h1>".$error."</h1>";
-                }
-            }
-            if ($leave_application->messages) {
-                foreach ($leave_application->messages as $message) {
-                    echo "<h1>".$message."</h1>";
-                }
-            }
-        }
-        
-
-        // load the leave application class
+            // load the leave application class
         require_once("includes/classes/LeaveApplication.php");
 
         $leave_application = new LeaveApplication();
@@ -29,12 +18,6 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
-
-<!--begin::Content-->
-<div id="kt_app_content" class="app-content flex-column-fluid">
-	<!--begin::Content container-->
-	<div id="kt_app_content_container" class="app-container container-fluid">
-		
 		<!--begin::Basic info-->
 		<div class="card mb-5 mb-xl-10">
 			<!--begin::Card header-->
@@ -113,7 +96,7 @@ if (isset($_POST["submit"])) {
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-							<textarea name = "reason" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea>
+							<textarea name = "reason" placeholder="Reason" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea>
 							
 							
 							</textarea>

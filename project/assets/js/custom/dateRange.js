@@ -7,10 +7,12 @@ $("#kt_datepicker_leave_range").flatpickr({
 });
 
 var today = new Date(); 
-var dd = today.getDate(); 
-var mm = today.getMonth()+1; //January is 0! 
-var yyyy = today.getFullYear(); 
+let yesterday =  new Date()
+yesterday.setDate(today.getDate() - 1)
+var dd = yesterday.getDate(); 
+var mm = yesterday.getMonth()+1; //January is 0! 
+var yyyy = yesterday.getFullYear(); 
 if(dd<10){ dd='0'+dd } 
 if(mm<10){ mm='0'+mm } 
-var today = mm+'/'+dd+'/'+yyyy; 
-$("#kt_daterangepicker").daterangepicker({minDate:today});
+var yesterday1 = mm+'/'+dd+'/'+yyyy; 
+$("#kt_daterangepicker").daterangepicker({minDate:yesterday1});

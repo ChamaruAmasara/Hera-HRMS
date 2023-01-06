@@ -1,52 +1,45 @@
 <?php
 
-
-
 /**
- * Class LeaveApplication
- * handles the employees leave application
+ * Class AddEmployee
+ * handles the employee registration
  */
-class LeaveApplication
+class AddEmployee
 {
     /**
-     * @var object The database connection
+     * @var object $db_connection The database connection
      */
     private $db_connection = null;
     /**
-     * @var array Collection of error messages
+     * @var array $errors Collection of error messages
      */
     public $errors = array();
     /**
-     * @var array Collection of success / neutral messages
+     * @var array $messages Collection of success / neutral messages
      */
     public $messages = array();
 
-     /**
-     * @var array Collection of success / neutral messages
+    /**
+     * @var array $messages Collection of success / neutral messages
      */
-    public $success = array();
+    public $successes = array();
 
     /**
      * the function "__construct()" automatically starts whenever an object of this class is created,
-        * you know, when you do "$leaveApplication = new LeaveApplication();"
-        */
-   
+     */
     public function __construct()
     {
+        if (isset($_POST["addEmployee"])) {
 
-
-        // check the possible login actions:
-
-        // leave application via post data (if user just submitted a leave application form)
-        if (isset($_POST["submit"])) {
-            $this->applyLeaveWithPostData();
+            $this->addEmployee();
         }
     }
 
     /**
-     * apply leave with post data
+     * handles the entire registration process. checks all error possibilities
+     * and creates a new employee in the database if everything is fine
      */
-    private function applyLeaveWithPostData()
+    private function addEmployee()
     {
         $valid=true;
         //initialize date1 and date2 variables to datetime today
@@ -175,7 +168,7 @@ class LeaveApplication
 
                 //print the result from above mysql statement
                 if ($statement->affected_rows == 1) {
-                    $this->success[] = "Your leave application has been submitted.";
+                    $this->successes[] = "Your leave application has been submitted.";
                 } else {
                     $this->errors[] = "Sorry, your leave application could not be submitted. Please go back and try again.";
                 }
@@ -256,8 +249,8 @@ class LeaveApplication
             EOT;
         }
     }
-    if ($this->success){
-        foreach ($this->success as $success1) {
+    if ($this->successes){
+        foreach ($this->successes as $success1) {
             echo <<<EOT
 
             <!--begin::Alert-->

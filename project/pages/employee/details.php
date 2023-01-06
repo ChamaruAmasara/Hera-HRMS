@@ -5,7 +5,6 @@
 	$conditions = array('1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
 	if(isset($_POST['submit'])){
-		echo "submitted";
 		$filter['Department'] = $_POST['Department'];
 		$filter['Job_Title'] = $_POST['Job_Title'];
 		$filter['Paygrade'] = $_POST['Paygrade'];
