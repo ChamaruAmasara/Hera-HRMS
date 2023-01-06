@@ -25,7 +25,7 @@
 									<!--begin::Aside-->
 									<div class="flex-column flex-lg-row-auto w-100 w-lg-250px w-xxl-325px mb-8 mb-lg-0 me-lg-9 me-5">
 										<!--begin::Form-->
-										<form action="#">
+										<form action="employeeFilter.php" method="post">
 											<!--begin::Card-->
 											<div class="card">
 												<!--begin::Body-->
@@ -40,7 +40,7 @@
 															</svg>
 														</span>
 														<!--end::Svg Icon-->
-														<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" />
+														<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" id="search"/>
 													</div>
 													<!--end:Search-->
 													<!--begin::Border-->
