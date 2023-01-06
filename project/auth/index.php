@@ -109,32 +109,12 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
-								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-									<div></div>
-									<!--begin::Link-->
-									<a href="../../demo1/dist/authentication/layouts/creative/reset-password.html" class="link-primary">Forgot Password ?</a>
-									<!--end::Link-->
-								</div>
-								<!--end::Wrapper-->
+
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
-									<input type="submit"  name="login" value="Log in" />
-									<button type="submit" id="kt_sign_in_submit" name="login" class="btn btn-primary">
-										<!--begin::Indicator label-->
-										<span class="indicator-label">Sign In</span>
-										<!--end::Indicator label-->
-										<!--begin::Indicator progress-->
-										<span class="indicator-progress">Please wait...
-										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-										<!--end::Indicator progress-->
-									</button>
+									<input type="submit"  name="login" value="Log in" class="btn btn-primary"/>
 								</div>
 								<!--end::Submit button-->
-								<!--begin::Sign up-->
-								<div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet?
-								<a href="../../demo1/dist/authentication/layouts/creative/sign-up.html" class="link-primary">Sign up</a></div>
-								<!--end::Sign up-->
 							</form>
 							<!--end::Form-->
 						</div>

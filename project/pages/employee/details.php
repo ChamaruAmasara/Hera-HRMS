@@ -84,15 +84,10 @@
 	}
 	$condition = implode(' AND ', $conditions);
 	$where = "WHERE ".$condition;
-	echo $condition;
 	$empDetails = new UserDetails();
-	$allEmployeesSql = $empDetails->getAllemployeeSql();
-	// $allEmployees = $allEmployeesSql->fetch_assoc();
-	// echo '\n';
-	// print_r($allEmployees);
+	$allEmployees = $empDetails->getAllemployeeSql($where);
 
-
-
+	$count=mysqli_num_rows($allEmployees);
 
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
@@ -212,7 +207,12 @@
 
 													<!--begin::Action-->
 													<div class="d-flex align-items-center justify-content-end">
-														<a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">Discard</a>
+														<!-- <a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">
+															Discard
+														</a> -->
+														<form action="<? echo $PHP_SELF; ?>" method="POST">
+															<input type="hidden" name="reset" value="RESET">
+															<input type="submit" value="RESET" class="btn btn-light"></form>
 														<input type="submit" name="submit" class="btn btn-primary">
 													</div>
 													<!--end::Action-->
@@ -230,8 +230,7 @@
 										<div class="d-flex flex-wrap flex-stack pb-7">
 											<!--begin::Title-->
 											<div class="d-flex flex-wrap align-items-center my-1">
-												<h3 class="fw-bold me-5 my-1">57 Items Found
-												<span class="text-gray-400 fs-6">by Recent Updates ↓</span></h3>
+												<h3 class="fw-bold me-5 my-1"><?php echo $count ?> Items Found</h3>
 											</div>
 											<!--end::Title-->
 											<!--begin::Controls-->
@@ -269,25 +268,7 @@
 													</li>
 												</ul>
 												<!--end::Tab nav-->
-												<!--begin::Actions-->
-												<div class="d-flex my-0">
-													<!--begin::Select-->
-													<select name="status" data-control="select2" data-hide-search="true" data-placeholder="Filter" class="form-select form-select-sm border-body bg-body w-150px me-5">
-														<option value="1">Recently Updated</option>
-														<option value="2">Last Month</option>
-														<option value="3">Last Quarter</option>
-														<option value="4">Last Year</option>
-													</select>
-													<!--end::Select-->
-													<!--begin::Select-->
-													<select name="status" data-control="select2" data-hide-search="true" data-placeholder="Export" class="form-select form-select-sm border-body bg-body w-100px">
-														<option value="1">Excel</option>
-														<option value="1">PDF</option>
-														<option value="2">Print</option>
-													</select>
-													<!--end::Select-->
-												</div>
-												<!--end::Actions-->
+	
 											</div>
 											<!--end::Controls-->
 										</div>
@@ -321,9 +302,11 @@
 																<!--begin::Body-->
 																<tbody class="fs-7">
 																	<?php
-																	$empDetails = new UserDetails();
-																	$allEmployees = $empDetails->getAllemployeeSql($where);
+																	// $empDetails = new UserDetails();
+																	// $allEmployees = $empDetails->getAllemployeeSql($where);
+																	$i = 0;
 																	while ($row = $allEmployees->fetch_assoc()) {
+																		$i = $i + 1;
 																		?>
 																		<tr>
 																			<td>

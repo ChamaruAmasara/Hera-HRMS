@@ -61,16 +61,9 @@ class UserDetails
     }
 
     function getAllemployeeSql($where = "WHERE 1=1"){
-
-        echo  $where;
         $Empsql="SELECT * FROM EmployeeDetails $where";
         $this->res = $this->mysqli->query($Empsql);
-        echo "\n";
-        // print_r($this->res->fetch_assoc());
 
-        // while ($row = $this->res->fetch_assoc()) {
-        //     print_r($row);
-        // }
         return $this->res;
     }
 
