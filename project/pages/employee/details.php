@@ -1,7 +1,7 @@
 <?php
 	
 	
-	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0');
+	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0','Search'=>'');
 	$conditions = array('1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
 	if(isset($_POST['submit'])){
@@ -10,6 +10,7 @@
 		$filter['Job_Title'] = $_POST['Job_Title'];
 		$filter['Paygrade'] = $_POST['Paygrade'];
 		$filter['Employment_status'] = $_POST['Employment_status'];
+		$filter['Search'] = $_POST['Search'];
 	}
 
 
@@ -82,6 +83,9 @@
 		default:
 			break;
 	}
+	if($filter['Search'] != ''){
+		$conditions[4] = "Name LIKE '%".$filter['Search']."%' OR Email LIKE '%".$filter['Search']."%' ";
+	}
 	$condition = implode(' AND ', $conditions);
 	$where = "WHERE ".$condition;
 	$empDetails = new UserDetails();
@@ -119,7 +123,7 @@
 									<!--begin::Aside-->
 									<div class="flex-column flex-lg-row-auto w-100 w-lg-250px w-xxl-325px mb-8 mb-lg-0 me-lg-9 me-5">
 										<!--begin::Form-->
-										<form  href="?page=Employee-Details" method="POST">
+										<form method="POST">
 											<!--begin::Card-->
 											<div class="card">
 												<!--begin::Body-->
@@ -134,7 +138,7 @@
 															</svg>
 														</span>
 														<!--end::Svg Icon-->
-														<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" />
+														<input type="text" class="form-control form-control-solid ps-10" name="Search" value="" data-hide-search="true" placeholder="Search" />
 													</div>
 													<!--end:Search-->
 													<!--begin::Border-->
@@ -207,12 +211,12 @@
 
 													<!--begin::Action-->
 													<div class="d-flex align-items-center justify-content-end">
-														<!-- <a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">
-															Discard
-														</a> -->
-														<form action="<? echo $PHP_SELF; ?>" method="POST">
+														 <a href="?page=Employee-Details" class="btn btn-active-light-primary btn-color-gray-400 me-3">
+															Discards
+														</a>
+														<!-- <form action="" method="POST">
 															<input type="hidden" name="reset" value="RESET">
-															<input type="submit" value="RESET" class="btn btn-light"></form>
+															<input type="submit" value="RESET" class="btn btn-light"></form>-->
 														<input type="submit" name="submit" class="btn btn-primary">
 													</div>
 													<!--end::Action-->
@@ -230,7 +234,7 @@
 										<div class="d-flex flex-wrap flex-stack pb-7">
 											<!--begin::Title-->
 											<div class="d-flex flex-wrap align-items-center my-1">
-												<h3 class="fw-bold me-5 my-1"><?php echo $count ?> Items Found</h3>
+												<h1 class="fw-bold me-5 my-1">Employee Details:</h1><h5 class="fw-bold me-5 my-1"><?php echo $count ?> Items Found</h5>
 											</div>
 											<!--end::Title-->
 											<!--begin::Controls-->
