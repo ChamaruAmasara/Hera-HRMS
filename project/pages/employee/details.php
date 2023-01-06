@@ -1,7 +1,8 @@
 <?php
 	
+	
 	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0');
-
+	$conditions = array('1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
 	if(isset($_POST['submit'])){
 		echo "submitted";
@@ -9,9 +10,90 @@
 		$filter['Job_Title'] = $_POST['Job_Title'];
 		$filter['Paygrade'] = $_POST['Paygrade'];
 		$filter['Employment_status'] = $_POST['Employment_status'];
-		
-
 	}
+
+
+	switch ($filter['Department']) {
+		case '0':
+			break;
+		case 'Engineering':
+			$conditions[0] = "DepartmentName = 'Engineering'";
+			break;
+		case 'HR':
+			$conditions[0] = "DepartmentName = 'HR'";
+			break;
+		case 'Accounting':
+			$conditions[0] = "DepartmentName = 'Accounting'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Job_Title']){
+		case '0':
+			break;
+		case 'Software_Engineer':
+			$conditions[1] = "JobTitle = 'Software Engineer'";
+			break;
+		case 'QA_Engineer':
+			$conditions[1] = "JobTitle = 'QA Engineer'";
+			break;
+		case 'Accountant':
+			$conditions[1] = "JobTitle = 'Accountant'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Paygrade']){
+		case '0':
+			break;
+		case 'Level_1':
+			$conditions[2] = "PayGrade = 'Level 1'";
+			break;
+		case 'Level_2':
+			$conditions[2] = "PayGrade = 'Level 2'";
+			break;
+		case 'Level_3':
+			$conditions[2] = "PayGrade = 'Level 3'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Employment_status']){
+		case '0':
+			break;
+		case 'Intern_Fulltime':
+			$conditions[3] = "EmploymentStatus = 'Intern Fulltime'";
+			break;
+		case 'Intern_Parttime':
+			$conditions[3] = "EmploymentStatus = 'Intern Parttime'";
+			break;
+		case 'Contract_Fulltime':
+			$conditions[3] = "EmploymentStatus = 'Contract Fulltime'";
+			break;
+		case 'Contract_Parttime':
+			$conditions[3] = "EmploymentStatus = 'Contract Parttime'";
+			break;
+		case 'Permanent':
+			$conditions[3] = "EmploymentStatus = 'Permanent'";
+			break;
+		case 'Freelance':
+			$conditions[3] = "EmploymentStatus = 'Freelance'";
+			break;
+		default:
+			break;
+	}
+	$condition = implode(' AND ', $conditions);
+	$where = "WHERE ".$condition;
+	echo $condition;
+	$empDetails = new UserDetails();
+	$allEmployeesSql = $empDetails->getAllemployeeSql();
+	// $allEmployees = $allEmployeesSql->fetch_assoc();
+	// echo '\n';
+	// print_r($allEmployees);
+
+
+
+
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 
@@ -26,15 +108,8 @@
 
 
 
-	
-	$allEmployeesSql="SELECT * FROM employee";
-	$allEmployeesResult=mysqli_query($connection, $allEmployeesSql);
-	$allEmployees=mysqli_fetch_all($allEmployeesResult, MYSQLI_ASSOC);
 
-	$empCountSql="SELECT COUNT(EmployeeID) FROM employee";
-	$empCountResult=mysqli_query($connection, $empCountSql);
-	$empCount=mysqli_fetch_array($empCountResult, MYSQLI_NUM);
-	$empCount=$empCount[0];
+
 
 
 ?>
@@ -64,7 +139,7 @@
 															</svg>
 														</span>
 														<!--end::Svg Icon-->
-														<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" id="search"/>
+														<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" />
 													</div>
 													<!--end:Search-->
 													<!--begin::Border-->
@@ -387,7 +462,7 @@
 																<tbody class="fs-7">
 																	<?php
 																	$empDetails = new UserDetails();
-																	$allEmployees = $empDetails->getAllDetailsSql();
+																	$allEmployees = $empDetails->getAllemployeeSql($where);
 																	while ($row = $allEmployees->fetch_assoc()) {
 																		?>
 																		<tr>

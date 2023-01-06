@@ -19,7 +19,7 @@
 	$maritalStat = $userDetailsArray['MaritalStatus'];
 
 	$empDetails = new UserDetails();
-	$allEmployees = $empDetails->getAllDetailsSql();
+	$allEmployees = $empDetails->getAllemployeeSql();
 	while ($row = $allEmployees->fetch_assoc()) {
 		print_r($row);
 	}

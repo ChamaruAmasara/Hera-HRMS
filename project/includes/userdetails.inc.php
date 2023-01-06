@@ -23,12 +23,13 @@ class UserDetails
     private $EmpRow;
     private $deptName;
     private $res;
+    private $mysqli;
 
 
     public function __construct($UID=-1, $EmployeeID=-1)
     {
 
-        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+        $this->mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
         $where = "WHERE 1=1";
 
 		
@@ -39,7 +40,7 @@ class UserDetails
             $where = "WHERE UserID=$UID";
 
             $Empsql="SELECT * FROM EmployeeDetails $where";
-            $res = $mysqli->query($Empsql); 
+            $res = $this->mysqli->query($Empsql); 
             $this->EmpRow = $res->fetch_assoc();
         }
         elseif ($EmployeeID!=-1) {
@@ -48,13 +49,9 @@ class UserDetails
             $where = "WHERE EmployeeID=$EmployeeID";
 
             $Empsql="SELECT * FROM EmployeeDetails $where";
-            $res = $mysqli->query($Empsql);  
+            $res = $this->mysqli->query($Empsql);  
             $this->EmpRow = $res->fetch_assoc();
             
-        }
-        else {
-            $Empsql="SELECT * FROM EmployeeDetails $where";
-            $this->res = $mysqli->query($Empsql);  
         }
         
 
@@ -63,12 +60,23 @@ class UserDetails
         return $this->EmpRow ;
     }
 
-    function getAllDetailsSql()
-    {
+    function getAllemployeeSql($where = "WHERE 1=1"){
+
+        echo  $where;
+        $Empsql="SELECT * FROM EmployeeDetails $where";
+        $this->res = $this->mysqli->query($Empsql);
+        echo "\n";
+        // print_r($this->res->fetch_assoc());
+
+        // while ($row = $this->res->fetch_assoc()) {
+        //     print_r($row);
+        // }
         return $this->res;
     }
 
 }
+
+
 
 class Employees{
     private $connection;
