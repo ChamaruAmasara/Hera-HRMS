@@ -1,7 +1,3 @@
-<?php
-	include PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
-?>
-
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
 	<!--begin::Content container-->
@@ -25,11 +21,6 @@
 				<form id="kt_account_profile_details_form" class="form">
 					<!--begin::Card body-->
 					<div class="card-body border-top p-9">
-						
-						
-						
-					
-						
 						
 						<!--begin::Input group-->
 						<div class="row mb-6">
@@ -131,3 +122,5 @@
 		
 	</div>
 	<!--end::Content container-->
+	
+	<script src="assets/js/custom/apps/projects/settings/settings.js"></script>

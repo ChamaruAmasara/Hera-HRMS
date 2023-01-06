@@ -5,8 +5,27 @@
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
 <?php 
-	include_once PROJECT_ROOT_PATH.'\layout\partials\_profile-header.php';
+	require_once PROJECT_ROOT_PATH.'/layout/partials/_profile-header.php';
+	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 	//include '/../../layout/partials/_profile-header.php';
+	$userDetails= $_SESSION['User'];
+	$userDetailsArray = $userDetails->getUserDetailArray();
+
+	$orgName = $userDetailsArray['OrganizationName'];
+	$userName = $userDetailsArray['Name'];;
+	$bDay = $userDetailsArray['BirthDate'];
+	$emgContName = $userDetailsArray['EmergencyContactName'];
+	$emgContPhone = $userDetailsArray['EmergencyContactPhoneNum'];
+	$maritalStat = $userDetailsArray['MaritalStatus'];
+
+	$empDetails = new UserDetails();
+	$allEmployees = $empDetails->getAllDetailsSql();
+	while ($row = $allEmployees->fetch_assoc()) {
+		print_r($row);
+	}
+
+		
+
 ?>
 
 

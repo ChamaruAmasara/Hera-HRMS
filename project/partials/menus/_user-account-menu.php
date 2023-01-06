@@ -1,5 +1,12 @@
 <?php
-    include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+  include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	$userDetails = $_SESSION['User'];
+	$userDetailsArray = $userDetails->getUserDetailArray();
+
+
+	$fullName = $userDetailsArray['Name'];
+	$email = $userDetailsArray['Email'];
+	$profilePic = $userDetailsArray['ProfilePhoto'];
 ?>
 
 <!--begin::User account menu-->
@@ -38,7 +45,7 @@
 		</a>
 	</div>
 	<div class="menu-item px-5">
-		<a href="?page=Employment-Info" class="menu-link px-5">
+		<a href="?page=Personal-Info&logout" class="menu-link px-5">
 			<span class="menu-text">Sign Out</span>			
 		</a>
 	</div>

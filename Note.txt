@@ -1,3 +1,10 @@
 Branch eka ehule oRGANIZATion ekata attribute ekk theenna oona wagee needa, 
 employee veda karana company eka ganna widiyak nee
 profilrer pic link ekk oonamee leave ekee patanganna dawasai iwara wena dawasai dekath daala leave day count ekath daana eka vedak thiyeda ban
+
+
+Add new user implement(convert emp to user)
+
+make leave counts cofigureable
+
+employee add karana kota prof pic ekata defult ekai , email ekat anot given kiyalai auto set karanna oona

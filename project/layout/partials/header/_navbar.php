@@ -1,5 +1,10 @@
 <?php
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+
+	$userDetails = $_SESSION['User'];
+	$userDetailsArray = $userDetails->getUserDetailArray();
+	$profilePic = $userDetailsArray['ProfilePhoto'];
+
 ?>
 
 <!--begin::Navbar-->
