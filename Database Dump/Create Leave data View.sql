@@ -1,7 +1,7 @@
 CREATE VIEW EmployeeLeaveData AS
 SELECT l.LeaveID,e.EmployeeID,l.Approved,l.Reason,l.LeaveType,l.FirstAbsentDate,l.LastAbsentDate,l.LeaveDayCount,l.ApprovedDateTime,
 e.Name,e.BirthDate,e.Gender,e.MaritalStatus,e.Address,d.DepartmentName AS Department,b.BranchName AS Branch,c.CountryName AS Country,
-o.name as Organization
+o.name as Organization,u.ProfilePhoto,u.Email,j.JobTitleName as JobTitle,p.PayGradeName AS PayGrade,d.DepartmentName
 FROM hera.leave l
 LEFT JOIN employee e ON l.EmployeeID=e.EmployeeID
 LEFT JOIN department d ON e.DepartmentID=d.DepartmentID

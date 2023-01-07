@@ -5,7 +5,7 @@
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
 <?php
-
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 if (isset($_POST["submit"])) { 
     if ($_POST["submit"]=="LeaveApplication"){
@@ -17,6 +17,26 @@ if (isset($_POST["submit"])) {
 
     }
 }
+$sqlLe = "SELECT * FROM hera.leave;";
+    $resLe = $mysqli->query($sqlLe);
+	//get current date time to store in mysql database
+	$TodateTime = date('Y-m-d H:i:s');
+
+	while($rowLe=$resLe->fetch_assoc()){
+		$logDateTime = $rowLe['LeaveLogDateTime'];
+
+		$day2=new DateTime($TodateTime);
+		$day1=new DateTime($logDateTime);
+
+		//count leave day count from $date2-$date1
+		$DayDifference = $day2->diff($day1)->format("%a")+1;
+
+		if ($DayDifference>365) {
+			$lID=$rowLe['LeaveID'];
+			$sql = "DELETE FROM hera.leave WHERE LeaveID =$lID;";
+        	$res = $mysqli->query($sql);
+		}
+	}
 ?>
 		<!--begin::Basic info-->
 		<div class="card mb-5 mb-xl-10">

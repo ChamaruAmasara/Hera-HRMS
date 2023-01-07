@@ -1,6 +1,46 @@
 <?php
-	
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+	// check for if the previous Application was Accepted or Rejected and act accordingly
+	$act=isset($_GET['act']) ? $_GET['act'] : '';
+	$leaveId=isset($_GET['lid']) ? $_GET['lid'] : '';
+
+	$errors=array();
+	$success=array();
+	$messages=array();
+
+	if($act=='appr' && $leaveId!=''){
+		$sql = "UPDATE hera.leave SET Approved = 'Approved' WHERE LeaveID = $leaveId;";
+        $res = $mysqli->query($sql);
+		$success[] = "Leave Application Approved";
+	}elseif ($act=='rej' && $leaveId!='') {
+		$sql = "UPDATE hera.leave SET Approved = 'Rejected' WHERE LeaveID = $leaveId;";
+        $res = $mysqli->query($sql);
+		$errors[] = "Leave Application Rejected";
+	}
+
+	$sqlLe = "SELECT * FROM hera.leave;";
+    $resLe = $mysqli->query($sqlLe);
+	//get current date time to store in mysql database
+	$TodateTime = date('Y-m-d H:i:s');
+
+	while($rowLe=$resLe->fetch_assoc()){
+		$logDateTime = $rowLe['LeaveLogDateTime'];
+
+		$day2=new DateTime($TodateTime);
+		$day1=new DateTime($logDateTime);
+
+		//count leave day count from $date2-$date1
+		$DayDifference = $day2->diff($day1)->format("%a")+1;
+
+		if ($DayDifference>365) {
+			$lID=$rowLe['LeaveID'];
+			$sql = "DELETE FROM hera.leave WHERE LeaveID =$lID ;";
+        	$res = $mysqli->query($sql);
+		}
+	}
+
+	
+
 	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0','Search'=>'');
 	$conditions = array('1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
@@ -87,7 +127,7 @@
 		$conditions[4] = "Name LIKE '%".$filter['Search']."%' OR Email LIKE '%".$filter['Search']."%' ";
 	}
 	$condition = implode(' AND ', $conditions);
-	$where = " Approved=0 AND ".$condition;
+	$where = " Approved='Pending' AND ".$condition;
 	$leaveDetails = new Leavedetails();
 	$allLeaves = $leaveDetails->getLeaveDetails($where);
 
@@ -96,34 +136,116 @@
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 
-	$act=isset($_GET['act']) ? $_GET['act'] : '';
-	$leaveId=isset($_GET['lid']) ? $_GET['lid'] : '';
+?>
+										<?php
+										if ($errors){
+											foreach ($errors as $error) {
+												echo <<<EOT
 
-	echo $act;
-	echo $leaveId;
+												<!--begin::Alert-->
+												<div class="alert alert-danger d-flex align-items-center p-5">
+													<!--begin::Icon-->
+													<span class="svg-icon svg-icon-2hx svg-icon-danger me-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+													<path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+												</svg></span>
+													<!--end::Icon-->
+												
+													<!--begin::Wrapper-->
+													<div class="d-flex flex-column">
+														<!--begin::Title-->
+														<h4 class="mb-1 text-danger">Error</h4>
+														<!--end::Title-->
+														<!--begin::Content-->
+														<span>
+												EOT;
+												echo $error;
+												echo <<<EOT
+												</span>
+														<!--end::Content-->
+													</div>
+													<!--end::Wrapper-->
+													<button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+														<i class="bi bi-x fs-1 text-danger"></i>
+													</button>
+												</div>
+												<!--end::Alert-->
 
-	if($act=='appr' && $leaveId!=''){
-		$sql = "UPDATE hera.leave SET Approved = 1 WHERE LeaveID = $leaveId;";
-        $res = $mysqli->query($sql);
-		echo "Approved";
-	}elseif ($act=='rej' && $leaveId!='') {
-		$sql = "DELETE FROM hera.leave WHERE LeaveID = $leaveId;";
-		$res = $mysqli->query($sql);
-		echo "Rejected";
-	}
+												EOT;
+											}
+										}
+										if ($messages){
+										foreach ($messages as $message) {
+											echo <<<EOT
 
+											<!--begin::Alert-->
+											<div class="alert alert-primary d-flex align-items-center p-5">
+												<!--begin::Icon-->
+												<span class="svg-icon svg-icon-2hx svg-icon-primary me-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+												<path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+											</svg></span>
+												<!--end::Icon-->
+											
+												<!--begin::Wrapper-->
+												<div class="d-flex flex-column">
+													<!--begin::Title-->
+													<h4 class="mb-1 text-primary">Notice</h4>
+													<!--end::Title-->
+													<!--begin::Content-->
+													<span>
+											EOT;
+											echo $message;
+											echo <<<EOT
+											</span>
+													<!--end::Content-->
+												</div>
+												<!--end::Wrapper-->
+												<button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+													<i class="bi bi-x fs-1 text-primary"></i>
+												</button>
+											</div>
+											<!--end::Alert-->
 
+											EOT;
+										}
+										}
+											if ($success) {
+												foreach ($success as $success1) {
+													echo <<<EOT
 
+											<!--begin::Alert-->
+											<div class="alert alert-success d-flex align-items-center p-5">
+												<!--begin::Icon-->
+												<span class="svg-icon svg-icon-2hx svg-icon-success me-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+												<path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+											</svg></span>
+												<!--end::Icon-->
+											
+												<!--begin::Wrapper-->
+												<div class="d-flex flex-column">
+													<!--begin::Title-->
+													<h4 class="mb-1 text-success">Success</h4>
+													<!--end::Title-->
+													<!--begin::Content-->
+													<span>
+											EOT;
+											echo $success1;
+											echo <<<EOT
+											</span>
+													<!--end::Content-->
+												</div>
+												<!--end::Wrapper-->
+												<button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+													<i class="bi bi-x fs-1 text-success"></i>
+												</button>
+											</div>
+											<!--end::Alert-->
 
-
-
-
-
-
-
-
-
-
+											EOT;
+											}
+										}
 
 ?>
 
@@ -523,6 +645,8 @@
 											</div>
 											<!--end::Tab pane-->
 											<!-- Card Tabs Ends here -->
+
+
 
 
 

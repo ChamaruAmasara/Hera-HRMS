@@ -30,10 +30,10 @@ class LeaveApplication
      * the function "__construct()" automatically starts whenever an object of this class is created,
         * you know, when you do "$leaveApplication = new LeaveApplication();"
         */
-   
+    public $mysqli;
     public function __construct()
     {
-
+        $this->mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
         // check the possible login actions:
 
@@ -48,6 +48,39 @@ class LeaveApplication
      */
     private function applyLeaveWithPostData()
     {
+
+        $leaveDetails=new Leavedetails();
+        $userDetails = $_SESSION['User'];
+        $empID=$userDetails->getUserDetailArray()['EmployeeID'];
+        $userDetailsArray = $userDetails->getUserDetailArray();
+        $ApprovedleaveCounts=$leaveDetails->getUserLeaveCounts("EmployeeID=$empID");
+        $leaveCounts=$leaveDetails->getUserLeaveCounts(having:"EmployeeID=$empID",where:"l.Approved='Pending' OR l.Approved='Approved'");
+        $userPayGrade= $userDetailsArray['PayGrade'];
+
+        $LeaveTypesandCounts=['Annual'=>0, 'Casual'=>0, 'Maternity'=>0, 'No-Pay'=>0];
+        $ApprovedLeaveTypesandCounts=['Annual'=>0, 'Casual'=>0, 'Maternity'=>0, 'No-Pay'=>0];
+        $AllowedLeaveTypesandCounts=['Annual'=>0, 'Casual'=>0, 'Maternity'=>0, 'No-Pay'=>0];
+
+        // getting leave counts of each leaves that the user has taken
+        while ($leaveCountsArray = $leaveCounts->fetch_assoc()) {
+            $LeaveTypesandCounts[$leaveCountsArray['LeaveType']]=$leaveCountsArray['LeaveCount'];	
+        }
+        // getting leave counts of each leaves that the user has taken
+        while ($ApprovedleaveCountsArray = $ApprovedleaveCounts->fetch_assoc()) {
+            $ApprovedLeaveTypesandCounts[$ApprovedleaveCountsArray['LeaveType']]=$ApprovedleaveCountsArray['LeaveCount'];	
+        }
+
+        // getting the counts of leaves that the user is allowed to take
+        $sql = "SELECT * FROM paygrade WHERE PayGradeName='$userPayGrade'";
+        $res = $this->mysqli->query($sql);
+        $payGradeRow = $res->fetch_assoc();
+        $AllowedLeaveTypesandCounts['Annual']=$payGradeRow['ApprovedAnnualLeaveCount'];
+        $AllowedLeaveTypesandCounts['Casual']=$payGradeRow['ApprovedCasualLeaveCount'];
+        $AllowedLeaveTypesandCounts['Maternity']=$payGradeRow['ApprovedMaternityLeaveCount'];
+        $AllowedLeaveTypesandCounts['No-Pay']=$payGradeRow['ApprovedPayLeaveCount'];
+
+
+
         $valid=true;
         //initialize date1 and date2 variables to datetime today
         $date1 = new DateTime();
@@ -110,6 +143,18 @@ class LeaveApplication
             }
 
         }
+
+        $allowedLeaveOfThisType = $AllowedLeaveTypesandCounts[$_POST['leave_type']];
+        $takenLeaveOfThisType = $ApprovedLeaveTypesandCounts[$_POST['leave_type']];
+        $allLeavesOfThisType = $LeaveTypesandCounts[$_POST['leave_type']];
+
+        if($allowedLeaveOfThisType <= $takenLeaveOfThisType){
+            $this->errors[] = "You have already taken all the leaves of this type.";
+            $valid=false;
+        }elseif ($allowedLeaveOfThisType <= $allLeavesOfThisType) {
+            $this->errors[] = "You have pending and Aproved leaves of this type exceeding the allowed leaves.";
+            $valid=false;
+        }
         
 
         //the data looks safe 
@@ -133,13 +178,15 @@ class LeaveApplication
                 
                 //get current date time to store in mysql database
                 $leaveLogDateTime = date('Y-m-d H:i:s');
+
+                
                 
                 //get current employeeid
                 $userDetails = $_SESSION['User'];
                 $userDetailsArray = $userDetails->getUserDetailArray();
                 $employeeID = $userDetailsArray['EmployeeID'];
 
-                $approved=false;
+                $approved='Pending';
 
                 $firstAbsentDate=$date1->format('Y/m/d');
                 $lastAbsentDate=$date2->format('Y/m/d');
@@ -170,7 +217,7 @@ class LeaveApplication
                                 ?, 
                                 ?);";
                 $statement = $this->db_connection->prepare($sql);
-                $statement -> bind_param('isssssss',$approved,$employeeID,$firstAbsentDate,$lastAbsentDate,$leaveDayCount,$leaveLogDateTime,$leave_type,$reason);
+                $statement -> bind_param('ssssssss',$approved,$employeeID,$firstAbsentDate,$lastAbsentDate,$leaveDayCount,$leaveLogDateTime,$leave_type,$reason);
                 $statement -> execute();
 
                 //print the result from above mysql statement
