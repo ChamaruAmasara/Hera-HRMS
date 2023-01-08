@@ -24,6 +24,8 @@
 			<!--end::Col-->
 		</div>
 		<!--end::Row-->
+
+<?php	/*
 		<!--begin::Row-->
 		<div class="row gx-5 gx-xl-10">
 			<!--begin::Col-->
@@ -79,7 +81,9 @@
 			</div>
 			<!--end::Col-->
 		</div>
-		<!--end::Row-->
+		<!--end::Row
+		*/
+		?>
 	</div>
 	<!--end::Content container-->
 </div>
