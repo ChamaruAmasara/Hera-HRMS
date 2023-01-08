@@ -50,6 +50,9 @@
 					else if ($page == 'Edit-Organization') {
 						include PROJECT_ROOT_PATH.'/pages/settings/editOrganization.php';
 					}
+					else if ($page == 'Promote-Employees') {
+						include PROJECT_ROOT_PATH.'/pages/employee/promote.php';
+					}
 					
 					?>
 				

@@ -33,7 +33,7 @@
                             if ($empLeaveDetais['ProfilePhoto']!=null) {
                                 echo $empLeaveDetais['ProfilePhoto']; 
                             }else{
-                                echo "'assets\media\avatars\defult.jpg'";
+                                echo "'assets\media\avatars\default.jpg'";
                             }
                             
                             ?> alt="image" />

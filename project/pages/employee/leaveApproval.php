@@ -460,7 +460,7 @@
 																							if ($row['ProfilePhoto']!=null) {
 																								echo $row['ProfilePhoto']; 
 																							}else{
-																								echo "'assets\media\avatars\defult.jpg'";
+																								echo "'assets\media\avatars\default.jpg'";
 																							}
 																							
 																							?> />
