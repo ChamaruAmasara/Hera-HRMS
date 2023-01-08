@@ -18,7 +18,7 @@
 										
 										
 											<!--begin::Form-->
-											<form id="kt_account_profile_details_form" class="form">
+											<form method="POST" action="" id="kt_account_profile_details_form" class="form">
 												<!--begin::Card body-->
 												<div class="card-body border-top p-9">
 												

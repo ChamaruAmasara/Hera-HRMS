@@ -48,7 +48,7 @@
 						include PROJECT_ROOT_PATH.'/pages/employee/leaveApproval.php';
 					}
 					else if ($page == 'Edit-Organization') {
-						include PROJECT_ROOT_PATH.'/pages/employee/editorganization.php';
+						include PROJECT_ROOT_PATH.'/pages/settings/editOrganization.php';
 					}
 					
 					?>
