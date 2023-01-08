@@ -13,8 +13,8 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Hera - The Modern Human Resource Management System" />
 		<meta property="og:url" content="https://hera.chamaru.me" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<meta property="og:site_name" content="Hera | CSE | UoM" />
+		<link rel="canonical" href="https://hera.chamaru.me" />
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
