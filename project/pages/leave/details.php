@@ -58,7 +58,7 @@
 							<!--begin::Progress-->
 							<div class="d-flex flex-column">
 								<div class="d-flex justify-content-between w-100 fs-4 fw-bold mb-3">
-									<span>Anual Leaves</span>
+									<span>Annual Leaves</span>
 									<span><?php echo $LeaveTypesandCounts['Annual']; ?> of <?php echo $ApprovedLeaveTypesandCounts['Annual']; ?> Used</span>
 								</div>
 

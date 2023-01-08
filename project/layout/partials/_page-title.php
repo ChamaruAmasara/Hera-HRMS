@@ -8,7 +8,7 @@
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 align-items-center my-0">
 	<?php
 		if ($page == "Leave-Application" or $page == "Leave-Details") { echo 'Absence'; }
-		elseif($page == "Personal-Info" or $page == "Employment-Info") { echo 'User Profile'; } 
+		elseif($page == "Personal-Info" or $page == "Employment-Info") { echo 'My Profile'; } 
 		elseif($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval" or $page == "Edit-Organization") { echo "Employees"; }
 	
 	?>

@@ -33,7 +33,7 @@
 						</span>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">User Profile</span>
+					<span class="menu-title">My Profile</span>
 					<span class="menu-arrow"></span>
 				</span>
 				<!--end:Menu link-->

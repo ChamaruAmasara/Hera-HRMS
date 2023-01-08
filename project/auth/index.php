@@ -1,17 +1,5 @@
-
-
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express Node.js & Flask Admin Dashboard Theme
-Purchase: https://1.envato.market/EA4JP
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="../"/>
@@ -23,7 +11,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express Node.js & Flask Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
+		<meta property="og:url" content="https://hera.chamaru.me" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
@@ -94,9 +82,9 @@ License: For each use you must have a valid license purchased only from above li
                     <!--end::Icon-->
                 
                     <!--begin::Wrapper-->
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column flex-lg-start">
                         <!--begin::Title-->
-                        <h4 class="mb-1 d-flex flex-center flex-lg-start flex-column  text-danger">Error</h4>
+                        <h4 class="mb-1 d-flex flex-center flex-lg-start flex-column text-danger">Error</h4>
                         <!--end::Title-->
                         <!--begin::Content-->
                         <span>
@@ -130,9 +118,9 @@ License: For each use you must have a valid license purchased only from above li
                 <!--end::Icon-->
             
                 <!--begin::Wrapper-->
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column flex-lg-start">
                     <!--begin::Title-->
-                    <h4 class="mb-1 d-flex flex-center flex-lg-start flex-column  text-primary">Notice</h4>
+                    <h4 class="mb-1 d-flex flex-center flex-lg-start flex-column text-primary">Notice</h4>
                     <!--end::Title-->
                     <!--begin::Content-->
                     <span>
