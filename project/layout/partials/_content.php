@@ -7,12 +7,13 @@
 			<!--begin::Col-->
 			<div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
 				<?php include 'partials/widgets/cards/_widget-20.php' ?>
-				<?php include 'partials/widgets/cards/_widget-7.php' ?>
+				<?php include 'partials/widgets/cards/_widget-17.php' ?>
 			</div>
 			<!--end::Col-->
 			<!--begin::Col-->
 			<div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-				<?php include 'partials/widgets/cards/_widget-17.php' ?>
+				
+				<?php include 'partials/widgets/cards/_widget-7.php' ?>
 				<?php include 'partials/widgets/lists/_widget-26.php' ?>
 			</div>
 			<!--end::Col-->
