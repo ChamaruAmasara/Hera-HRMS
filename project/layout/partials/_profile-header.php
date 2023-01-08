@@ -2,6 +2,12 @@
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
 
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
+	// if (isset($_GET['ID'])) {
+	// 	$id=$_GET['ID'];
+	// 	$userDetails = new UserDetails(EmployeeID:$id);
+	// 	unset($_GET['ID']);
+	// }
+
 	$userDetailsArray = $userDetails->getUserDetailArray();
 
 	$fullName = $userDetailsArray['Name'];
@@ -12,7 +18,7 @@
 
 ?>
 
-<div class="card mb-5 mb-xl-10">
+										<div class="card mb-5 mb-xl-10">
 										<div class="card-body pt-9 pb-0">
 											<!--begin::Details-->
 											<div class="d-flex flex-wrap flex-sm-nowrap mb-3">

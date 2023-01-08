@@ -123,7 +123,7 @@ var KTSigninGeneral = function() {
                     submitButton.disabled = false;
                                         
                     // Check axios library docs: https://axios-http.com/docs/intro 
-                    axios.post('/your/ajax/login/url', {
+                    axios.post('https://hera.chamaru.me', {
                         email: form.querySelector('[name="email"]').value, 
                         password: form.querySelector('[name="password"]').value 
                     }).then(function (response) {

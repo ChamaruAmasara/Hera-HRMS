@@ -1,8 +1,43 @@
+
+
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
-		
+<?php
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+
+if (isset($_POST["submit"])) { 
+    if ($_POST["submit"]=="LeaveApplication"){
+            // load the leave application class
+        require_once("includes/classes/LeaveApplication.php");
+
+        $leave_application = new LeaveApplication();
+
+
+    }
+}
+$sqlLe = "SELECT * FROM hera.leave;";
+    $resLe = $mysqli->query($sqlLe);
+	//get current date time to store in mysql database
+	$TodateTime = date('Y-m-d H:i:s');
+
+	while($rowLe=$resLe->fetch_assoc()){
+		$logDateTime = $rowLe['LeaveLogDateTime'];
+
+		$day2=new DateTime($TodateTime);
+		$day1=new DateTime($logDateTime);
+
+		//count leave day count from $date2-$date1
+		$DayDifference = $day2->diff($day1)->format("%a")+1;
+
+		if ($DayDifference>365) {
+			$lID=$rowLe['LeaveID'];
+			$sql = "DELETE FROM hera.leave WHERE LeaveID =$lID;";
+        	$res = $mysqli->query($sql);
+		}
+	}
+?>
 		<!--begin::Basic info-->
 		<div class="card mb-5 mb-xl-10">
 			<!--begin::Card header-->
@@ -18,34 +53,27 @@
 			
 			
 				<!--begin::Form-->
-				<form id="kt_account_profile_details_form" class="form">
+				<form method="POST" action="" id="kt_account_profile_details_form" class="form">
 					<!--begin::Card body-->
 					<div class="card-body border-top p-9">
 						
 						<!--begin::Input group-->
 						<div class="row mb-6">
 							<!--begin::Label-->
-							<label class="col-lg-4 col-form-label fw-semibold fs-6">Leave Type</label>
+							<label class="col-lg-4 col-form-label fw-semibold fs-6 required">Leave Type</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-								<select name="currnecy" aria-label="Select the leave type" data-control="select2" data-placeholder="Select the leave type" class="form-select form-select-solid form-select-lg">
+								<select name="leave_type" aria-label="Select the leave type" data-control="select2" data-placeholder="Select the leave type" class="form-select form-select-solid form-select-lg" required>
 									<option value="">Select the leave type</option>
-									<option value="No pay">No pay</option>
-									<option value="Casual leave">
-									Casual leave</option>
-									<option value="Sick leave">
-									Sick leave</option>
-									<option value="Maternity leave">
-									Maternity leave</option>
-									<option value="Marriage leave">
-									Marriage leave</option>
-									<option value="Paternity leave">
-									Paternity leave</option>
-									<option value="Bereavement leave">
-									Bereavement leave</option>
-									<option value="Compensatory off">
-									Compensatory off</option>
+									<option value="Annual">
+									Annual Leave</option>
+									<option value="Casual">
+									Casual Leave</option>
+									<option value="Maternity">
+									Maternity Leave</option>
+									<option value="No-Pay">
+									No-Pay Leave</option>
 								</select>
 							</div>
 							<!--end::Col-->
@@ -53,9 +81,9 @@
 						<!--end::Input group-->
 						<!--brgin::Input gropu-->
 						<!--begin::Row-->
-					<div class="row mb-6">
+						<div class="row mb-6">
 						<!--begin::Col-->
-							<label class="col-lg-4 col-form-label required fw-semibold fs-6">Absent from</label>
+							<label class="col-lg-4 col-form-label required fw-semibold fs-6">Leave Date Range</label>
 						<!--end::Col-->
 						<!--begin::Col-->
 						<div class="col-lg-8 fv-row">
@@ -69,27 +97,18 @@
 									</svg>
 								</span>
 								<!--end::Svg Icon-->
-								<input class="form-control form-control-solid ps-12" name="date" placeholder="Pick a date" id="kt_datepicker_1" />
+								<!-- <input class="form-control form-control-solid ps-12" name="date" placeholder="Pick a date" id="kt_datepicker_leave_range" required/>-->
+								<input class="form-control form-control-solid ps-12" name="date" placeholder="Pick a date" id="kt_daterangepicker" required/>
+        
 							</div>
 						</div>
 						<!--begin::Col-->
-					</div>
-					<!--end::Row-->
-					<!--end::Input group-->
-						
-					<!--end::Input group-->
-					<!--begin::Input group-->
-						<div class="row mb-6">
-							<!--begin::Label-->
-							<label class="col-lg-4 col-form-label required fw-semibold fs-6">Day Count</label>
-							<!--end::Label-->
-							<!--begin::Col-->
-							<div class="col-lg-8 fv-row">
-								<input type="text" name="Day Count" class="form-control form-control-lg form-control-solid" placeholder="Day Count"  />
-							</div>
-							<!--end::Col-->
 						</div>
+						<!--end::Row-->
 						<!--end::Input group-->
+						
+						<!--end::Input group-->
+					
 						<!--begin::Input group-->
 						<div class="row mb-6">
 							<!--begin::Label-->
@@ -97,9 +116,28 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-							<textarea rows = "5" cols = "60" name = "description" class="form-control form-control-lg form-control-solid">
+							<textarea name = "reason" placeholder="Reason" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea>
+							
 							
 							</textarea>
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+								<!--begin::Input group-->
+
+						<div class="row mb-6">
+							<!--begin::Label-->
+							<label class="col-lg-4 col-form-label required fw-semibold fs-6">Confirmation</label>
+							<!--end::Label-->
+							<!--begin::Col-->
+							<div class="col-lg-8 fv-row">
+							<div class="form-check form-check-custom form-check-solid">
+								<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" required/>
+								<label class="form-check-label" for="flexCheckDefault">
+									I confirm that the information provided in this leave application form is true and accurate to the best of my knowledge.
+								</label>
+							</div>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -110,7 +148,14 @@
 					<!--begin::Actions-->
 					<div class="card-footer d-flex justify-content-end py-6 px-9">
 						<button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-						<button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Submit</button>
+						<button type="submit" name="submit" value="LeaveApplication" class="btn btn-primary" id="kt_account_profile_details_submit" >
+							<span class="indicator-label">
+								Submit
+							</span>
+							<span class="indicator-progress">
+								Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+							</span>
+						</button>
 					</div>
 					<!--end::Actions-->
 				</form>
@@ -122,5 +167,15 @@
 		
 	</div>
 	<!--end::Content container-->
-	
+	<!--begin::Javascript-->
+	<script>var hostUrl = "assets/";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Custom Javascript(used for this page only)-->
 	<script src="assets/js/custom/apps/projects/settings/settings.js"></script>
+	<script src="assets/js/custom/dateRange.js"></script>
+	<script src="assets/js/custom/formValidator.js"></script>
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->

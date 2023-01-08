@@ -68,10 +68,16 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
+
+                #avoided sql injections
+
                 $sql = "SELECT UserID, Username, Email, PasswordHash
                         FROM useraccount
-                        WHERE Username = '" . $user_name . "' OR Email = '" . $user_name . "';";
-                $result_of_login_check = $this->db_connection->query($sql);
+                        WHERE Username = ? OR Email = ?;";
+                $statement = $this->db_connection->prepare($sql);
+                $statement -> bind_param('ss',$user_name,$user_name);
+                $statement -> execute();
+                $result_of_login_check = $statement->get_result();
 
                 // if this user exists
                 if ($result_of_login_check->num_rows == 1) {
@@ -90,6 +96,10 @@ class Login
                         $_SESSION['UserLoginStatus'] = 1;
                         $_SESSION['User'] = new UserDetails(UID:$result_row->UserID);
 
+                        
+                        header("Location: ?success=true");
+                       
+
                     } else {
                         $this->errors[] = "Wrong password. Try again.";
                     }
@@ -99,6 +109,24 @@ class Login
             } else {
                 $this->errors[] = "Database connection problem.";
             }
+        }
+        
+        $redirectURL="auth/?";
+        
+        foreach ($this->errors as $error) {
+            $redirectURL=$redirectURL."errors[]=".$error."&";
+        }
+        foreach ($this->messages as $message) {
+            $redirectURL=$redirectURL."messages[]=".$message."&";
+        }
+        if (sizeof($this->errors)==0 && sizeof($this->messages)==0){
+        // the user is not logged in. you can do whatever you want here.
+        // for demonstration purposes, we simply show the "you are not logged in" view.
+        
+        }
+        else{
+            header("Location: ".$redirectURL);
+            die;
         }
     }
 
@@ -127,4 +155,6 @@ class Login
         // default return
         return false;
     }
+
+
 }

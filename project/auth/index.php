@@ -1,45 +1,19 @@
-<?php
-// show potential errors / feedback (from login object)
-if (isset($login)) {
-    if ($login->errors) {
-        foreach ($login->errors as $error) {
-            echo $error;
-        }
-    }
-    if ($login->messages) {
-        foreach ($login->messages as $message) {
-            echo $message;
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express Node.js & Flask Admin Dashboard Theme
-Purchase: https://1.envato.market/EA4JP
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="../"/>
-		<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular & Laravel by Keenthemes</title>
+		<title>Hera - The Modern Human Resource Management System</title>
 		<meta charset="utf-8" />
-		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
-		<meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="description" content="Hera - The Modern Human Resource Management System" />
+		<meta name="keywords" content="human,resource,program,application,development,product,employee,management,easy,to,use,free" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express Node.js & Flask Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<meta property="og:title" content="Hera - The Modern Human Resource Management System" />
+		<meta property="og:url" content="https://hera.chamaru.me" />
+		<meta property="og:site_name" content="Hera | CSE | UoM" />
+		<link rel="canonical" href="https://hera.chamaru.me" />
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -94,6 +68,80 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::Subtitle-->
 									<div class="text-gray-500 fw-semibold fs-6">to access HERA</div>
 									<!--end::Subtitle=-->
+									<?php
+	if (isset($_GET['errors'])){
+            foreach ($_GET['errors'] as $error) {
+                echo <<<EOT
+                <br><!--begin::Alert-->
+                <div class="alert alert-danger d-flex align-items-center p-5">
+                    <!--begin::Icon-->
+                    <span class="svg-icon svg-icon-2hx svg-icon-danger me-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                    <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+                </svg></span>
+                    <!--end::Icon-->
+                
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column flex-lg-start">
+                        <!--begin::Title-->
+                        <h4 class="mb-1 d-flex flex-center flex-lg-start flex-column text-danger">Error</h4>
+                        <!--end::Title-->
+                        <!--begin::Content-->
+                        <span>
+                EOT;
+                echo $error;
+                echo <<<EOT
+                </span>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                    <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                        <i class="bi bi-x fs-1 text-danger"></i>
+                    </button>
+                </div>
+                <!--end::Alert-->
+
+                EOT;
+            }
+        }
+		if (isset($_GET['messages'])){
+            foreach ($_GET['messages'] as $message) {
+            echo <<<EOT
+
+            <br><!--begin::Alert-->
+            <div class="alert alert-primary d-flex align-items-center p-5">
+                <!--begin::Icon-->
+                <span class="svg-icon svg-icon-2hx svg-icon-primary me-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+                <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+            </svg></span>
+                <!--end::Icon-->
+            
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column flex-lg-start">
+                    <!--begin::Title-->
+                    <h4 class="mb-1 d-flex flex-center flex-lg-start flex-column text-primary">Notice</h4>
+                    <!--end::Title-->
+                    <!--begin::Content-->
+                    <span>
+            EOT;
+            echo $message;
+            echo <<<EOT
+            </span>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+                <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                    <i class="bi bi-x fs-1 text-primary"></i>
+                </button>
+            </div>
+            <!--end::Alert-->
+
+            EOT;
+        
+    }
+}
+									?>
 								</div>
 								<!--begin::Heading-->
 								<!--begin::Input group=-->
@@ -109,32 +157,12 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
-								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-									<div></div>
-									<!--begin::Link-->
-									<a href="../../demo1/dist/authentication/layouts/creative/reset-password.html" class="link-primary">Forgot Password ?</a>
-									<!--end::Link-->
-								</div>
-								<!--end::Wrapper-->
+
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
-									<input type="submit"  name="login" value="Log in" />
-									<button type="submit" id="kt_sign_in_submit" name="login" class="btn btn-primary">
-										<!--begin::Indicator label-->
-										<span class="indicator-label">Sign In</span>
-										<!--end::Indicator label-->
-										<!--begin::Indicator progress-->
-										<span class="indicator-progress">Please wait...
-										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-										<!--end::Indicator progress-->
-									</button>
+									<input type="submit"  name="login" value="Log in" class="btn btn-primary"/>
 								</div>
 								<!--end::Submit button-->
-								<!--begin::Sign up-->
-								<div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet?
-								<a href="../../demo1/dist/authentication/layouts/creative/sign-up.html" class="link-primary">Sign up</a></div>
-								<!--end::Sign up-->
 							</form>
 							<!--end::Form-->
 						</div>

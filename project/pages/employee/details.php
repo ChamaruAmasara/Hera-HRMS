@@ -1,17 +1,97 @@
 <?php
 	
-	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0');
-
+	
+	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0','Search'=>'');
+	$conditions = array('1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
 	if(isset($_POST['submit'])){
-		echo "submitted";
 		$filter['Department'] = $_POST['Department'];
 		$filter['Job_Title'] = $_POST['Job_Title'];
 		$filter['Paygrade'] = $_POST['Paygrade'];
 		$filter['Employment_status'] = $_POST['Employment_status'];
-		
-
+		$filter['Search'] = $_POST['Search'];
 	}
+
+
+	switch ($filter['Department']) {
+		case '0':
+			break;
+		case 'Engineering':
+			$conditions[0] = "DepartmentName = 'Engineering'";
+			break;
+		case 'HR':
+			$conditions[0] = "DepartmentName = 'HR'";
+			break;
+		case 'Accounting':
+			$conditions[0] = "DepartmentName = 'Accounting'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Job_Title']){
+		case '0':
+			break;
+		case 'Software_Engineer':
+			$conditions[1] = "JobTitle = 'Software Engineer'";
+			break;
+		case 'QA_Engineer':
+			$conditions[1] = "JobTitle = 'QA Engineer'";
+			break;
+		case 'Accountant':
+			$conditions[1] = "JobTitle = 'Accountant'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Paygrade']){
+		case '0':
+			break;
+		case 'Level_1':
+			$conditions[2] = "PayGrade = 'Level 1'";
+			break;
+		case 'Level_2':
+			$conditions[2] = "PayGrade = 'Level 2'";
+			break;
+		case 'Level_3':
+			$conditions[2] = "PayGrade = 'Level 3'";
+			break;
+		default:
+			break;
+	}
+	switch($filter['Employment_status']){
+		case '0':
+			break;
+		case 'Intern_Fulltime':
+			$conditions[3] = "EmploymentStatus = 'Intern Fulltime'";
+			break;
+		case 'Intern_Parttime':
+			$conditions[3] = "EmploymentStatus = 'Intern Parttime'";
+			break;
+		case 'Contract_Fulltime':
+			$conditions[3] = "EmploymentStatus = 'Contract Fulltime'";
+			break;
+		case 'Contract_Parttime':
+			$conditions[3] = "EmploymentStatus = 'Contract Parttime'";
+			break;
+		case 'Permanent':
+			$conditions[3] = "EmploymentStatus = 'Permanent'";
+			break;
+		case 'Freelance':
+			$conditions[3] = "EmploymentStatus = 'Freelance'";
+			break;
+		default:
+			break;
+	}
+	if($filter['Search'] != ''){
+		$conditions[4] = "Name LIKE '%".$filter['Search']."%' OR Email LIKE '%".$filter['Search']."%' ";
+	}
+	$condition = implode(' AND ', $conditions);
+	$where = "WHERE ".$condition;
+	$empDetails = new UserDetails();
+	$allEmployees = $empDetails->getAllemployeeSql($where);
+
+	$count=mysqli_num_rows($allEmployees);
+
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 
@@ -26,15 +106,8 @@
 
 
 
-	
-	$allEmployeesSql="SELECT * FROM employee";
-	$allEmployeesResult=mysqli_query($connection, $allEmployeesSql);
-	$allEmployees=mysqli_fetch_all($allEmployeesResult, MYSQLI_ASSOC);
 
-	$empCountSql="SELECT COUNT(EmployeeID) FROM employee";
-	$empCountResult=mysqli_query($connection, $empCountSql);
-	$empCount=mysqli_fetch_array($empCountResult, MYSQLI_NUM);
-	$empCount=$empCount[0];
+
 
 
 ?>
@@ -49,7 +122,7 @@
 									<!--begin::Aside-->
 									<div class="flex-column flex-lg-row-auto w-100 w-lg-250px w-xxl-325px mb-8 mb-lg-0 me-lg-9 me-5">
 										<!--begin::Form-->
-										<form  href="?page=Employee-Details" method="POST">
+										<form method="POST">
 											<!--begin::Card-->
 											<div class="card">
 												<!--begin::Body-->
@@ -64,7 +137,7 @@
 															</svg>
 														</span>
 														<!--end::Svg Icon-->
-														<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" id="search"/>
+														<input type="text" class="form-control form-control-solid ps-10" name="Search" value="" data-hide-search="true" placeholder="Search" />
 													</div>
 													<!--end:Search-->
 													<!--begin::Border-->
@@ -137,7 +210,12 @@
 
 													<!--begin::Action-->
 													<div class="d-flex align-items-center justify-content-end">
-														<a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">Discard</a>
+														 <a href="?page=Employee-Details" class="btn btn-active-light-primary btn-color-gray-400 me-3">
+															Discards
+														</a>
+														<!-- <form action="" method="POST">
+															<input type="hidden" name="reset" value="RESET">
+															<input type="submit" value="RESET" class="btn btn-light"></form>-->
 														<input type="submit" name="submit" class="btn btn-primary">
 													</div>
 													<!--end::Action-->
@@ -155,16 +233,28 @@
 										<div class="d-flex flex-wrap flex-stack pb-7">
 											<!--begin::Title-->
 											<div class="d-flex flex-wrap align-items-center my-1">
-												<h3 class="fw-bold me-5 my-1">57 Items Found
-												<span class="text-gray-400 fs-6">by Recent Updates ↓</span></h3>
+												<h1 class="fw-bold me-5 my-1">Employee Details:</h1><h5 class="fw-bold me-5 my-1"><?php echo $count ?> Items Found</h5>
 											</div>
 											<!--end::Title-->
 											<!--begin::Controls-->
 											<div class="d-flex flex-wrap my-1">
 												<!--begin::Tab nav-->
+												
 												<ul class="nav nav-pills me-6 mb-2 mb-sm-0">
 													<li class="nav-item m-0">
-														<a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary me-3 active" data-bs-toggle="tab" href="#kt_project_users_card_pane">
+														<a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary me-3 active" data-bs-toggle="tab" href="#kt_project_users_table_pane">
+															<!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+															<span class="svg-icon svg-icon-2">
+																<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																	<path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="currentColor" />
+																	<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="currentColor" />
+																</svg>
+															</span>
+															<!--end::Svg Icon-->
+														</a>
+													</li>
+													<li class="nav-item m-0">
+														<a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary " data-bs-toggle="tab" href="#kt_project_users_card_pane">
 															<!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
 															<span class="svg-icon svg-icon-2">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
@@ -179,39 +269,9 @@
 															<!--end::Svg Icon-->
 														</a>
 													</li>
-													<li class="nav-item m-0">
-														<a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary" data-bs-toggle="tab" href="#kt_project_users_table_pane">
-															<!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
-															<span class="svg-icon svg-icon-2">
-																<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																	<path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="currentColor" />
-																	<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="currentColor" />
-																</svg>
-															</span>
-															<!--end::Svg Icon-->
-														</a>
-													</li>
 												</ul>
 												<!--end::Tab nav-->
-												<!--begin::Actions-->
-												<div class="d-flex my-0">
-													<!--begin::Select-->
-													<select name="status" data-control="select2" data-hide-search="true" data-placeholder="Filter" class="form-select form-select-sm border-body bg-body w-150px me-5">
-														<option value="1">Recently Updated</option>
-														<option value="2">Last Month</option>
-														<option value="3">Last Quarter</option>
-														<option value="4">Last Year</option>
-													</select>
-													<!--end::Select-->
-													<!--begin::Select-->
-													<select name="status" data-control="select2" data-hide-search="true" data-placeholder="Export" class="form-select form-select-sm border-body bg-body w-100px">
-														<option value="1">Excel</option>
-														<option value="1">PDF</option>
-														<option value="2">Print</option>
-													</select>
-													<!--end::Select-->
-												</div>
-												<!--end::Actions-->
+	
 											</div>
 											<!--end::Controls-->
 										</div>
@@ -219,9 +279,97 @@
 										<!--begin::Tab Content-->
 										<div class="tab-content">
 
+											<!-- Row tabs Begins here -->
+											<!--begin::Tab pane-->
+											<div id="kt_project_users_table_pane" class="tab-pane fade show active">
+												<!--begin::Card-->
+												<div class="card card-flush">
+													<!--begin::Card body-->
+													<div class="card-body pt-0">
+														<!--begin::Table container-->
+														<div class="table-responsive">
+															<!--begin::Table-->
+															<table id="kt_project_users_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
+																<!--begin::Head-->
+																<thead class="fs-7 text-gray-400 text-uppercase">
+																	<tr>
+																			<th class="min-w-250px">Employee</th>
+																			<th class="min-w-150px">Birth Date</th>
+																			<th class="min-w-90px">Job Title</th>
+																			<th class="min-w-90px">Paygrade</th>		
+																			<th class="min-w-90px">Department</th>
+																			<th class="min-w-50px text-end">Details</th>
+																	</tr>
+																</thead>
+																<!--end::Head-->
+																<!--begin::Body-->
+																<tbody class="fs-7">
+																	<?php
+																	// $empDetails = new UserDetails();
+																	// $allEmployees = $empDetails->getAllemployeeSql($where);
+
+
+																	while ($row = $allEmployees->fetch_assoc()) {
+																		?>
+																		<tr>
+																			<td>
+																				<!--begin::User-->
+																				<div class="d-flex align-items-center">
+																					<!--begin::Wrapper-->
+																					<div class="me-5 position-relative">
+																						<!--begin::Avatar-->
+																						<div class="symbol symbol-35px symbol-circle">
+																							<img alt="Pic" src=<?php 
+																							if ($row['ProfilePhoto']!=null) {
+																								echo $row['ProfilePhoto']; 
+																							}else{
+																								echo "'assets\media\avatars\defult.jpg'";
+																							}
+																							
+																							?> />
+																						</div>
+																						<!--end::Avatar-->
+																					</div>
+																					<!--end::Wrapper-->
+																					<!--begin::Info-->
+																					<div class="d-flex flex-column justify-content-center">
+																						<a href="?page=Employee-Details&SubPage=Employee-Info&ID=<?php echo $row['EmployeeID']; ?>" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
+																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $row['Email'] ?></div>
+																					</div>
+																					<!--end::Info-->
+																				</div>
+																				<!--end::User-->
+																			</td>
+																			<td><?php echo $row['BirthDate'] ?></td>
+																			<td><?php echo $row['JobTitle'] ?></td>
+																			<td><?php echo $row['PayGrade'] ?></td>
+																			
+																			<td><?php echo $row['DepartmentName'] ?></td>
+																			<td class="text-end">
+																				<a href="#" class="btn btn-light btn-sm">Edit</a>
+																			</td>
+																		</tr>
+																		<?php
+																	}
+																	?>
+															
+																	</tbody>
+																<!--end::Body-->
+															</table>
+															<!--end::Table-->
+														</div>
+														<!--end::Table container-->
+													</div>
+													<!--end::Card body-->
+												</div>
+												<!--end::Card-->
+											</div>
+											<!--end::Tab pane-->
+											<!-- Row tabs Ends here -->
+
 											<!-- Card Tabs Begins here -->
 											<!--begin::Tab pane-->
-											<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+											<div id="kt_project_users_card_pane" class="tab-pane fade">
 												<!--begin::Row-->
 												<div class="row g-6 g-xl-9">
 													<!--begin::Col-->
@@ -360,90 +508,7 @@
 											<!--end::Tab pane-->
 											<!-- Card Tabs Ends here -->
 
-											<!-- Row tabs Begins here -->
-											<!--begin::Tab pane-->
-											<div id="kt_project_users_table_pane" class="tab-pane fade">
-												<!--begin::Card-->
-												<div class="card card-flush">
-													<!--begin::Card body-->
-													<div class="card-body pt-0">
-														<!--begin::Table container-->
-														<div class="table-responsive">
-															<!--begin::Table-->
-															<table id="kt_project_users_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
-																<!--begin::Head-->
-																<thead class="fs-7 text-gray-400 text-uppercase">
-																	<tr>
-																			<th class="min-w-250px">Employee</th>
-																			<th class="min-w-150px">Birth Date</th>
-																			<th class="min-w-90px">Job Title</th>
-																			<th class="min-w-90px">Paygrade</th>									
-																			<th class="min-w-50px text-end">Details</th>
-																			<th class="min-w-90px">Department</th>
-																	</tr>
-																</thead>
-																<!--end::Head-->
-																<!--begin::Body-->
-																<tbody class="fs-7">
-																	<?php
-																	$empDetails = new UserDetails();
-																	$allEmployees = $empDetails->getAllDetailsSql();
-																	while ($row = $allEmployees->fetch_assoc()) {
-																		?>
-																		<tr>
-																			<td>
-																				<!--begin::User-->
-																				<div class="d-flex align-items-center">
-																					<!--begin::Wrapper-->
-																					<div class="me-5 position-relative">
-																						<!--begin::Avatar-->
-																						<div class="symbol symbol-35px symbol-circle">
-																							<img alt="Pic" src=<?php 
-																							if ($row['ProfilePhoto']!=null) {
-																								echo $row['ProfilePhoto']; 
-																							}else{
-																								echo "'assets\media\avatars\defult.jpg'";
-																							}
-																							
-																							?> />
-																						</div>
-																						<!--end::Avatar-->
-																					</div>
-																					<!--end::Wrapper-->
-																					<!--begin::Info-->
-																					<div class="d-flex flex-column justify-content-center">
-																						<a href="" class="mb-1 text-gray-800 text-hover-primary"><?php echo $row['Name'] ?></a>
-																						<div class="fw-semibold fs-6 text-gray-400"><?php echo $row['Email'] ?></div>
-																					</div>
-																					<!--end::Info-->
-																				</div>
-																				<!--end::User-->
-																			</td>
-																			<td><?php echo $row['BirthDate'] ?></td>
-																			<td><?php echo $row['JobTitle'] ?></td>
-																			<td><?php echo $row['PayGrade'] ?></td>
-																			<td class="text-end">
-																				<a href="#" class="btn btn-light btn-sm">Edit</a>
-																			</td>
-																			<td><?php echo $row['DepartmentName'] ?></td>
-																		</tr>
-																		<?php
-																	}
-																	?>
-															
-																	</tbody>
-																<!--end::Body-->
-															</table>
-															<!--end::Table-->
-														</div>
-														<!--end::Table container-->
-													</div>
-													<!--end::Card body-->
-												</div>
-												<!--end::Card-->
-											</div>
-											<!--end::Tab pane-->
-											<!-- Row tabs Ends here -->
+
 
 
 										</div>
