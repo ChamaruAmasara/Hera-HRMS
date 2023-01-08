@@ -29,9 +29,8 @@ class AddEmployee
      */
     public function __construct()
     {
-        if (isset($_POST["addEmployee"])) {
-
-            $this->addEmployee();
+        if (isset($_POST['submit'])) {
+            $this->addEmployee();        
         }
     }
 
@@ -41,141 +40,174 @@ class AddEmployee
      */
     private function addEmployee()
     {
+
         $valid=true;
-        //initialize date1 and date2 variables to datetime today
-        $date1 = new DateTime();
-        $date2 = new DateTime();
-        
-        // check  form contents
-        if (empty($_POST['leave_type'])) {
-            $this->errors[] = "Leave Type field was empty.";
-            $valid=false;
-        } elseif (empty($_POST['date'])) {
-            $this->errors[] = "Leave Date Range field was empty.";
-            $valid=false;
-        } elseif (empty($_POST['reason'])) {
-            $this->errors[] = "Reason field was empty.";
-            $valid=false;
-        } 
 
-
-        //check whether $_POST['leave_type'] is one of "Annual", "Casual", "Maternity", "No-Pay"
-        elseif (!in_array($_POST['leave_type'], array("Annual", "Casual", "Maternity", "No-Pay"))) {
-            $this->errors[] = "Leave Type is not valid.";
-            $valid=false;
-        }
-
-
-
-        // split $_POST['date'] by "-" and check whether the individuals are valid dates in future. The date format is MM/DD/YYYY
-
-
-        
-        elseif (!empty($_POST['date'])) {
-            $date=trim($_POST['date']);
-            $dates = explode("-", $date);
-            
-            if (count($dates) != 2) {
-                $this->errors[] = "Leave Date Range is not valid. 1";
+        //create a array containing required form contents like Name,BirthDate,Gender,MaritalStatus,Address,EmergencyContactName,EmergencyContactNumber,DeparmetId,BranchID,JobTitleID,PayGradeID,EmploymentStatus,SupervisorID
+        $required = array('Name','BirthDate','Gender','MaritalStatus','Address','EmergencyContactName','EmergencyContactNumber','EmergencyContactAddress','DepartmentID','BranchID','JobTitleID','PayGradeID','EmploymentStatusID','SupervisorID');
+        //check whether each get request avaialable and add error if something is missing
+        foreach ($required as $field) {
+            if (isset($_POST[$field])){
+                if (empty($_POST[$field])) {
+                    $valid=false;
+                    $this->errors[] = "Field $field is required.";
+                }
+            } else{
                 $valid=false;
-            } else {
-                try{
-                $date1 = DateTime::createFromFormat('m/d/Y', trim($dates[0]));
-                $date2 = DateTime::createFromFormat('m/d/Y', trim($dates[1]));
-                if ($date1 == false || $date2 == false) {
-                    $this->errors[] = "Leave Date Range is not valid. 2";
-                    $valid=false;
-                } else {
-                    //set today date to a variable called today
-                    $today = new DateTime();
-                    //check whether date1 and date2 are in future
-                    if ($date1 <= $today || $date2 <= $today) {
-                        $this->errors[] = "Leave Date Range is not valid. 3";
-                        $valid=false;
-                    }
-                    
-                }
-                }
-                catch(Exception $e){
-                    $this->errors[] = "Leave Date Range is not valid. 4";
-                    $valid=false;
-                }
+                $this->errors[] = "Field $field is required.";
             }
-
         }
-        
-
-        //the data looks safe 
-        if ($valid) {
-
-            // create a database connection, using the constants from config/db.php (which we loaded in index.php)
-            $this->db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-
-            // change character set to utf8 and check it
-            if (!$this->db_connection->set_charset("utf8")) {
-                $this->errors[] = $this->db_connection->error;
-            }
-
-            // if no connection errors (= working database connection)
-            if (!$this->db_connection->connect_errno) {
-
-                // escape the POST stuff
-                $leave_type = $this->db_connection->real_escape_string($_POST['leave_type']);
-                $date = $this->db_connection->real_escape_string($_POST['date']);
-                $reason = $this->db_connection->real_escape_string($_POST['reason']);
-                
-                //get current date time to store in mysql database
-                $leaveLogDateTime = date('Y-m-d H:i:s');
-                
-                //get current employeeid
-                $userDetails = $_SESSION['User'];
-                $userDetailsArray = $userDetails->getUserDetailArray();
-                $employeeID = $userDetailsArray['EmployeeID'];
-
-                $approved=false;
-
-                $firstAbsentDate=$date1->format('Y/m/d');
-                $lastAbsentDate=$date2->format('Y/m/d');
-
-                //count leave day count from $date2-$date1
-                $leaveDayCount = $date2->diff($date1)->format("%a")+1;
-
-
-
-                // database query, getting all the info of the selected user
-
-                //avoided sql injections
-
-                $sql = "INSERT INTO hera.leave (Approved, 
-                                            EmployeeID, 
-                                            FirstAbsentDate, 
-                                            LastAbsentDate, 
-                                            LeaveDayCount, 
-                                            LeaveLogDateTime, 
-                                            LeaveType, 
-                                            Reason)
-                        VALUES (?, 
-                                ?, 
-                                ?, 
-                                ?, 
-                                ?, 
-                                ?, 
-                                ?, 
-                                ?);";
-                $statement = $this->db_connection->prepare($sql);
-                $statement -> bind_param('isssssss',$approved,$employeeID,$firstAbsentDate,$lastAbsentDate,$leaveDayCount,$leaveLogDateTime,$leave_type,$reason);
-                $statement -> execute();
-
-                //print the result from above mysql statement
-                if ($statement->affected_rows == 1) {
-                    $this->successes[] = "Your leave application has been submitted.";
+        //all parameters are not empty
+        if ($valid){
+            //check whether BirthDate is a proper date older than today
+            if (!empty($_POST['BirthDate'])) {
+                try{
+                $date = $_POST['BirthDate'];
+                $d = DateTime::createFromFormat('Y-m-d', $date);
+                if ($d && $d->format('Y-m-d') === $date) {
+                    if ($date > date('Y-m-d')) {
+                        $valid=false;
+                        $this->errors[] = 'BirthDate cannot be in the future.';
+                    }
                 } else {
-                    $this->errors[] = "Sorry, your leave application could not be submitted. Please go back and try again.";
+                    $valid=false;
+                    $this->errors[] = 'BirthDate is not a valid date.';
                 }
-
-            } else {
-                $this->errors[] = "Database connection problem.";
             }
+            catch(Exception $e){
+                $valid=false;
+                $this->errors[] = 'BirthDate is not a valid date.';
+            }
+            }
+            
+            //check whether gender is male or female
+            
+            if (!empty($_POST['Gender'])){
+                if (!in_array($_POST['Gender'][0],array('male','female'))){
+                    $valid=false;
+                    $this->errors[] = 'The gender should be either male or female';
+                }
+            }
+
+            if (!empty($_POST['MaritalStatus'])){
+                if (!in_array($_POST['MaritalStatus'][0],array('Married','Unmarried'))){
+                    $valid=false;
+                    $this->errors[] = 'The Marital Status should be either Married or Unmarried';
+                }
+            }
+
+            
+
+
+                //the data looks safe 
+                if ($valid) {
+
+                    // create a database connection, using the constants from config/db.php (which we loaded in index.php)
+                    $this->db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+
+                    // change character set to utf8 and check it
+                    if (!$this->db_connection->set_charset("utf8")) {
+                        $this->errors[] = $this->db_connection->error;
+                    }
+
+                    // if no connection errors (= working database connection)
+                    if (!$this->db_connection->connect_errno) {
+
+                        // escape the POST stuff
+                        // $required = array('Name','BirthDate','Gender[]','MaritalStatus[]','Address','EmergencyContactName','EmergencyContactNumber','DepartmentID','BranchID','JobTitleID','PayGradeID','EmploymentStatusID','SupervisorID');
+        
+                        $Name = $this->db_connection->real_escape_string($_POST['Name']);
+                        $BirthDate = $this->db_connection->real_escape_string($_POST['BirthDate']);
+
+                        $Gender = $this->db_connection->real_escape_string($_POST['Gender'][0]);
+                        $MaritalStatus = $this->db_connection->real_escape_string($_POST['MaritalStatus'][0]);
+
+                        $Address = $this->db_connection->real_escape_string($_POST['Address']);
+                        $EmergencyContactName = $this->db_connection->real_escape_string($_POST['EmergencyContactName']);
+                        $EmergencyContactNumber = $this->db_connection->real_escape_string($_POST['EmergencyContactNumber']);
+                        $EmergencyContactAddress = $this->db_connection->real_escape_string($_POST['EmergencyContactAddress']);
+                        $DepartmentID = $this->db_connection->real_escape_string($_POST['DepartmentID']);
+                        $BranchID = $this->db_connection->real_escape_string($_POST['BranchID']);
+                        $JobTitleID = $this->db_connection->real_escape_string($_POST['JobTitleID']);
+                        $PayGradeID = $this->db_connection->real_escape_string($_POST['PayGradeID']);
+                        $EmploymentStatusID = $this->db_connection->real_escape_string($_POST['EmploymentStatusID']);
+                        $SupervisorID = $this->db_connection->real_escape_string($_POST['SupervisorID']);
+
+                
+                        // insert into emergencycontact
+
+                        try{
+
+                        $sql = "INSERT INTO hera.emergencycontact (Name, 
+                                                                    PrimaryPhoneNumber, 
+                                                                    Address)
+                                                VALUES (?, 
+                                                        ?, 
+                                                        ?);";
+                        $statement1 = $this->db_connection->prepare($sql);
+                        $statement1 -> bind_param('sss',$EmergencyContactName,$EmergencyContactNumber,$EmergencyContactAddress);
+                        $statement1 -> execute();
+
+                        $sql = "INSERT INTO hera.employee (Name,
+                                                            BirthDate,
+                                                            Gender,
+                                                            MaritalStatus,
+                                                            Address,
+                                                            EmergencyContactID,
+                                                            DepartmentID,
+                                                            BranchID,
+                                                            JobTitleID,
+                                                            PayGradeID,
+                                                            EmploymentStatusID,
+                                                            SupervisorID) 
+                                                            VALUES (?, 
+                                                                    ?, 
+                                                                    ?, 
+                                                                    ?, 
+                                                                    ?, 
+                                                                    (SELECT EmergencyContactID FROM emergencycontact WHERE Name=? AND PrimaryPhoneNumber=? AND Address=? LIMIT 1),
+                                                                    ?, 
+                                                                    ?, 
+                                                                    ?, 
+                                                                    ?, 
+                                                                    ?, 
+                                                                    ?);";
+                        $statement2 = $this->db_connection->prepare($sql);
+                        $statement2 -> bind_param('ssssssssiiiiii',$Name,$BirthDate,$Gender,$MaritalStatus,$Address,$EmergencyContactName,$EmergencyContactNumber,$EmergencyContactAddress,$DepartmentID,$BranchID,$JobTitleID,$PayGradeID,$EmploymentStatusID,$SupervisorID );
+                        $statement2 -> execute();
+
+                        $sql="SELECT EmployeeID FROM hera.employee WHERE Name=? AND BirthDate=? ORDER BY EmployeeID DESC LIMIT 1;";
+                        $statement3 = $this->db_connection->prepare($sql);
+                        $statement3 -> bind_param('ss',$Name,$BirthDate);
+                        $statement3 -> execute();
+                        $EmployeeIDRow = $statement3->get_result();
+                        $EmployeeIDData = $EmployeeIDRow->fetch_object();
+                        $EmployeeID = $EmployeeIDData->EmployeeID;
+                                            
+                        //print the result from above mysql statement
+                        if ($statement1->affected_rows == 1 && $statement2->affected_rows == 1) {
+                            $this->successes[] = "New Employee with EmployeeID ".$EmployeeID." has been added to the system.";
+
+                            
+                        } 
+                        elseif ($statement1->affected_rows == 1 && $statement2->affected_rows != 1){
+                                
+                            $this->errors[] = "Sorry, emergency contact could not be submitted. Please submit again.";
+                        }
+                        else {
+                            
+                            $this->errors[] = "Sorry, The new employee could not be added.";
+                        }
+
+                    }
+                    //catch exception and add it to errors
+                    catch(Exception $e){
+                        $this->errors[] = $e->getMessage();
+                    }
+                } else {
+                        $this->errors[] = "Database connection problem.";
+                    }
+                }
         }
         if ($this->errors){
             foreach ($this->errors as $error) {
@@ -274,6 +306,13 @@ class AddEmployee
             echo <<<EOT
             </span>
                     <!--end::Content-->
+
+                    <!--begin::Buttons-->
+                    <div class="d-flex flex-start flex-wrap">
+                        <a href="#" class="btn btn-outline btn-outline-success btn-active-danger m-2">Cancel</a>
+                        <a href="?page=Employee-Details&SubPage=Employee-Info&ID=$EmployeeID" class="btn btn-success m-2">View Employee</a>
+                    </div>
+                    <!--end::Buttons-->
                 </div>
                 <!--end::Wrapper-->
                 <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">

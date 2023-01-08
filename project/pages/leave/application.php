@@ -81,7 +81,7 @@ $sqlLe = "SELECT * FROM hera.leave;";
 						<!--end::Input group-->
 						<!--brgin::Input gropu-->
 						<!--begin::Row-->
-					<div class="row mb-6">
+						<div class="row mb-6">
 						<!--begin::Col-->
 							<label class="col-lg-4 col-form-label required fw-semibold fs-6">Leave Date Range</label>
 						<!--end::Col-->
@@ -103,11 +103,11 @@ $sqlLe = "SELECT * FROM hera.leave;";
 							</div>
 						</div>
 						<!--begin::Col-->
-					</div>
-					<!--end::Row-->
-					<!--end::Input group-->
+						</div>
+						<!--end::Row-->
+						<!--end::Input group-->
 						
-					<!--end::Input group-->
+						<!--end::Input group-->
 					
 						<!--begin::Input group-->
 						<div class="row mb-6">

@@ -27,6 +27,9 @@ require_once("includes/classes/Login.php");
 
 // create a login object. when this object is created, it will do all login/logout stuff automatically
 // so this single line handles the entire login process. in consequence, you can simply ...
+if (isset($login)){
+    $oldLogin=$login;
+}
 $login = new Login();
 
 // ... ask if we are logged in here:
@@ -36,8 +39,17 @@ if ($login->isUserLoggedIn() == true) {
     include("pages/default.php");
 
 } else {
+    $redirectURL="auth/?";
+    if (isset($oldLogin)){
+        foreach ($oldLogin->errors as $error) {
+            $redirectURL=$redirectURL."errors[]=".$error."&";
+        }
+        foreach ($oldLogin->messages as $message) {
+            $redirectURL=$redirectURL."messages[]=".$message."&";
+        }
+    }
     // the user is not logged in. you can do whatever you want here.
     // for demonstration purposes, we simply show the "you are not logged in" view.
-    header("Location: auth/");
+    header("Location: ".$redirectURL);
 }
 ?>

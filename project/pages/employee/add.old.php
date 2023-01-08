@@ -1,19 +1,15 @@
-
-<!--begin::Content-->
-<div id="kt_app_content" class="app-content flex-column-fluid">
-	<!--begin::Content container-->
-	<div id="kt_app_content_container" class="app-container container-fluid">
-
+						
+						
+							<!--begin::Content-->
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<!--begin::Content container-->
+								<div id="kt_app_content_container" class="app-container container-fluid">
 <?php
-
-
 
 require_once(PROJECT_ROOT_PATH ."/includes/getDBTablePrimaryData.php");
 
 if (isset($_POST["submit"])) { 
-
     if ($_POST["submit"]=="addEmployee"){
-
         // load the leave application class
         require_once(PROJECT_ROOT_PATH ."/includes/classes/AddEmployee.php");
 
@@ -24,24 +20,26 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<!--begin::Basic info-->
-									<div class="card mb-5 mb-xl-10">
+									<!--begin::Basic info-->
+									<div class="card mb-4 mb-xl-10">
 										<!--begin::Card header-->
 										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 											<!--begin::Card title-->
-											<div class="card-title m-0">
-												<h1 class="fw-bold m-0">Profile Details</h1>
+											<div class="card-title m-0" font="20">
+												<h1 class="fw-bold m-0" font="20">Add Employee</h1>
 											</div>
 											<!--end::Card title-->
 										</div>
 										<!--begin::Card header-->
 										<!--begin::Content-->
-										<div id="kt_account_settings_profile_details" class="collapse show">
+										
+										
 											<!--begin::Form-->
-											<form method="POST" id="kt_account_profile_details_form" class="form">
+											
+											<form method="POST" action="test.php" id="kt_account_profile_details_form" class="form">
 												<!--begin::Card body-->
 												<div class="card-body border-top p-9">
-                                                    
+													
 													<!--begin::Input group-->
 													<div class="row mb-6">
 														<!--begin::Label-->
@@ -49,7 +47,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<input type="text" name="Name" class="form-control form-control-lg form-control-solid" placeholder="Full Name"  required/>
+															<input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="Full Name"  required/>
 														</div>
 														<!--end::Col-->
 													</div>
@@ -66,13 +64,13 @@ if (isset($_POST["submit"])) {
 																<div class="d-flex align-items-center mt-3">
 																	<!--begin::Option-->
 																	<label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-																		<input class="form-check-input" name="Gender[]" type="radio" value="male" required/>
+																		<input class="form-check-input" name="gender[]" type="radio" value="male" required/>
 																		<span class="fw-semibold ps-2 fs-6">Male</span>
 																	</label>
 																	<!--end::Option-->
 																	<!--begin::Option-->
 																	<label class="form-check form-check-custom form-check-inline form-check-solid">
-																		<input class="form-check-input" name="Gender[]" type="radio" value="female" />
+																		<input class="form-check-input" name="gender[]" type="radio" value="Female" />
 																		<span class="fw-semibold ps-2 fs-6">Female</span>
 																	</label>
 																	<!--end::Option-->
@@ -95,13 +93,13 @@ if (isset($_POST["submit"])) {
 																<div class="d-flex align-items-center mt-3">
 																	<!--begin::Option-->
 																	<label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-																		<input class="form-check-input" name="MaritalStatus[]" type="radio" value="Married" required/>
+																		<input class="form-check-input" name="marital[]" type="radio" value="married" required/>
 																		<span class="fw-semibold ps-2 fs-6">Married</span>
 																	</label>
 																	<!--end::Option-->
 																	<!--begin::Option-->
 																	<label class="form-check form-check-custom form-check-inline form-check-solid">
-																		<input class="form-check-input" name="MaritalStatus[]" type="radio" value="Unmarried" />
+																		<input class="form-check-input" name="marital[]" type="radio" value="unmarried" />
 																		<span class="fw-semibold ps-2 fs-6">Unmarried</span>
 																	</label>
 																	<!--end::Option-->
@@ -132,7 +130,7 @@ if (isset($_POST["submit"])) {
 																</svg>
 															</span>
 															<!--end::Svg Icon-->
-															<input class="form-control form-control-solid ps-12" name="BirthDate" placeholder="Enter birthdate" id="kt_datepicker_1" required/>
+															<input class="form-control form-control-solid ps-12" name="birthdate" placeholder="Enter birthdate" id="kt_datepicker_1" required/>
 														</div>
 													</div>
 													<!--begin::Col-->
@@ -148,7 +146,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-														<textarea name = "Address" placeholder="Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
+														<textarea name = "address" placeholder="Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
 														</div>
 														<!--end::Col-->
 													</div>
@@ -158,7 +156,7 @@ if (isset($_POST["submit"])) {
 													<!--begin::Input group-->
 													<div class="row mb-6">
 														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Country</label>
+														<label class="col-lg-4 col-form-label fw-semibold fs-6">Country</label>
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
@@ -401,7 +399,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-														<select name="BranchID" aria-label="Select the Branch" data-control="select2" data-placeholder="Select the Branch" class="form-select form-select-solid form-select-lg" required>
+														<select name="branch" aria-label="Select the Branch" data-control="select2" data-placeholder="Select the Branch" class="form-select form-select-solid form-select-lg" required>
 																<option value="">Select the Branch</option>
 																<?php 
 																	$sqlResult=getDBTablePrimaryData("branch","BranchID","BranchName");
@@ -426,7 +424,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select name="DepartmentID" aria-label="Select the Department" data-control="select2" data-placeholder="Select the Department" class="form-select form-select-solid form-select-lg" required>
+															<select name="department" aria-label="Select the Department" data-control="select2" data-placeholder="Select the Department" class="form-select form-select-solid form-select-lg" required>
 																<option value="">Select the Department</option>
 																<?php 
 																	$sqlResult=getDBTablePrimaryData("department","DepartmentID","DepartmentName");
@@ -452,7 +450,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select name="JobTitleID" aria-label="Select the Job Title" data-control="select2" data-placeholder="Select the Job Title" class="form-select form-select-solid form-select-lg" required>
+															<select name="job_title" aria-label="Select the Job Title" data-control="select2" data-placeholder="Select the Job Title" class="form-select form-select-solid form-select-lg" required>
 																<option value="">Select the Job Title</option>
 																<?php 
 																	$sqlResult=getDBTablePrimaryData("jobtitle","JobTitleID","JobTitleName");
@@ -478,7 +476,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select name="PayGradeID" aria-label="Select the Pay Grade" data-control="select2" data-placeholder="Select the Pay Grade" class="form-select form-select-solid form-select-lg" required>
+															<select name="pay_grade" aria-label="Select the Pay Grade" data-control="select2" data-placeholder="Select the Pay Grade" class="form-select form-select-solid form-select-lg" required>
 																<option value="">Select the Pay Grade</option>
 																<?php 
 																	$sqlResult=getDBTablePrimaryData("paygrade","PayGradeID","PayGradeName");
@@ -503,7 +501,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select name="EmploymentStatusID" aria-label="Select the Employment Status" data-control="select2" data-placeholder="Select the Employment Status" class="form-select form-select-solid form-select-lg" required>
+															<select name="employment_status" aria-label="Select the Employment Status" data-control="select2" data-placeholder="Select the Employment Status" class="form-select form-select-solid form-select-lg" required>
 																<option value="">Select the Employment Status</option>
 																<?php 
 																	$sqlResult=getDBTablePrimaryData("employmentstatus","EmploymentStatusID","EmploymentStatusName");
@@ -527,7 +525,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<input type="text" name="EmergencyContactName" class="form-control form-control-lg form-control-solid" placeholder="Emergency Contact Person's Name"  required/>
+															<input type="text" name="emergency_contact_name" class="form-control form-control-lg form-control-solid" placeholder="Emergency Contact Name"  required/>
 														</div>
 														<!--end::Col-->
 													</div>
@@ -540,77 +538,37 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<input type="text" name="EmergencyContactNumber" class="form-control form-control-lg form-control-solid" placeholder="Emergancy Contact Person's Number"  required/>
+															<input type="text" name="emergency_contact_number" class="form-control form-control-lg form-control-solid" placeholder="Emergancy Contact Number"  required/>
 														</div>
 														<!--end::Col-->
 													</div>
 													<!--end::Input group-->
-
-
-											
-													<!--begin::Input group-->
-													<div class="row mb-6">
-														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Emergency Contact Address</label>
-														<!--end::Label-->
-														<!--begin::Col-->
-														<div class="col-lg-8 fv-row">
-														<textarea name = "EmergencyContactAddress" placeholder="Emergency Contact Person's Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
-														</div>
-														<!--end::Col-->
-													</div>
-													<!--end::Input group-->
-
-
-
-												
-																										<!--begin::Input group-->
-																										<div class="row mb-6">
-														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Supervisor</label>
-														<!--end::Label-->
-														<!--begin::Col-->
-														<div class="col-lg-8 fv-row">
-															<select id="kt_docs_select2_rich_content" name="SupervisorID" aria-label="Select a Supervisor..." data-placeholder="Select a Supervisor..." class="form-select form-select-solid form-select-lg" required>
-																<option value="">Select a Supervisor...</option>
-																<?php 
-																	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-																	$sql = "SELECT EmployeeID,Name,Email,ProfilePhoto FROM EmployeeDetails WHERE Email is not NULL";
-																	$sqlResult = $mysqli->query($sql);
-																	
-																	while(($row =  $sqlResult->fetch_assoc())) {
-																	   //store $ID and $name as an key value pair
-																	   echo "<option value=\"".$row["EmployeeID"]."\" data-kt-rich-content-subcontent=\"".$row["Email"]."\" data-kt-rich-content-icon=\"".$row["ProfilePhoto"]."\" >".$row["Name"]."</option>";
-																	}
-																	
-																?>	
-																
-															</select>
-															<!--end::Select-->
-														</div>
-													</div>
-														<!--end::Input group-->
-
-
 												</div>
+				
 												<!--end::Card body-->
-												<!--begin::Actions-->
-												<div class="card-footer d-flex justify-content-end py-6 px-9">
-													<button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-													<button type="submit" name="submit" value="addEmployee" class="btn btn-primary" id="kt_account_profile_details_submit">Add Employee</button>
-												</div>
-												<!--end::Actions-->
+
+													<!--begin::Actions-->
+													
+													<div class="card-footer d-flex justify-content-end py-6 px-9">
+														
+														<button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+														<button type="submit" name="submit" value="AddEmployee" class="btn btn-primary" id="kt_account_profile_details_submit2" >
+														Add Employee
+														</button>
+													</div>
+													<!--end::Actions-->				
+												
 											</form>
 											<!--end::Form-->
 										</div>
 										<!--end::Content-->
 									</div>
 									<!--end::Basic info-->
-
-
-
-    </div>
-</div>
+									
+								</div>
+								<!--end::Content container-->
+							</div>
+							<!--end::Content-->
 		<!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -622,10 +580,35 @@ if (isset($_POST["submit"])) {
 		<!--end::Vendors Javascript-->
 		<!--begin::Custom Javascript(used for this page only)-->
 		
-		<script src="assets/js/custom/supervisorSelect.js"></script>
-		<script src="assets/js/custom/countrySearch.js"></script>
-		<script src="assets/js/custom/dateRange.js"></script>
-        
+		
+		<script src="assets/js/custom/account/settings/signin-methods.js"></script>
+		<script src="assets/js/custom/account/settings/profile-details.js"></script>
+		<script src="assets/js/custom/account/settings/deactivate-account.js"></script>
+		<script src="assets/js/custom/pages/user-profile/general.js"></script>
+		<script src="assets/js/widgets.bundle.js"></script>
+		<script src="assets/js/custom/widgets.js"></script>
+		<script src="assets/js/custom/apps/chat/chat.js"></script>
+		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="assets/js/custom/utilities/modals/offer-a-deal/type.js"></script>
+		<script src="assets/js/custom/utilities/modals/offer-a-deal/details.js"></script>
+		<script src="assets/js/custom/utilities/modals/offer-a-deal/finance.js"></script>
+		<script src="assets/js/custom/utilities/modals/offer-a-deal/complete.js"></script>
+		<script src="assets/js/custom/utilities/modals/offer-a-deal/main.js"></script>
+		<script src="assets/js/custom/utilities/modals/two-factor-authentication.js"></script>
+		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
+		<!--begin::Javascript-->
+		<script>var hostUrl = "assets/";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used for this page only)-->
+		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used for this page only)-->
 		<script src="assets/js/custom/apps/projects/settings/settings.js"></script>
 		<script src="assets/js/widgets.bundle.js"></script>
 		<script src="assets/js/custom/widgets.js"></script>
@@ -634,5 +617,8 @@ if (isset($_POST["submit"])) {
 		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
 		<script src="assets/js/custom/utilities/modals/new-target.js"></script>
+		<script src="assets/js/custom/countrySearch.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+		
+	

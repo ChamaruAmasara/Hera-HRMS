@@ -16,3 +16,7 @@ if(dd<10){ dd='0'+dd }
 if(mm<10){ mm='0'+mm } 
 var yesterday1 = mm+'/'+dd+'/'+yyyy; 
 $("#kt_daterangepicker").daterangepicker({minDate:yesterday1});
+
+$("#kt_datepicker_1").flatpickr({
+    maxDate: "today"
+});

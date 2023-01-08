@@ -126,9 +126,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`emergencycontact` (
   `EmergencyContactID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(20) NULL DEFAULT NULL,
+  `Name` VARCHAR(1024) NULL DEFAULT NULL,
   `PrimaryPhoneNumber` VARCHAR(20) NULL DEFAULT NULL,
-  `Address` VARCHAR(50) NULL DEFAULT NULL,
+  `Address` VARCHAR(2048) NULL DEFAULT NULL,
   PRIMARY KEY (`EmergencyContactID`),
   UNIQUE INDEX `EmergencyContactID_UNIQUE` (`EmergencyContactID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -141,11 +141,11 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`employee` (
   `EmployeeID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(20) NULL DEFAULT NULL,
+  `Name` VARCHAR(1024) NULL DEFAULT NULL,
   `BirthDate` DATE NULL DEFAULT NULL,
   `Gender` ENUM('Male', 'Female') NULL DEFAULT NULL,
   `MaritalStatus` ENUM('Married', 'Unmarried') NULL DEFAULT NULL,
-  `Address` VARCHAR(45) NULL DEFAULT NULL,
+  `Address` VARCHAR(2048) NULL DEFAULT NULL,
   `EmergencyContactID` INT NULL DEFAULT NULL,
   `DepartmentID` INT NULL DEFAULT NULL,
   `BranchID` INT NULL DEFAULT NULL,
@@ -242,8 +242,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`organization` (
   `OrganizationID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(20) NULL DEFAULT NULL,
-  `Address` VARCHAR(50) NULL DEFAULT NULL,
+  `Name` VARCHAR(1024) NULL DEFAULT NULL,
+  `Address` VARCHAR(2048) NULL DEFAULT NULL,
   `RegistrationNumber` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`OrganizationID`),
   UNIQUE INDEX `OrganizationID_UNIQUE` (`OrganizationID` ASC) VISIBLE)

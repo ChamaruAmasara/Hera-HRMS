@@ -95,6 +95,8 @@ class Login
                         $_SESSION['Email'] = $result_row->Email;
                         $_SESSION['UserLoginStatus'] = 1;
                         $_SESSION['User'] = new UserDetails(UID:$result_row->UserID);
+                        
+                       
 
                     } else {
                         $this->errors[] = "Wrong password. Try again.";
@@ -105,6 +107,24 @@ class Login
             } else {
                 $this->errors[] = "Database connection problem.";
             }
+        }
+        
+        $redirectURL="auth/?";
+        
+        foreach ($this->errors as $error) {
+            $redirectURL=$redirectURL."errors[]=".$error."&";
+        }
+        foreach ($this->messages as $message) {
+            $redirectURL=$redirectURL."messages[]=".$message."&";
+        }
+        
+        if (sizeof($this->errors)==0 && sizeof($this->messages)==0){
+        // the user is not logged in. you can do whatever you want here.
+        // for demonstration purposes, we simply show the "you are not logged in" view.
+        
+        }
+        else{
+            header("Location: ".$redirectURL);
         }
     }
 
@@ -133,4 +153,6 @@ class Login
         // default return
         return false;
     }
+
+
 }

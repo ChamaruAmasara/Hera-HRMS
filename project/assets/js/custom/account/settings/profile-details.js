@@ -14,31 +14,31 @@ var KTAccountSettingsProfileDetails = function () {
             form,
             {
                 fields: {
-                    fname: {
+                    name: {
                         validators: {
                             notEmpty: {
-                                message: 'First name is required'
+                                message: 'Full name is required'
                             }
                         }
                     },
-                    lname: {
+                    birthdate: {
                         validators: {
                             notEmpty: {
-                                message: 'Last name is required'
+                                message: 'Birth Date is required'
                             }
                         }
                     },
-                    company: {
+                    emergency_contact_name: {
                         validators: {
                             notEmpty: {
-                                message: 'Company name is required'
+                                message: 'Emergency Contact Name is required'
                             }
                         }
                     },
-                    phone: {
+                    emergency_contact_number: {
                         validators: {
                             notEmpty: {
-                                message: 'Contact phone number is required'
+                                message: 'Emergency contact phone number is required'
                             }
                         }
                     },
@@ -49,24 +49,52 @@ var KTAccountSettingsProfileDetails = function () {
                             }
                         }
                     },
-                    timezone: {
+                    branch: {
                         validators: {
                             notEmpty: {
-                                message: 'Please select a timezone'
+                                message: 'Please select a branch'
                             }
                         }
                     },
-                    'communication[]': {
+                    'gender[]': {
                         validators: {
                             notEmpty: {
-                                message: 'Please select at least one communication method'
+                                message: 'Please select the gender'
                             }
                         }
                     },
-                    language: {
+                    'marital[]': {
                         validators: {
                             notEmpty: {
-                                message: 'Please select a language'
+                                message: 'Please select the status'
+                            }
+                        }
+                    },
+                    department: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please select a department'
+                            }
+                        }
+                    },
+                    job_title: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please select a job title'
+                            }
+                        }
+                    },
+                    pay_grade: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please select a pay grade'
+                            }
+                        }
+                    },
+                    employment_status: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please select a employment status'
                             }
                         }
                     },
@@ -90,9 +118,9 @@ var KTAccountSettingsProfileDetails = function () {
             validation.revalidateField('country');
         });
 
-        $(form.querySelector('[name="language"]')).on('change', function() {
+        $(form.querySelector('[name="name"]')).on('change', function() {
             // Revalidate the color field when an option is chosen
-            validation.revalidateField('language');
+            validation.revalidateField('name');
         });
 
         $(form.querySelector('[name="timezone"]')).on('change', function() {
@@ -101,36 +129,122 @@ var KTAccountSettingsProfileDetails = function () {
         });
     }
 
-    var handleForm = function () {
+    var handleForm = function() {
+		nextButton.addEventListener('click', function (e) {
+			// Prevent default button action
+			e.preventDefault();
+
+			// Disable button to avoid multiple click 
+			nextButton.disabled = true;
+
+			// Validate form before submit
+			if (validator) {
+				validator.validate().then(function (status) {
+					console.log('validated!');
+					e.preventDefault();
+
+					if (status == 'Valid') {
+						// Show loading indication
+						nextButton.setAttribute('data-kt-indicator', 'on');
+
+						// Simulate form submission
+						setTimeout(function() {
+							// Simulate form submission
+							nextButton.removeAttribute('data-kt-indicator');
+							
+							// Enable button
+							nextButton.disabled = false;
+							
+							// Go to next step
+							stepper.goNext();
+						}, 1000);   						
+					} else {
+						// Enable button
+						nextButton.disabled = false;
+						
+						// Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+						Swal.fire({
+							text: "Sorry, looks like there are some errors detected, please try again.",
+							icon: "error",
+							buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn btn-primary"
+							}
+						});
+					}
+				});
+			}			
+		});
+	}
+
+
+    var handleSubmitAjax = function(e) {
+        // Handle form submit
         submitButton.addEventListener('click', function (e) {
-            e.preventDefault();
+            // Prevent button default action
+            //e.preventDefault();
 
-            validation.validate().then(function (status) {
+            // Validate form
+            validator.validate().then(function (status) {
                 if (status == 'Valid') {
+                    // Hide loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
 
-                    swal.fire({
-                        text: "Thank you! You've updated your basic info",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-light-primary"
+                    // Enable button
+                    submitButton.disabled = false;
+                                        
+                    // Check axios library docs: https://axios-http.com/docs/intro 
+                    axios.post('index.php', {
+                        user_name: form.querySelector('[name="name"]').value, 
+                        user_password: form.querySelector('[name="country"]').value 
+                    }).then(function (response) {
+                        if (response) {
+                            form.querySelector('[name="name"]').value= "";
+                            form.querySelector('[name="country"]').value= "";  
+
+                            const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                            
+                            if (redirectUrl) {
+                                location.href = redirectUrl;
+                            }
+                        } else {
+                            // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                            Swal.fire({
+                                text: "Sorry, something is wrong, please try again.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            });
                         }
+                    }).catch(function (error) {
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
                     });
-
                 } else {
-                    swal.fire({
+                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
                         customClass: {
-                            confirmButton: "btn fw-bold btn-light-primary"
+                            confirmButton: "btn btn-primary"
                         }
                     });
                 }
             });
-        });
+		});
     }
 
     // Public methods
@@ -145,6 +259,7 @@ var KTAccountSettingsProfileDetails = function () {
             submitButton = form.querySelector('#kt_account_profile_details_submit');
 
             initValidation();
+            //handleSubmitAjax();
         }
     }
 }();
