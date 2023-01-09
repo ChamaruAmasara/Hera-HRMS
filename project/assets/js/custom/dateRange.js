@@ -20,3 +20,7 @@ $("#kt_daterangepicker").daterangepicker({minDate:yesterday1});
 $("#kt_datepicker_1").flatpickr({
     maxDate: "today"
 });
+
+$("#kt_datepicker_1_2").flatpickr({
+    maxDate: ""
+});

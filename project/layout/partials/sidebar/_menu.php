@@ -228,6 +228,20 @@
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
+
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link <?php if ($page == "leaveConfig") { echo 'active'; } ?>"  href="?page=leaveConfig">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Configure Leave Counts</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
