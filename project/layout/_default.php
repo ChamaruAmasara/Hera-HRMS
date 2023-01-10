@@ -21,7 +21,10 @@
 	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
 					}
 					else if ($SubPage == 'Employee-Info' AND $page == 'Employee-Details') {
-						include PROJECT_ROOT_PATH.'\pages\employee\info.php';
+						include PROJECT_ROOT_PATH.'/pages/employee/info.php';
+					}
+					else if ($SubPage == 'edit' AND $page == 'Employee-Details') {
+						include PROJECT_ROOT_PATH.'/pages/employee/edit.php';
 					}
 					else if ($page == 'Personal-Info') {
 						include PROJECT_ROOT_PATH.'/pages/user/profile.php';

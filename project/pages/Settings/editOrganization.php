@@ -1,3 +1,29 @@
+	<?php
+	$errors = array();
+
+	echo $_POST['oname'];
+	
+
+	?>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							<!--begin::Content-->
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->
@@ -323,7 +349,7 @@
 												<!--begin::Actions-->
 												<div class="card-footer d-flex justify-content-end py-6 px-9">
 													
-													<button type="save" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
+													<button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
 												</div>
 												<!--end::Actions-->
 											</form>
