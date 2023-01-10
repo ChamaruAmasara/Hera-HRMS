@@ -53,6 +53,9 @@
 					else if ($page == 'Promote-Employees') {
 						include PROJECT_ROOT_PATH.'/pages/employee/promote.php';
 					}
+					else if ($page == 'leaveConfig') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/leaveConfig.php';
+					}
 					
 					?>
 				

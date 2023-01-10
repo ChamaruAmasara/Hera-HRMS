@@ -43,7 +43,7 @@
 				<!--begin::Card header-->
 				<div class="card-header">
 					<!--begin::Card header-->
-					<div class="card-title fs-3 fw-bold">Project Budget</div>
+					<div class="card-title fs-3 fw-bold">Anual Leave Usage</div>
 					<!--end::Card header-->
 				</div>
 				<!--end::Card header-->
