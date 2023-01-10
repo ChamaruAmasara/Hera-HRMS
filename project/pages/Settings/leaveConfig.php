@@ -12,7 +12,6 @@ $leaveCounts =['Annual'=>0, 'Casual'=>0, 'Maternity'=>0, 'No-Pay'=>0];
 
 $payGradeId=isset($_GET['payGradeId']) ? $_GET['payGradeId'] : -1;
 
-echo $payGradeId;
 
 if (isset($_POST['Annual'])) {
 	$lcAnnual= $_POST['Annual'];	
@@ -21,6 +20,29 @@ if (isset($_POST['Annual'])) {
 	// print_r($res1->fetch_assoc());
 	unset($_POST['Annual']);
 
+}
+if(isset($_POST['Casual'])){
+	$lcCasual= $_POST['Casual'];
+	$sql2 = "UPDATE hera.paygrade SET ApprovedCasualLeaveCount = $lcCasual WHERE PayGradeID = $payGradeId;";
+	$res2 = $mysqli->query($sql2);
+	// print_r($res2->fetch_assoc());
+	unset($_POST['Casual']);
+}
+
+if(isset($_POST['Maternity'])){
+	$lcMaternity= $_POST['Maternity'];
+	$sql3 = "UPDATE hera.paygrade SET ApprovedMaternityLeaveCount = $lcMaternity WHERE PayGradeID = $payGradeId;";
+	$res3 = $mysqli->query($sql3);
+	// print_r($res3->fetch_assoc());
+	unset($_POST['Maternity']);
+}
+
+if(isset($_POST['No-Pay'])){
+	$lcNoPay= $_POST['No-Pay'];
+	$sql4 = "UPDATE hera.paygrade SET ApprovedPayLeaveCount = $lcNoPay WHERE PayGradeID = $payGradeId;";
+	$res4 = $mysqli->query($sql4);
+	// print_r($res4->fetch_assoc());
+	unset($_POST['No-Pay']);
 }
 
 if($payGradeId!=-1){
@@ -134,11 +156,26 @@ if($payGradeId!=-1){
 							<!--end::Col-->
 						</div>
 						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-6">
+							<!--begin::Label-->
+							<label class="col-lg-4 col-form-label required fw-semibold fs-6">No-Pay</label>
+							<!--end::Label-->
+							<!--begin::Col-->
+							<div class="col-lg-8 fv-row">
+								<div class="form-outline" style="width: 22rem;">
+								<input value="<?php echo $leaveCounts['No-Pay']; ?>" name="No-Pay" min="0" max="100" type="number" id="typeNumber" class="form-control form-control-solid" />
+							</div>
+							</div>
+							<!--end::Col-->
+
 
 					<!--end::Card body-->
 					<!--begin::Actions-->
 					<div class="card-footer d-flex justify-content-end py-6 px-9">
-						<button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+						<a href="?page=leaveConfig" class="btn btn-active-light-primary btn-color-gray-400 me-3">
+							Discards
+						</a>
 						<button type="submit" name="submit" value="LeaveApplication" class="btn btn-primary" id="kt_account_profile_details_submit" >
 							<span class="indicator-label">
 								Submit

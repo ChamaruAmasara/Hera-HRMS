@@ -86,7 +86,8 @@
 			break;
 	}
 	if($filter['Search'] != ''){
-		$conditions[4] = "Name LIKE '%".$filter['Search']."%' OR Email LIKE '%".$filter['Search']."%' ";
+		$search= mysqli_real_escape_string($mysqli, $filter['Search']);
+		$conditions[4] = "Name LIKE '%".$search."%' OR Email LIKE '%".$filter['Search']."%' ";
 	}
 	$condition = implode(' AND ', $conditions);
 	$where = "WHERE ".$condition;
