@@ -10,7 +10,8 @@ make leave counts cofigureable
 employee add karana kota prof pic ekata defult ekai , email ekat anot given kiyalai auto set karanna oona
 
 leave aproval eka , ee ee employee lata adaala supervisorta eyaa yatathee inna ayage eewa witharak pennanna oone , 
-approve una leave wala aprove karee kauwda kiyalath thiyenna oona
+approve una leave wala aprove karee kauwda kiyalath thiyenna oona.
+supervisor kenek leave illuwoth aprove karanna oona kauwda kiyalal kiyala neene eewa hema supervisor tama peenna hediuwanam hariyai i think
 
 user account walat alevel dena eka auwl wagee , user level walata wenama table ekk nodee nikama role attribute ekak user 
 table ekata dunnanam eekata anuwa acces hadann apuluwanne php walin
