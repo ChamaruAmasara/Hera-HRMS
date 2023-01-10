@@ -6,8 +6,8 @@
 - How we planed the ER diagrams first
 - how we reduced them in to the normal form
 - what are the schemas and atributes in them
-    - how we implement the PIM module
-    - how we implement the Abcense module
+    - how we implement the <mark>PIM module</mark>
+    - how we implement the <mark>Abcense module</mark>
 - how we implement
     - adding custom attributes
     - user accounts and roles
@@ -25,10 +25,10 @@
 
 - show how data binding has done ( not all pick a one simple example like user profile)
     - explain how we stop XXS attacks (attempts to run JS scripts from the database data when they were echod in to html)
-        - using the == htmlspecialcharacter() == function in PHP
+        - using the <mark> htmlspecialcharacter() </mark> function in PHP
         - or whaterver the f used chamaru
 - show how we insert data in to the database (pick a simple forum implementation code and explain and )
     - explain how we stoped SQL injections 
-        - using mysqli_real_escape() function in PHP prosidual way
-        - or the prepare statement u have used in the PHP OOP way idk
+        - using <mark>mysqli_real_escape()<mark> function in PHP prosidual way
+        - or the <mark>prepare statement</mark> u have used in the PHP OOP way idk
 - show how the security is done by implementing role functions and sign in option
