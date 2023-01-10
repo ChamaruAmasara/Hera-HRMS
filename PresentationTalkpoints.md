@@ -25,7 +25,7 @@
 
 - show how data binding has done ( not all pick a one simple example like user profile)
     - explain how we stop XXS attacks (attempts to run JS scripts from the database data when they were echod in to html)
-        - using the ==htmlspecialcharacter()== function in PHP
+        - using the == htmlspecialcharacter() == function in PHP
         - or whaterver the f used chamaru
 - show how we insert data in to the database (pick a simple forum implementation code and explain and )
     - explain how we stoped SQL injections 
