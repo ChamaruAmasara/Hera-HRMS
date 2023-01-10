@@ -11,3 +11,6 @@ employee add karana kota prof pic ekata defult ekai , email ekat anot given kiya
 
 leave aproval eka , ee ee employee lata adaala supervisorta eyaa yatathee inna ayage eewa witharak pennanna oone , 
 approve una leave wala aprove karee kauwda kiyalath thiyenna oona
+
+user account walat alevel dena eka auwl wagee , user level walata wenama table ekk nodee nikama role attribute ekak user 
+table ekata dunnanam eekata anuwa acces hadann apuluwanne php walin
