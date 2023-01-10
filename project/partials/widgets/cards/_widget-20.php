@@ -48,9 +48,9 @@
 	<a href='?page=Leave-Approval' class="btn btn-sm btn-light-danger fw-bold">Moderate Leave Requests</a>
 	</div>
 	<!--begin::Card body-->
-	<div class="card-body d-flex align-items-end pt-0">
+	<div class="card-body d-flex align-items-end pt-2">
 			<!--begin::Progress-->
-		<div class="d-flex align-items-center flex-column mt-3 w-100">
+		<div class="d-flex align-items-center flex-column mt-6 w-100">
 			<div class="d-flex justify-content-between fw-bold fs-6 text-white opacity-75 w-100 mt-auto mb-2">
 				<span><?php echo $totalCount;?> Total Leave Requests</span>
 				<span><?php echo $percentage;?>% Complete</span>
