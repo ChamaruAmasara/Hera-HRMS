@@ -42,14 +42,20 @@
 	
 
 	$filter=array('Department'=>'0','Job_Title'=>'0','Leave_Type'=>'0','Absent_From'=>'0','Search'=>'');
-	$conditions = array('1=1', '1=1', '1=1', '1=1');
+	$conditions = array('1=1', '1=1', '1=1', '1=1', '1=1');
 	// Handle submitions
+
 	if(isset($_POST['submit'])){
-		$filter['Department'] = $_POST['Department'];
-		$filter['Job_Title'] = $_POST['Job_Title'];
-		$filter['Leave_Type'] = $_POST['Leave_Type'];
+		$filter['Department'] = isset($_POST['Department']) ? $_POST['Department'] : '0';
+		$filter['Job_Title'] = isset($_POST['Job_Title']) ? $_POST['Job_Title'] : '0';
+		$filter['Leave_Type'] = isset($_POST['Leave_Type']) ? $_POST['Leave_Type'] : '0';
+
+		if ($_POST['Absent_From']) {
 		$filter['Absent_From'] = $_POST['Absent_From'];
-		$filter['Search'] = $_POST['Search'];
+		}
+
+		// $filter['Absent_From'] = !is_null($_POST['Absent_From']) AND isset($_POST['Absent_From']) ? $_POST['Absent_From'] : '0';
+		$filter['Search'] = isset($_POST['Search']) ? $_POST['Search'] : '';
 	}
 
 
@@ -101,12 +107,9 @@
 			default:
 				break;
 		}
-		switch($filter['Absent_From']){
-			case '0':
-				break;
-			default:
-				$conditions[3]="FirstAbsentDate = '".$filter['Absent_From']."'";
-				break;
+
+		if ($filter['Absent_From']!='0') {
+			$conditions[3]="FirstAbsentDate = '".$filter['Absent_From']."'";
 		}
 		
 	
@@ -117,6 +120,10 @@
 	$where = " Approved='Pending' AND ".$condition;
 	$leaveDetails = new Leavedetails();
 	$allLeaves = $leaveDetails->getLeaveDetails($where);
+
+	
+	
+	
 
 	$count=mysqli_num_rows($allLeaves);
 
@@ -333,7 +340,16 @@
 																		</svg>
 																	</span>
 																	<!--end::Svg Icon-->
-																	<input class="form-control form-control-solid ps-12" name="Absent_From" placeholder="Absent From" id="kt_datepicker_1_2" required/>
+																	<input class="form-control form-control-solid ps-12"  name="Absent_From" placeholder="<?php 
+																	if ($filter['Absent_From']!='0') {
+																		echo $filter['Absent_From'];
+																	}
+																	else{
+																		echo 'Absent From';
+																	}	
+																	
+																	
+																	?>" id="kt_datepicker_1_2" required/>
 																</div>
 															</div>
 															<!--begin::Col-->
