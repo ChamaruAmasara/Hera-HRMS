@@ -8,3 +8,6 @@ Add new user implement(convert emp to user)
 make leave counts cofigureable
 
 employee add karana kota prof pic ekata defult ekai , email ekat anot given kiyalai auto set karanna oona
+
+leave aproval eka , ee ee employee lata adaala supervisorta eyaa yatathee inna ayage eewa witharak pennanna oone , 
+approve una leave wala aprove karee kauwda kiyalath thiyenna oona
