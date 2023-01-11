@@ -54,7 +54,7 @@
 						include PROJECT_ROOT_PATH.'/pages/employee/leaveApproval.php';
 					}
 					else if ($page == 'Edit-Organization') {
-						include PROJECT_ROOT_PATH.'/pages/settings/editOrganization.php';
+						include PROJECT_ROOT_PATH.'\pages\Settings\editOrganization.php';
 					}
 					else if ($page == 'Promote-Employees') {
 						include PROJECT_ROOT_PATH.'/pages/employee/promote.php';

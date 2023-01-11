@@ -18,3 +18,8 @@ table ekata dunnanam eekata anuwa acces hadann apuluwanne php walin
 
 
 edit employee sub page eka hadanna
+
+
+
+
+update user ekee denata userla welaa inna ayawath update karanna puluwan wenna oona
