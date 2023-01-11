@@ -339,6 +339,10 @@ ADD CONSTRAINT `leave_appId`
   REFERENCES `hera`.`employee` (`EmployeeID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
+ALTER TABLE `hera`.`organization` 
+ADD COLUMN `TelephoneNumber` VARCHAR(20) NULL AFTER `Address`;
+
 
 
 
