@@ -353,7 +353,7 @@
 																			
 																			<td><?php echo $row['DepartmentName'] ?></td>
 																			<td class="text-end">
-																				<a href="?page=Employee-Details&SubPage=edit&ID=<?php echo $row['EmployeeID']; ?>" class="btn btn-light btn-sm">Edit</a>
+																				<a href="?page=Employee-Details&SubPage=Employee-Edit&ID=<?php echo $row['EmployeeID']; ?>" class="btn btn-light btn-sm">Edit</a>
 																			</td>
 																		</tr>
 																		<?php

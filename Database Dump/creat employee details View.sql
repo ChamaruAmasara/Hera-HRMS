@@ -1,9 +1,15 @@
 CREATE VIEW EmployeeDetails AS
-SELECT e.EmployeeID,e.Name,e.BirthDate, e.Gender ,e.MaritalStatus,e.Address,u.UserID,u.Email,
+SELECT e.EmployeeID,e.Name,e.BirthDate, e.Gender ,e.MaritalStatus,e.Address,e.Country,
+e.BranchID,e.EmergencyContactId,e.DepartmentId,e.JobTitleID,e.PayGradeID,e.EmploymentStatusID,
+u.UserID,u.Email,
 u.ProfilePhoto,ec.Name as EmergencyContactName,ec.PrimaryPhoneNumber AS EmergencyContactPhoneNum,
 ec.Address as EmergencyContactAddress,d.DepartmentName,b.BranchName,c.CountryName,o.Name as OrganizationName,
 jt.JobTitleName as JobTitle, p.PayGradeName as PayGrade,es.EmploymentStatusName as EmploymentStatus,
-sup.Name as SupervisorName
+sup.Name as SupervisorName,
+e.SupervisorID,
+e.EmergencyContactID
+
+
 FROM employee e
 LEFT JOIN useraccount u ON e.EmployeeID=u.EmployeeID
 LEFT JOIN emergencycontact ec ON e.EmergencyContactID=ec.EmergencyContactID

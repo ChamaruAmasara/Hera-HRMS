@@ -146,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `hera`.`employee` (
   `Gender` ENUM('Male', 'Female') NULL DEFAULT NULL,
   `MaritalStatus` ENUM('Married', 'Unmarried') NULL DEFAULT NULL,
   `Address` VARCHAR(2048) NULL DEFAULT NULL,
+  `Country` VARCHAR(10) NULL DEFAULT NULL,
   `EmergencyContactID` INT NULL DEFAULT NULL,
   `DepartmentID` INT NULL DEFAULT NULL,
   `BranchID` INT NULL DEFAULT NULL,

@@ -116,7 +116,7 @@ $sqlLe = "SELECT * FROM hera.leave;";
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-							<textarea name = "reason" placeholder="Reason" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea>
+							<textarea name = "reason" placeholder="Reason" class="form-control form-control-lg form-control-solid" data-kt-autosize="true" required></textarea>
 							
 							
 							</textarea>

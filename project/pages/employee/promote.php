@@ -179,7 +179,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-														<textarea name = "Address" placeholder="Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
+														<textarea name = "Address" placeholder="Address" class="form-control form-control-lg form-control-solid" data-kt-autosize="true" required></textarea></textarea>
 														</div>
 														<!--end::Col-->
 													</div>
@@ -586,7 +586,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-														<textarea name = "EmergencyContactAddress" placeholder="Emergency Contact Person's Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
+														<textarea name = "EmergencyContactAddress" placeholder="Emergency Contact Person's Address" class="form-control form-control-lg form-control-solid" data-kt-autosize="true" required></textarea></textarea>
 														</div>
 														<!--end::Col-->
 													</div>

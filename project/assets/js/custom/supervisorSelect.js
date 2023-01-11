@@ -3,7 +3,7 @@
 
 
 // Format options
-const optionFormat = (item) => {
+const optionFormat1 = (item) => {
     if (!item.id) {
         return item.text;
     }
@@ -27,6 +27,6 @@ const optionFormat = (item) => {
 // Init Select2 --- more info: https://select2.org/
 $('#kt_docs_select2_rich_content').select2({
     placeholder: "Select an option",
-    templateSelection: optionFormat,
-    templateResult: optionFormat
+    templateSelection: optionFormat1,
+    templateResult: optionFormat1
 });

@@ -1,6 +1,6 @@
 <?php
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
-	$SubPage=isset($_GET['SubPage']) ? $_GET['SubPage'] : '';
+	$SubPage=isset($_GET['SubPage']) ? $_GET['SubPage'] : 'Employee-Details';
 	?>
 
 <!--begin::App-->
@@ -19,6 +19,9 @@
 					<?php 
 					if ($page == 'index') {
 	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
+					}
+					else if ($SubPage == 'Employee-Edit' AND $page == 'Employee-Details') {
+						include PROJECT_ROOT_PATH.'\pages\employee\edit.php';
 					}
 					else if ($SubPage == 'Employee-Info' AND $page == 'Employee-Details') {
 						include PROJECT_ROOT_PATH.'/pages/employee/info.php';
