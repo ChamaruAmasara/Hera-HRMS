@@ -25,6 +25,7 @@ class AddEmployee
     public $successes = array();
 
     private $EmployeeID;
+    private $UserID;
 
     /**
      * the function "__construct()" automatically starts whenever an object of this class is created,
@@ -40,6 +41,9 @@ class AddEmployee
         }
         elseif (isset($_POST['submit']) && ($_POST['submit']=="editEmployee") ) {
             $this->editEmployee($_POST['EmployeeID']);        
+        }
+        elseif (isset($_POST['submit']) && ($_POST['submit']=="promoteToUser") ) {
+            $this->promoteToUser($_POST['EmployeeID']);        
         }
 
         $this->showErrors();
@@ -228,7 +232,7 @@ class AddEmployee
 
     }
 
-    public function editEmployee($EmployeeID){
+    private function editEmployee($EmployeeID){
         
 
         $valid=true;
@@ -377,6 +381,204 @@ class AddEmployee
                 }
         }
     }
+
+    private function promoteToUser($EmployeeID){
+
+        
+        $valid=true;
+
+        //create a array containing required form contents like Name,BirthDate,Gender,MaritalStatus,Address,EmergencyContactName,EmergencyContactNumber,DeparmetId,BranchID,JobTitleID,PayGradeID,EmploymentStatus,SupervisorID
+        $required = array('Username','EmployeeID','Password','UserAccountLevelID','EmailAddress');
+        //check whether each get request avaialable and add error if something is missing
+        foreach ($required as $field) {
+            if (isset($_POST[$field])){
+                if (empty($_POST[$field])) {
+                    $valid=false;
+                    $this->errors[] = "Field $field is required.";
+                }
+            } else{
+                $valid=false;
+                $this->errors[] = "Field $field is required.";
+            }
+        }
+
+
+
+
+
+            
+
+            
+
+
+                //the data looks safe 
+                if ($valid) {
+
+                    // create a database connection, using the constants from config/db.php (which we loaded in index.php)
+                    $this->db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+
+                    // change character set to utf8 and check it
+                    if (!$this->db_connection->set_charset("utf8")) {
+                        $this->errors[] = $this->db_connection->error;
+                    }
+
+                    // if no connection errors (= working database connection)
+                    if (!$this->db_connection->connect_errno) {
+
+                        // escape the POST stuff
+                        // $required = array('Name','BirthDate','Gender[]','MaritalStatus[]','Address','EmergencyContactName','EmergencyContactNumber','DepartmentID','BranchID','JobTitleID','PayGradeID','EmploymentStatusID','SupervisorID');
+        
+                        $Username = $this->db_connection->real_escape_string($_POST['Username']);
+                        $EmployeeID = $this->db_connection->real_escape_string($_POST['EmployeeID']);
+
+                        $Password = $this->db_connection->real_escape_string($_POST['Password']);
+
+                        $UserAccountLevelID = $this->db_connection->real_escape_string($_POST['UserAccountLevelID']);
+                        $EmailAddress = $this->db_connection->real_escape_string($_POST['EmailAddress']);
+                        $passwordHash = password_hash($Password,PASSWORD_BCRYPT);
+
+
+                
+                        // insert into emergencycontact
+
+                        try{
+
+
+                        $sql="SELECT UserID FROM hera.useraccount WHERE EmployeeID=? ORDER BY UserID DESC LIMIT 1;";
+                        $statement3 = $this->db_connection->prepare($sql);
+                        $statement3 -> bind_param('i',$EmployeeID);
+                        $statement3 -> execute();
+
+                        $EmployeeIDRow = $statement3->get_result();
+                        $EmployeeIDData = $EmployeeIDRow->fetch_object();
+                        if ($EmployeeIDData){
+                            $this->errors[] = "The Employee already has an account in the system.";
+                            throw new Exception('Cannot Proceed');
+                        }
+
+                                    
+                        $uploadedFileName = $this->uploadAvatar($EmployeeID);
+
+                        if (!$uploadedFileName){
+                            $valid=false;
+                        }
+
+                        $sql = "INSERT INTO hera.useraccount (Username, 
+                                                                Email, 
+                                                                EmployeeID,
+                                                                PasswordHash,
+                                                                UserAccountLevelID,
+                                                                ProfilePhoto)
+                                                VALUES (?, 
+                                                        ?, 
+                                                        ?,
+                                                        ?,
+                                                        ?,
+                                                        ?);";
+                        $statement1 = $this->db_connection->prepare($sql);
+                        $statement1 -> bind_param('ssisis',$Username,$EmailAddress,$EmployeeID,$passwordHash,$UserAccountLevelID,$uploadedFileName);
+                        $statement1 -> execute();
+                        
+
+                        $sql="SELECT UserID FROM hera.useraccount WHERE Username=? AND Email=? ORDER BY UserID DESC LIMIT 1;";
+                        $statement3 = $this->db_connection->prepare($sql);
+                        $statement3 -> bind_param('ss',$Username,$EmailAddress);
+                        $statement3 -> execute();
+                 
+                        
+                        $EmployeeIDRow = $statement3->get_result();
+                        $EmployeeIDData = $EmployeeIDRow->fetch_object();
+                 
+                        // print_r($EmployeeIDData);
+                        $UserID = $EmployeeIDData->UserID;
+                 
+                        $this->EmployeeID = $EmployeeID;
+                            
+                        //print the result from above mysql statement
+                        if ($statement1->affected_rows == 1) {
+                            $this->successes[] = "New User with UserID ".$UserID." has been added to the system.";
+
+                            
+                        } 
+ 
+                        else {
+                            
+                            $this->errors[] = "Sorry, The new user could not be added.";
+                        }
+
+                    }
+                    //catch exception and add it to errors
+                    catch(Exception $e){
+                        $this->errors[] = $e->getMessage();
+                    }
+                } else {
+                        $this->errors[] = "Database connection problem.";
+                    }
+                }
+        }
+
+    
+
+    private function uploadAvatar($EmployeeID){
+        $target_dir = "assets/media/avatars/";
+        //get name basename($_FILES["avatar"]["name"])
+        $extension = (explode(".",basename($_FILES["avatar"]["name"]) ));
+        $fileName= $EmployeeID.".".end($extension);
+        $target_file = $target_dir .$fileName ;
+        //echo $target_file;
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+        if($check !== false) {
+            $this->messages[] = "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            $this->errors[] = "File is not an image.";
+            $uploadOk = 0;
+        }
+        }
+
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            $this->messages[] = "Sorry, file already exists. - The existing file will be replaced";
+            chmod($target_file,0755); //Change the file permissions if allowed
+            unlink($target_file); //remove the file
+        $uploadOk = 1;
+        }
+
+
+        // Check file size
+        if ($_FILES["avatar"]["size"] > 500000) {
+            $this->errors[] = "Sorry, your file is too large.";
+        $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+            $this->errors[] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            $this->errors[] = "Sorry, your file was not uploaded.";
+            return false;
+        // if everything is ok, try to upload file
+        } else {
+        if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
+            $this->messages[] = "The file ". htmlspecialchars( basename( $_FILES["avatar"]["name"])). " has been uploaded.";
+            return $target_file;
+        } else {
+            $this->errors[] = "Sorry, there was an error uploading your file.";
+            return false;
+        }
+        }
+    }
+
     private function showErrors(){
         if ($this->errors){
             foreach ($this->errors as $error) {
