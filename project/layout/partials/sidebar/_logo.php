@@ -2,9 +2,15 @@
 <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 	<!--begin::Logo image-->
 	<a href="?page=index">
+		<?php 
+		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+		$sqlOrg = "SELECT Name FROM hera.organization;";
+		$resOrg = $mysqli->query($sqlOrg);
+		$orgName = $resOrg->fetch_assoc()['Name']; 
+		?>
 		<!-- <img alt="Logo" src="assets/media/logos/HERA-logo.png" class="h-25px app-sidebar-logo-default" />
 		<img alt="Logo" src="assets/media/logos/HERA-logo.png" class="h-20px app-sidebar-logo-minimize" /> -->
-		<div class="OrganizationName"><div class="fw-bold text-primary h-25px app-sidebar-logo-default">Jupiter</div></div>
+		<div class="OrganizationName"><div class="fw-bold text-primary h-25px app-sidebar-logo-default"><?php echo $orgName  ?></div></div>
 		<div class="OrganizationName"><div class="fw-bold text-primary h-20px app-sidebar-logo-minimize">J</div></div>
 	</a>
 	<!--end::Logo image-->
