@@ -451,33 +451,51 @@ class AddEmployee
 
                         $EmployeeIDRow = $statement3->get_result();
                         $EmployeeIDData = $EmployeeIDRow->fetch_object();
-                        if ($EmployeeIDData){
-                            $this->errors[] = "The Employee already has an account in the system.";
-                            throw new Exception('Cannot Proceed');
-                        }
 
-                                    
                         $uploadedFileName = $this->uploadAvatar($EmployeeID);
 
                         if (!$uploadedFileName){
                             throw new Exception('Cannot Proceed');
                         }
 
-                        $sql = "INSERT INTO hera.useraccount (Username, 
-                                                                Email, 
-                                                                EmployeeID,
-                                                                PasswordHash,
-                                                                UserAccountLevelID,
-                                                                ProfilePhoto)
-                                                VALUES (?, 
-                                                        ?, 
-                                                        ?,
-                                                        ?,
-                                                        ?,
-                                                        ?);";
+                        if ($EmployeeIDData){
+                            $this->messages[] = "The Employee already had an account in the system.";
+                            $this->successes[] = "User Account updated.";
+
+
+                            $sql = "UPDATE hera.useraccount 
+                                    SET Username=?, 
+                                        Email=?, 
+                                        PasswordHash=?,
+                                        UserAccountLevelID=?,
+                                        ProfilePhoto=?
+                                    WHERE UserID=?;";
                         $statement1 = $this->db_connection->prepare($sql);
-                        $statement1 -> bind_param('ssisis',$Username,$EmailAddress,$EmployeeID,$passwordHash,$UserAccountLevelID,$uploadedFileName);
+                        $statement1 -> bind_param('sssisi',$Username,$EmailAddress,$passwordHash,$UserAccountLevelID,$uploadedFileName,$EmployeeIDData->UserID);
                         $statement1 -> execute();
+                            
+                        }else{
+                            $sql = "INSERT INTO hera.useraccount (Username, 
+                            Email, 
+                            EmployeeID,
+                            PasswordHash,
+                            UserAccountLevelID,
+                            ProfilePhoto)
+                                        VALUES (?, 
+                                                ?, 
+                                                ?,
+                                                ?,
+                                                ?,
+                                                ?);";
+                            $statement1 = $this->db_connection->prepare($sql);
+                            $statement1 -> bind_param('ssisis',$Username,$EmailAddress,$EmployeeID,$passwordHash,$UserAccountLevelID,$uploadedFileName);
+                            $statement1 -> execute();
+                        }
+
+                                    
+                        
+
+                        
                         
 
                         $sql="SELECT UserID FROM hera.useraccount WHERE Username=? AND Email=? ORDER BY UserID DESC LIMIT 1;";
@@ -514,6 +532,15 @@ class AddEmployee
                 } else {
                         $this->errors[] = "Database connection problem.";
                     }
+                    // $userDetails = $_SESSION['User'];
+                    // $userDetailsArray = $userDetails->getUserDetailArray();
+                    // $currUID = $userDetailsArray['UserID'];
+                    // echo $currUID;
+                    // echo $UserID;
+                    // if ($UserID==$currUID) {
+                    //     header('Location: '.PROJECT_ROOT_PATH.'\auth\index.php');
+                    //     exit;
+                    // }
                 }
         }
 
