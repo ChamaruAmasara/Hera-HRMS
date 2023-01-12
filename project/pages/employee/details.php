@@ -55,6 +55,9 @@
 		case 'Level_3':
 			$conditions[2] = "PayGrade = 'Level 3'";
 			break;
+		case 'Level_4':
+			$conditions[2] = "PayGrade = 'Level 4'";
+			break;
 		default:
 			break;
 	}
@@ -83,7 +86,8 @@
 			break;
 	}
 	if($filter['Search'] != ''){
-		$conditions[4] = "Name LIKE '%".$filter['Search']."%' OR Email LIKE '%".$filter['Search']."%' ";
+		$search= mysqli_real_escape_string($mysqli, $filter['Search']);
+		$conditions[4] = "Name LIKE '%".$search."%' OR Email LIKE '%".$filter['Search']."%' ";
 	}
 	$condition = implode(' AND ', $conditions);
 	$where = "WHERE ".$condition;
@@ -95,6 +99,8 @@
 	include_once PROJECT_ROOT_PATH.'/includes/userdetails.inc.php';
 	include_once PROJECT_ROOT_PATH.'/includes/dbconfig.inc.php';
 
+
+	
 
 
 
@@ -182,6 +188,7 @@
 															<option value="Level_1" <?php if ($filter['Paygrade']=='Level_1') {echo 'selected="selected"';}  ?>>Level 1</option>
 															<option value="Level_2" <?php if ($filter['Paygrade']=='Level_2') {echo 'selected="selected"';}  ?>>Level 2</option>
 															<option value="Level_3" <?php if ($filter['Paygrade']=='Level_3') {echo 'selected="selected"';}  ?>>Level 3</option>
+															<option value="Level_4" <?php if ($filter['Paygrade']=='Level_4') {echo 'selected="selected"';}  ?>>Level 4</option>
 														</select>
 														<!--end::Select-->
 													</div>
@@ -323,7 +330,7 @@
 																							if ($row['ProfilePhoto']!=null) {
 																								echo $row['ProfilePhoto']; 
 																							}else{
-																								echo "'assets\media\avatars\defult.jpg'";
+																								echo "'assets\media\avatars\default.jpg'";
 																							}
 																							
 																							?> />
@@ -346,7 +353,7 @@
 																			
 																			<td><?php echo $row['DepartmentName'] ?></td>
 																			<td class="text-end">
-																				<a href="#" class="btn btn-light btn-sm">Edit</a>
+																				<a href="?page=Employee-Details&SubPage=Employee-Edit&ID=<?php echo $row['EmployeeID']; ?>" class="btn btn-light btn-sm">Edit</a>
 																			</td>
 																		</tr>
 																		<?php

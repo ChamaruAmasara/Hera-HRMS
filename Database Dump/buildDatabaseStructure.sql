@@ -126,9 +126,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`emergencycontact` (
   `EmergencyContactID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(20) NULL DEFAULT NULL,
+  `Name` VARCHAR(1024) NULL DEFAULT NULL,
   `PrimaryPhoneNumber` VARCHAR(20) NULL DEFAULT NULL,
-  `Address` VARCHAR(50) NULL DEFAULT NULL,
+  `Address` VARCHAR(2048) NULL DEFAULT NULL,
   PRIMARY KEY (`EmergencyContactID`),
   UNIQUE INDEX `EmergencyContactID_UNIQUE` (`EmergencyContactID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -141,11 +141,12 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`employee` (
   `EmployeeID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(20) NULL DEFAULT NULL,
+  `Name` VARCHAR(1024) NULL DEFAULT NULL,
   `BirthDate` DATE NULL DEFAULT NULL,
   `Gender` ENUM('Male', 'Female') NULL DEFAULT NULL,
   `MaritalStatus` ENUM('Married', 'Unmarried') NULL DEFAULT NULL,
-  `Address` VARCHAR(45) NULL DEFAULT NULL,
+  `Address` VARCHAR(2048) NULL DEFAULT NULL,
+  `Country` VARCHAR(10) NULL DEFAULT NULL,
   `EmergencyContactID` INT NULL DEFAULT NULL,
   `DepartmentID` INT NULL DEFAULT NULL,
   `BranchID` INT NULL DEFAULT NULL,
@@ -242,8 +243,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`organization` (
   `OrganizationID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(20) NULL DEFAULT NULL,
-  `Address` VARCHAR(50) NULL DEFAULT NULL,
+  `Name` VARCHAR(1024) NULL DEFAULT NULL,
+  `Address` VARCHAR(2048) NULL DEFAULT NULL,
   `RegistrationNumber` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`OrganizationID`),
   UNIQUE INDEX `OrganizationID_UNIQUE` (`OrganizationID` ASC) VISIBLE)
@@ -304,10 +305,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`useraccount` (
   `UserID` INT NOT NULL AUTO_INCREMENT,
-  `Username` VARCHAR(32) NULL DEFAULT NULL,
-  `Email` VARCHAR(32) NULL DEFAULT NULL,
+  `Username` VARCHAR(64) NULL DEFAULT NULL,
+  `Email` VARCHAR(64) NULL DEFAULT NULL,
   `EmployeeID` INT NULL,
-  `PasswordHash` BINARY(20) NULL DEFAULT NULL,
+  `PasswordHash` VARCHAR(20) NULL DEFAULT NULL,
   `UserAccountLevelID` INT NULL DEFAULT NULL,
   `ProfilePhoto` VARCHAR(2048) NULL,
   PRIMARY KEY (`UserID`),
@@ -329,17 +330,70 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
+ALTER TABLE `hera`.`leave` 
+ADD COLUMN `ApprovedByID` INT NULL AFTER `ApprovedDateTime`,
+ADD INDEX `leave_appId_idx` (`ApprovedByID` ASC) VISIBLE;
+;
+ALTER TABLE `hera`.`leave` 
+ADD CONSTRAINT `leave_appId`
+  FOREIGN KEY (`ApprovedByID`)
+  REFERENCES `hera`.`employee` (`EmployeeID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+ALTER TABLE `hera`.`organization` 
+ADD COLUMN `TelephoneNumber` VARCHAR(20) NULL AFTER `Address`;
+
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+
+-- -----------------------------------------------------
+-- View EmployeeLeaveData
+-- -----------------------------------------------------
+
+CREATE VIEW EmployeeLeaveData AS
+SELECT l.LeaveID,e.EmployeeID,l.Approved,l.Reason,l.LeaveType,l.FirstAbsentDate,l.LastAbsentDate,l.LeaveDayCount,l.ApprovedDateTime,
+e.Name,e.BirthDate,e.Gender,e.MaritalStatus,e.Address,d.DepartmentName AS Department,b.BranchName AS Branch,c.CountryName AS Country,
+o.name as Organization,u.ProfilePhoto,u.Email,j.JobTitleName as JobTitle,p.PayGradeName AS PayGrade,d.DepartmentName
+FROM hera.leave l
+LEFT JOIN employee e ON l.EmployeeID=e.EmployeeID
+LEFT JOIN department d ON e.DepartmentID=d.DepartmentID
+LEFT JOIN branch b ON e.BranchID=b.BranchID
+LEFT JOIN jobtitle j ON e.JobTitleID=j.JobTitleID
+LEFT JOIN paygrade p ON e.PayGradeID=p.PayGradeID
+LEFT JOIN employmentstatus es ON e.EmploymentStatusID=es.EmploymentStatusID
+LEFT JOIN country c ON b.CountryID=c.CountryID
+LEFT JOIN organization o ON b.OrganizationID=o.OrganizationID
+LEFT JOIN useraccount u ON e.EmployeeID=u.EmployeeID
+LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID
+
+
+
+
+-- -----------------------------------------------------
+-- View EmployeeDetails
+-- -----------------------------------------------------
+
+
+
 CREATE VIEW EmployeeDetails AS
-SELECT e.EmployeeID,e.Name,e.BirthDate, e.Gender ,e.MaritalStatus,e.Address,u.UserID,u.Email,
+SELECT e.EmployeeID,e.Name,e.BirthDate, e.Gender ,e.MaritalStatus,e.Address,e.Country,
+e.BranchID,e.EmergencyContactId,e.DepartmentId,e.JobTitleID,e.PayGradeID,e.EmploymentStatusID,
+u.UserID,u.Email,
 u.ProfilePhoto,ec.Name as EmergencyContactName,ec.PrimaryPhoneNumber AS EmergencyContactPhoneNum,
 ec.Address as EmergencyContactAddress,d.DepartmentName,b.BranchName,c.CountryName,o.Name as OrganizationName,
 jt.JobTitleName as JobTitle, p.PayGradeName as PayGrade,es.EmploymentStatusName as EmploymentStatus,
-sup.Name as SupervisorName
+sup.Name as SupervisorName,
+e.SupervisorID,
+e.EmergencyContactID
+
+
 FROM employee e
 LEFT JOIN useraccount u ON e.EmployeeID=u.EmployeeID
 LEFT JOIN emergencycontact ec ON e.EmergencyContactID=ec.EmergencyContactID
@@ -350,4 +404,4 @@ LEFT JOIN organization o ON b.OrganizationID=o.OrganizationID
 LEFT JOIN jobtitle jt ON e.JobTitleID=jt.JobTitleID
 LEFT JOIN paygrade p ON e.PayGradeID=p.PayGradeID
 LEFT JOIN employmentstatus es ON e.EmploymentStatusID=es.EmploymentStatusID
-LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID;
+LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID

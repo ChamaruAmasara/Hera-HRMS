@@ -32,58 +32,23 @@
 				<!--end::Menu separator-->
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a href="#" class="menu-link px-3">New Ticket</a>
+					<a href="?page=Add-Employee" class="menu-link px-3">New Employee</a>
 				</div>
 				<!--end::Menu item-->
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a href="#" class="menu-link px-3">New Customer</a>
-				</div>
-				<!--end::Menu item-->
-				<!--begin::Menu item-->
-				<div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
-					<!--begin::Menu item-->
-					<a href="#" class="menu-link px-3">
-						<span class="menu-title">New Group</span>
-						<span class="menu-arrow"></span>
-					</a>
-					<!--end::Menu item-->
-					<!--begin::Menu sub-->
-					<div class="menu-sub menu-sub-dropdown w-175px py-4">
-						<!--begin::Menu item-->
-						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Admin Group</a>
-						</div>
-						<!--end::Menu item-->
-						<!--begin::Menu item-->
-						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Staff Group</a>
-						</div>
-						<!--end::Menu item-->
-						<!--begin::Menu item-->
-						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Member Group</a>
-						</div>
-						<!--end::Menu item-->
-					</div>
-					<!--end::Menu sub-->
+					<a href="?page=Leave-Application" class="menu-link px-3">New Leave</a>
 				</div>
 				<!--end::Menu item-->
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a href="#" class="menu-link px-3">New Contact</a>
+					<a href="?page=Promote-Employees" class="menu-link px-3">Promote to User</a>
 				</div>
 				<!--end::Menu item-->
 				<!--begin::Menu separator-->
 				<div class="separator mt-3 opacity-75"></div>
 				<!--end::Menu separator-->
-				<!--begin::Menu item-->
-				<div class="menu-item px-3">
-					<div class="menu-content px-3 py-3">
-						<a class="btn btn-primary btn-sm px-4" href="#">Generate Reports</a>
-					</div>
-				</div>
-				<!--end::Menu item-->
+
 			</div>
 			<!--end::Menu 2-->
 			<!--end::Menu-->

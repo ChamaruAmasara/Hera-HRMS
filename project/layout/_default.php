@@ -1,6 +1,6 @@
 <?php
 	$page=isset($_GET['page']) ? $_GET['page'] : 'index';  // Get the page name from the URL and set it to page, if it is null set page to index
-	$SubPage=isset($_GET['SubPage']) ? $_GET['SubPage'] : '';
+	$SubPage=isset($_GET['SubPage']) ? $_GET['SubPage'] : 'Employee-Details';
 	?>
 
 <!--begin::App-->
@@ -20,8 +20,14 @@
 					if ($page == 'index') {
 	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
 					}
+					else if ($SubPage == 'Employee-Edit' AND $page == 'Employee-Details') {
+						include PROJECT_ROOT_PATH.'\pages\employee\edit.php';
+					}
 					else if ($SubPage == 'Employee-Info' AND $page == 'Employee-Details') {
-						include PROJECT_ROOT_PATH.'\pages\employee\info.php';
+						include PROJECT_ROOT_PATH.'/pages/employee/info.php';
+					}
+					else if ($SubPage == 'edit' AND $page == 'Employee-Details') {
+						include PROJECT_ROOT_PATH.'/pages/employee/edit.php';
 					}
 					else if ($page == 'Personal-Info') {
 						include PROJECT_ROOT_PATH.'/pages/user/profile.php';
@@ -48,7 +54,19 @@
 						include PROJECT_ROOT_PATH.'/pages/employee/leaveApproval.php';
 					}
 					else if ($page == 'Edit-Organization') {
-						include PROJECT_ROOT_PATH.'/pages/settings/editOrganization.php';
+						include PROJECT_ROOT_PATH.'\pages\Settings\editOrganization.php';
+					}
+					else if ($page == 'Promote-Employees') {
+						include PROJECT_ROOT_PATH.'/pages/employee/promote.php';
+					}
+					else if ($page == 'leaveConfig') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/leaveConfig.php';
+					}
+					else if ($page == 'Edit-Branch') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/editBranch.php';
+					}
+					else if ($page == 'Edit-Department') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/editDepartment.php';
 					}
 					
 					?>

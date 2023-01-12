@@ -45,7 +45,7 @@
                             if ($profilePic!=null) {
                                 echo $profilePic; 
                             }else{
-                                echo "'assets\media\avatars\defult.jpg'";
+                                echo "'assets\media\avatars\default.jpg'";
                             }
                             
                             ?> alt="image" />

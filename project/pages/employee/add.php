@@ -30,7 +30,7 @@ if (isset($_POST["submit"])) {
 										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 											<!--begin::Card title-->
 											<div class="card-title m-0">
-												<h1 class="fw-bold m-0">Profile Details</h1>
+												<h1 class="fw-bold m-0">Add Employee</h1>
 											</div>
 											<!--end::Card title-->
 										</div>
@@ -148,7 +148,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-														<textarea name = "Address" placeholder="Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
+														<textarea name = "Address" placeholder="Address" class="form-control form-control-lg form-control-solid" data-kt-autosize="true" required></textarea></textarea>
 														</div>
 														<!--end::Col-->
 													</div>
@@ -162,7 +162,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select id="kt_docs_select2_country" name="country" aria-label="Select a Country..." data-placeholder="Select a Country..." class="form-select form-select-solid form-select-lg" required>
+															<select id="kt_docs_select2_country" name="Country" aria-label="Select a Country..." data-placeholder="Select a Country..." class="form-select form-select-solid form-select-lg" required>
 																<option value="">Select a Country...</option>
 																<option value="AF" data-kt-select2-country="assets/media/flags/afghanistan.svg">Afghanistan</option>
 																<option value="AX" data-kt-select2-country="assets/media/flags/aland-islands.svg">Aland Islands</option>
@@ -555,7 +555,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-														<textarea name = "EmergencyContactAddress" placeholder="Emergency Contact Person's Address" class="form-control form-control form-control-solid" data-kt-autosize="true" required></textarea></textarea>
+														<textarea name = "EmergencyContactAddress" placeholder="Emergency Contact Person's Address" class="form-control form-control-lg form-control-solid" data-kt-autosize="true" required></textarea></textarea>
 														</div>
 														<!--end::Col-->
 													</div>

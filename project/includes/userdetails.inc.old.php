@@ -145,7 +145,7 @@ class UserDetails
 
         // get Profile Picture
         if($this->EmpRow == NULL||$this->EmpRow['ProfilePhoto'] == NULL ){
-            $this->profilePic = "assets\media\avatars\defult.jpg";}
+            $this->profilePic = "assets\media\avatars\default.jpg";}
         else{
             $this->profilePic = htmlspecialchars($this->EmpRow['ProfilePhoto']);
         }
