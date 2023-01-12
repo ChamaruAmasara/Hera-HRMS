@@ -460,7 +460,7 @@ class AddEmployee
                         $uploadedFileName = $this->uploadAvatar($EmployeeID);
 
                         if (!$uploadedFileName){
-                            $valid=false;
+                            throw new Exception('Cannot Proceed');
                         }
 
                         $sql = "INSERT INTO hera.useraccount (Username, 
