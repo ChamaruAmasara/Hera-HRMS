@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php       echo $_POST[$Name];      ?>
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="../"/>
