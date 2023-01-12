@@ -20,6 +20,10 @@ if (isset($_POST["submit"])) {
 
     }
 }
+
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+$sql = "SELECT * FROM EmployeeDetails order by UserID";
+$sqlResult = $mysqli->query($sql);
 ?>
 
 <!--begin::Basic info-->
@@ -28,7 +32,7 @@ if (isset($_POST["submit"])) {
 										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 											<!--begin::Card title-->
 											<div class="card-title m-0">
-												<h1 class="fw-bold m-0">Promote Users</h1>
+												<h1 class="fw-bold m-0">Manage User Accounts</h1>
 											</div>
 											<!--end::Card title-->
 										</div>
@@ -45,20 +49,45 @@ if (isset($_POST["submit"])) {
                                                     <!--begin::Input group-->
                                                     <div class="row mb-6">
 														<!--begin::Label-->
-														<label class="col-lg-4 col-form-label required fw-semibold fs-6">User to Promote</label>
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">User/Employee</label>
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select id="kt_docs_select2_rich_content" name="EmployeeID" aria-label="Select a User to Promote..." data-placeholder="Select a User to Promote..." class="form-select form-select-solid form-select-lg" required>
-																<option value="">Select a User to Promote...</option>
+															<select onchange='reload()' name="PayGradeID"  type='submit' id="kt_docs_select2_rich_content" name="EmployeeID" aria-label="Select a User to Promote..." data-placeholder="Select a User to Promote..." class="form-select form-select-solid form-select-lg" required>
+																<?php
+																	if(isset($_GET["empId"])){
+																		$empId = $_GET["empId"];
+																		$sqlSel="SELECT * FROM EmployeeDetails WHERE EmployeeID = '$empId'";
+																		$sqlResultSel = $mysqli->query($sqlSel);
+																		$rowSel =  $sqlResultSel->fetch_assoc();
+																		if(!empty($rowSel["ProfilePhoto"])){
+																			$profpicSel= $rowSel["ProfilePhoto"];
+																		}
+																		else{
+																			$profpicSel= "assets/media/avatars/default.jpg";
+																		}
+																		
+																		echo "<option value=\"".$rowSel["EmployeeID"]."\" data-kt-rich-content-subcontent=\"".$rowSel["Email"]."\" data-kt-rich-content-icon=\"".$profpicSel."\" >".$rowSel["Name"]."</option>";
+																	
+																	}
+																	else{
+																		echo "<option value=\"\">Select a User to Promote...</option>";
+																	}
+																?>
+															
+																
 																<?php 
-																	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-																	$sql = "SELECT EmployeeID,Name FROM EmployeeDetails WHERE Email is NULL";
-																	$sqlResult = $mysqli->query($sql);
+																	
 																	
 																	while(($row =  $sqlResult->fetch_assoc())) {
+																		if(!empty($row["ProfilePhoto"])){
+																			$profpic= $row["ProfilePhoto"];
+																		}
+																		else{
+																			$profpic= "assets/media/avatars/default.jpg";
+																		}
 																	   //store $ID and $name as an key value pair
-																	   echo "<option value=\"".$row["EmployeeID"]."\" data-kt-rich-content-subcontent=\"".$row["Email"]."\" data-kt-rich-content-icon=\"assets/media/avatars/default.jpg\" >".$row["Name"]."</option>";
+																	   echo "<option value=\"".$row["EmployeeID"]."\" data-kt-rich-content-subcontent=\"".$row["Email"]."\" data-kt-rich-content-icon=\"".$profpic."\" >".$row["Name"]."</option>";
 																	}
 																	
 																?>	
@@ -76,9 +105,12 @@ if (isset($_POST["submit"])) {
 														<!--begin::Label-->
 														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Username</label>
 														<!--end::Label-->
+														
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<input type="text" name="Username" class="form-control form-control-lg form-control-solid" placeholder="Username"  required/>
+															<input type="text" name="Username" class="form-control form-control-lg form-control-solid" placeholder="Username" value="<?php if(!empty($rowSel["Username"])){ echo $rowSel["Username"];} ?>"  required/>
+															<input type="hidden" name="EmployeeID"   value="<?php if(!empty($rowSel["EmployeeID"])){ echo $rowSel["EmployeeID"];} ?>" />
+																
 														</div>
 														<!--end::Col-->
 													</div>
@@ -93,7 +125,7 @@ if (isset($_POST["submit"])) {
 													<div class="col-lg-8 fv-row">
 														<!--begin::Input wrapper-->
 														<div class="position-relative mb-3">
-															<input class="form-control form-control-lg form-control-solid" type="password" placeholder="Password" name="Password" autocomplete="off" required/>
+															<input class="form-control form-control-lg form-control-solid" type="password" placeholder="Password" name="Password" autocomplete="off"  required/>
 															<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
 																<i class="bi bi-eye-slash fs-2"></i>
 																<i class="bi bi-eye fs-2 d-none"></i>
@@ -149,7 +181,7 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<input type="text" name="EmailAddress" class="form-control form-control-lg form-control-solid" placeholder="Email Address"  required/>
+															<input type="text" name="EmailAddress" class="form-control form-control-lg form-control-solid" placeholder="Email Address" value="<?php if(!empty($rowSel["Email"])){ echo $rowSel["Email"];} ?>" required/>
 														</div>
 														<!--end::Col-->
 													</div>
@@ -165,13 +197,21 @@ if (isset($_POST["submit"])) {
 															<!--begin::Image input-->
 															<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
 																<!--begin::Preview existing avatar-->
-																<div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-1.jpg)"></div>
+																<?php if (!empty($rowSel["ProfilePhoto"])) {
+																	$exAv = $rowSel["ProfilePhoto"];
+																	$profPicAvailable=1;
+																} else {
+																	$profPicAvailable=0;
+																	$exAv = "assets/media/avatars/default.jpg";} ?>
+																<div class="image-input-wrapper w-125px h-125px" style="background-image: url(<?php echo $exAv ?>)"></div>
 																<!--end::Preview existing avatar-->
 																<!--begin::Label-->
 																<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
 																	<i class="bi bi-pencil-fill fs-7"></i>
 																	<!--begin::Inputs-->
+																	<input type="hidden" name="avatar" value="<?php echo $exAv ?>"/>
 																	<input type="file" name="avatar" accept=".png, .jpg, .jpeg" required/>
+																	
 																	<input type="hidden" name="avatar_remove" />
 																	<!--end::Inputs-->
 																</label>
@@ -203,7 +243,7 @@ if (isset($_POST["submit"])) {
 												<!--begin::Actions-->
 												<div class="card-footer d-flex justify-content-end py-6 px-9">
 													<button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-													<button type="submit" name="submit" value="promoteToUser" class="btn btn-primary" id="kt_account_profile_details_submit">Promote to User</button>
+													<button type="submit" name="submit" value="promoteToUser" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
 												</div>
 												<!--end::Actions-->
 											</form>
@@ -218,6 +258,15 @@ if (isset($_POST["submit"])) {
     </div>
 </div>
 		<!--begin::Javascript-->
+
+		<script>
+			function reload(){
+				var v1=document.getElementById('kt_docs_select2_rich_content').value;
+				// document.write(v1);
+				self.location='?page=Promote-Employees&empId=' +v1;
+			}
+			
+		</script>
 		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
