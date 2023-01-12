@@ -210,7 +210,7 @@
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
-							<span class="menu-title">Promote Employees to Users</span>
+							<span class="menu-title">Manage User Accounts</span>
 						</a>
 						<!--end:Menu link-->
 					</div>

@@ -62,6 +62,12 @@
 					else if ($page == 'leaveConfig') {
 						include PROJECT_ROOT_PATH.'/pages/Settings/leaveConfig.php';
 					}
+					else if ($page == 'Edit-Branch') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/editBranch.php';
+					}
+					else if ($page == 'Edit-Department') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/editDepartment.php';
+					}
 					
 					?>
 				
