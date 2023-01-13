@@ -385,7 +385,7 @@ LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID
 CREATE VIEW EmployeeDetails AS
 SELECT e.EmployeeID,e.Name,e.BirthDate, e.Gender ,e.MaritalStatus,e.Address,e.Country,
 e.BranchID,e.EmergencyContactId,e.DepartmentId,e.JobTitleID,e.PayGradeID,e.EmploymentStatusID,
-u.UserID,u.Email,
+u.UserID,u.Email,u.Username
 u.ProfilePhoto,ec.Name as EmergencyContactName,ec.PrimaryPhoneNumber AS EmergencyContactPhoneNum,
 ec.Address as EmergencyContactAddress,d.DepartmentName,b.BranchName,c.CountryName,o.Name as OrganizationName,
 jt.JobTitleName as JobTitle, p.PayGradeName as PayGrade,es.EmploymentStatusName as EmploymentStatus,
