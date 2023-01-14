@@ -57,7 +57,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`customattributename` (
   `AttributeNameID` INT NOT NULL AUTO_INCREMENT,
-  `AttributeName` VARCHAR(20) NULL DEFAULT NULL,
+  `AttributeName` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`AttributeNameID`),
   UNIQUE INDEX `AttributeNameID_UNIQUE` (`AttributeNameID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -113,7 +113,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`jobtitle` (
   `JobTitleID` INT NOT NULL AUTO_INCREMENT,
-  `JobTitleName` ENUM('HR Manager', 'Accuntant', 'Software Engineer', 'QA Engineer') NULL DEFAULT NULL,
+  `JobTitleName` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`JobTitleID`),
   UNIQUE INDEX `JobTitleID_UNIQUE` (`JobTitleID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -286,13 +286,17 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
   `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
-  `UserAccountLevelName` ENUM('Admin', 'Second Management', 'HR Manager', 'Employee') NULL DEFAULT NULL ,
+  `UserAccountLevelName` VARCHAR(200) NULL DEFAULT NULL ,
   `OwnProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') NULL DEFAULT NULL,
   `EveryProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') NULL DEFAULT NULL,
   `CreateProfile` TINYINT(1) NULL DEFAULT NULL,
   `CreateLeave` TINYINT(1) NULL DEFAULT NULL,
   `ApproveLeave` TINYINT(1) NULL DEFAULT NULL,
-  `UserAccountLevelChange` TINYINT(1) NULL DEFAULT NULL,
+  `UserAccountLevelChange` TINYINT(1) NULL DEFAULT NULL,CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
+  `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
+  `UserAccountLevelName` VARCHAR(200) NULL DEFAULT NULL ,CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
+  `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
+  `UserAccountLevelName` VARCHAR(200) NULL DEFAULT NULL ,
   PRIMARY KEY (`UserAccountLevelID`),
   UNIQUE INDEX `UserAccountLevelID_UNIQUE` (`UserAccountLevelID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -385,7 +389,7 @@ LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID
 CREATE VIEW EmployeeDetails AS
 SELECT e.EmployeeID,e.Name,e.BirthDate, e.Gender ,e.MaritalStatus,e.Address,e.Country,
 e.BranchID,e.EmergencyContactId,e.DepartmentId,e.JobTitleID,e.PayGradeID,e.EmploymentStatusID,
-u.UserID,u.Email,
+u.UserID,u.Email,u.Username
 u.ProfilePhoto,ec.Name as EmergencyContactName,ec.PrimaryPhoneNumber AS EmergencyContactPhoneNum,
 ec.Address as EmergencyContactAddress,d.DepartmentName,b.BranchName,c.CountryName,o.Name as OrganizationName,
 jt.JobTitleName as JobTitle, p.PayGradeName as PayGrade,es.EmploymentStatusName as EmploymentStatus,

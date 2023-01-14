@@ -15,6 +15,4 @@ jobs:
         username: hera
         password: My1stPassword
         local-dir: project/
-        server-dir: home/hera/public_html/
-        dangerous-clean-slate: true
-        
+        server-dir: home/hera/public_html/        

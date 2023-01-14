@@ -67,7 +67,7 @@
 				<!--end:Menu sub-->
 			</div>
 			<!--end:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Leave-Application" or $page == "Leave-Details") { echo ' hover show'; } ?>">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Leave-Application" or $page == "Leave-Details" or $page == "Leave-Approval" ) { echo ' hover show'; } ?>">
 				<!--begin:Menu link-->
 				<span class="menu-link <?php if ($page == "Leave-Application" or $page == "Leave-Details") { echo ' active'; } ?>">
 					<span class="menu-icon">
@@ -80,7 +80,7 @@
 						</span>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">Absence</span>
+					<span class="menu-title">Leaves</span>
 					<span class="menu-arrow"></span>
 				</span>
 				<!--end:Menu link-->
@@ -110,168 +110,33 @@
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
+					<?php 
+
+					//Leave approval
+					//admin, secondmanagement, supervisor, hradmin has access to the leave approval
+					if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,5))){
+						include PROJECT_ROOT_PATH.'/layout/partials/sidebar/_menu-1.php' ;
+						} ?>
 				</div>
 				<!--end:Menu sub-->
 			</div>
 
-			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval" or $page == "Edit-Employee-Details") { echo ' hover show'; } ?>">
-				<!--begin:Menu link-->
-				<span class="menu-link <?php if ($page == "Add-Employee" or $page == "Employee-Details" or $page == "Leave-Approval" or $page == "Edit-Employee-Details") { echo 'active'; } ?>">
-					<span class="menu-icon">
-						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
-						<span class="svg-icon svg-icon-2">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="currentColor" />
-								<rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor" />
-							</svg>
-						</span>
-						<!--end::Svg Icon-->
-					</span>
-					<span class="menu-title">Employees</span>
-					<span class="menu-arrow"></span>
-				</span>
-				<!--end:Menu link-->
-				<!--begin:Menu sub-->
-				<div class="menu-sub menu-sub-accordion">
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Employee-Details") { echo 'active'; } ?>"  href="?page=Employee-Details">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Employee Details</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Add-Employee") { echo 'active'; } ?>"  href="?page=Add-Employee">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Add Employee</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Leave-Approval") { echo 'active'; } ?>"  href="?page=Leave-Approval">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Leave Aproval</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
+
+			<?php 
+
+			//Employees
+			//admin, secondmanagement, hradmin has access to the Employee management and settings
+			if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,6))){
+				include PROJECT_ROOT_PATH.'/layout/partials/sidebar/_menu-2.php' ;
+				} 
 
 
-				</div>
-				<!--end:Menu sub-->
-			</div>
-			<!--end:Menu item-->
-
-
-	
-			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Promote-Employees" or $page == "Edit-Branches" or $page == "Edit-Departments" or $page == "Edit-Organization" or $page == "leaveConfig" or $page == "Edit-Branch" or $page == "Edit-Department") { echo ' hover show'; } ?>">
-				<!--begin:Menu link-->
-				<span class="menu-link <?php if ($page == "Promote-Employees" or $page == "Edit-Branches" or $page == "Edit-Departments" or $page == "Edit-Organization" or $page == "leaveConfig" or $page == "Edit-Branch" or $page == "Edit-Department") { echo 'active'; } ?>">
-					<span class="menu-icon">
-						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
-						<span class="svg-icon svg-icon-2">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path opacity="0.3" d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z" fill="currentColor"></path>
-														<path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
-													</svg>
-						</span>
-						<!--end::Svg Icon-->
-					</span>
-					<span class="menu-title">Settings</span>
-					<span class="menu-arrow"></span>
-				</span>
-				<!--end:Menu link-->
-
-
-				
-				<!--begin:Menu sub-->
-				<div class="menu-sub menu-sub-accordion">
-
-					<!--begin:Menu item-->
-					<div class="menu-item">
-					<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Promote-Employees") { echo 'active'; } ?>"  href="?page=Promote-Employees">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Manage User Accounts</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Edit-Organization") { echo 'active'; } ?>"  href="?page=Edit-Organization">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Edit Organization</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "leaveConfig") { echo 'active'; } ?>"  href="?page=leaveConfig">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Configure Leave Counts</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Edit-Branch") { echo 'active'; } ?>"  href="?page=Edit-Branch">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Edit Branches</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link <?php if ($page == "Edit-Department") { echo 'active'; } ?>"  href="?page=Edit-Department">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Edit Departments</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-
-
-				</div>
-				<!--end:Menu sub-->
-			</div>
-			<!--end:Menu item-->
+			//Settings items
+			//admin, secondmanagement, has access to the Employee management and settings
+			if (in_array($_SESSION['UserAccountLevelID'],array(1,3,6))){
+				include PROJECT_ROOT_PATH.'/layout/partials/sidebar/_menu-3.php' ;
+				} 
+			?>
 
 		</div>
 		<!--end::Menu-->
