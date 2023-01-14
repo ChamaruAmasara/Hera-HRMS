@@ -5,13 +5,26 @@
 	<head>
 		<base href="" />
 		<title>Hera - The Modern Human Resource Management System</title>
-		<meta charset="utf-8" />
-		<meta name="description" content="Hera - The Modern Human Resource Management System" />
-		<meta name="keywords" content="" />
+		<meta name="title" content="Hera - The Modern Human Resource Management System">
+		<meta name="description" content="Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, manage leave applications and payrolls with the click of a button!">
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://hera.chamaru.me/">
+		<meta property="og:title" content="Hera - The Modern Human Resource Management System">
+		<meta property="og:description" content="Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, manage leave applications and payrolls with the click of a button!">
+		<meta property="og:image" content="https://hera.chamaru.me/assets/media/image.jpg">
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content="https://hera.chamaru.me/">
+		<meta property="twitter:title" content="Hera - The Modern Human Resource Management System">
+		<meta property="twitter:description" content="Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, manage leave applications and payrolls with the click of a button!">
+		<meta property="twitter:image" content="https://hera.chamaru.me/assets/media/image.jpg">
+		<meta name="keywords" content="human,resource,program,application,development,product,employee,management,easy,to,use,free" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Hera - The Modern Human Resource Management System" />
 		<meta property="og:url" content="https://hera.chamaru.me" />
 		<meta property="og:site_name" content="Hera | CSE | UoM" />
 		<link rel="canonical" href="https://hera.chamaru.me" />
@@ -34,6 +47,37 @@
 		<link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
 		<!-- Link to custom css file -->
 	</head>
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-37VKWSZBN0"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-37VKWSZBN0');
+	</script>
+	<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "fe3ufricqe");
+	</script>
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/63c277d847425128790d67f9/1gmnq8abf';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+	</script>
+	<!--End of Tawk.to Script-->
+
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_app_body" data-kt-app-page-loading-enabled="true" data-kt-app-page-loading="on" data-kt-app-layout="dark-sidebar" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" class="app-default">
