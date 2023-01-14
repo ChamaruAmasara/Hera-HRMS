@@ -13,9 +13,28 @@
     - user accounts and roles
 - ect.
 
+# Describe UI structure - Nadun?
+    - show how  the items in the menue difer from user type to type
+    - when you log in to each user make sure to show what user level he is in by hovering ower the right upper prof pic
+    - go through each menue items available to user levels
+
 # Describe the UI - Ginushmal 
 
+- log in as employee
+- describe what is visible to employee user level
 - Describe each and every tabs in the manue 
+    - show profile and employee and personal details
+    - show leave application and leave detail tabs and that a leave entry is created 
+      in mysql when submitted
+- log in as the supervisor of that employee and 
+    - show that his leave submission apears in the leave aproval tab of the supervisor 
+    - and submit or reject it and 
+    - show it recorded in both th previous employee and the Data base
+- login as a asmin 
+    - show employee details and describe how we used a viwe to get nessosry data in to the website hiding unnessesory stuff
+    - show all other functionalaties of the rest of the menue
+    - and show how the update and represented in the database
+
 - and the use of them
 - show all the functionalities of those UI models
 - explain what information ech page showing or getting

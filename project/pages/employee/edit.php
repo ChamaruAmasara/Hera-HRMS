@@ -596,13 +596,13 @@ if (isset($_POST["submit"])) {
 														<!--end::Label-->
 														<!--begin::Col-->
 														<div class="col-lg-8 fv-row">
-															<select id="kt_docs_select2_rich_content" name="SupervisorID" aria-label="Select a Supervisor..." data-placeholder="Select a Supervisor..." class="form-select form-select-solid form-select-lg" required>
+															<select id="kt_docs_select2_rich_content" name="SupervisorID" aria-label="Select a Supervisor..." data-placeholder="Select a Supervisor..." class="form-select form-select-solid form-select-lg" >
 																<option value="">Select a Supervisor...</option>
 																<?php 
 																	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 																	$sql = "SELECT EmployeeID,Name,Email,ProfilePhoto FROM EmployeeDetails WHERE Email is not NULL";
 																	$sqlResult = $mysqli->query($sql);
-																	
+																echo "<option value=\"0\" data-kt-rich-content-subcontent=\"\" data-kt-rich-content-icon=\"\" selected=\"selected\">No Supervisor</option>  "; 
 																	while(($row =  $sqlResult->fetch_assoc())) {
 																	   //store $ID and $name as an key value pair
 																	   echo "<option value=\"".$row["EmployeeID"]."\" data-kt-rich-content-subcontent=\"".$row["Email"]."\" data-kt-rich-content-icon=\"".$row["ProfilePhoto"]."\"";

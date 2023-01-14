@@ -68,6 +68,9 @@
 					else if ($page == 'Edit-Department') {
 						include PROJECT_ROOT_PATH.'/pages/Settings/editDepartment.php';
 					}
+					else if ($page == 'Edit-CustomAttributes') {
+						include PROJECT_ROOT_PATH.'/pages/Settings/editCustomAttributes.php';
+					}
 					
 					?>
 				

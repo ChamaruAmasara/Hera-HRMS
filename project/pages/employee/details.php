@@ -3,6 +3,17 @@
 	
 	$filter=array('Department'=>'0','Job_Title'=>'0','Paygrade'=>'0','Employment_status'=>'0','Search'=>'');
 	$conditions = array('1=1', '1=1', '1=1', '1=1');
+	$customFilter= array();
+	$cusConditions = array();
+
+	$sqlCusAatt = "SELECT * FROM hera.customattributename;";
+	$resultCusAatt = $mysqli->query($sqlCusAatt);
+
+	while ($rowCusAatt = $resultCusAatt->fetch_assoc()){
+		$customFilter[$rowCusAatt['AttributeName']] = '0';
+		
+	}
+
 	// Handle submitions
 	if(isset($_POST['submit'])){
 		$filter['Department'] = $_POST['Department'];
@@ -10,6 +21,22 @@
 		$filter['Paygrade'] = $_POST['Paygrade'];
 		$filter['Employment_status'] = $_POST['Employment_status'];
 		$filter['Search'] = $_POST['Search'];
+		$resultCusAatt2 = $mysqli->query($sqlCusAatt);
+		$i=0;
+		foreach($customFilter as $key => $value){
+			$sqlCusAatt2 = "SELECT * FROM hera.customattributename where AttributeName='$key';";
+			
+			
+			$resultCusAatt2 = $mysqli->query($sqlCusAatt2);
+			$rowCusAatt2 = $resultCusAatt2->fetch_assoc();
+			if(isset($_POST[$key]) AND !empty($_POST[$key])){
+				$customFilter[$key] = $_POST[$key];
+				$cusname=mysqli_real_escape_string($mysqli,$rowCusAatt2['AttributeNameID']);
+				$cusConditions[$i] = "AttributeNameID = '".mysqli_real_escape_string($mysqli,$cusname) ."' AND AttributeValue = '".mysqli_real_escape_string($mysqli,$customFilter[$key])."'";
+				
+			}
+			$i=$i+1;
+		}
 	}
 
 
@@ -89,8 +116,39 @@
 		$search= mysqli_real_escape_string($mysqli, $filter['Search']);
 		$conditions[4] = "Name LIKE '%".$search."%' OR Email LIKE '%".$filter['Search']."%' ";
 	}
+	if (!empty($cusConditions)){
+		$cusCondition= implode(' OR ', $cusConditions);
+	}else{
+		$cusCondition= "1=2";
+	}
+	
+	// echo $cusCondition;
+	$sqlSlect="SELECT EmployeeID FROM hera.customattributevalue where $cusCondition";
+	// echo "<br>select sql :". $sqlSlect;
+	$resultCusAatt2 = $mysqli->query($sqlSlect);
+	$rowCusAatt3=array();
+
+		$j = 0;
+		while($rowCusAatt2 = $resultCusAatt2->fetch_assoc()){
+			if (!empty($rowCusAatt2)) {
+				$rowCusAatt3[$j] = " EmployeeID=" . $rowCusAatt2['EmployeeID'];
+			}else{
+				$rowCusAatt3[$j]= "1=1";
+			}
+				$j++;
+		}
+		$cusCondition2= implode(' OR ', $rowCusAatt3);
+
+	if($cusCondition2==""){
+		$cusCondition2="1=1";
+	}
+
+	
+	
+	// echo "<br>con 2  :". $cusCondition2;
 	$condition = implode(' AND ', $conditions);
-	$where = "WHERE ".$condition;
+	$where = "WHERE ".$condition." AND ".$cusCondition2;
+	// echo "<br>wher  :". $where;
 	$empDetails = new UserDetails();
 	$allEmployees = $empDetails->getAllemployeeSql($where);
 
@@ -210,10 +268,36 @@
 														<!--end::Select-->
 													</div>
 													<!--end::Input group-->
+													<?php
+													$sqlCusAatt2 = "SELECT * FROM hera.customattributename;";
+													$resultCusAatt2 = $mysqli->query($sqlCusAatt2);
+													while ($rowCusAatt2 = $resultCusAatt2->fetch_assoc()){
+														$cusAttName=mysqli_real_escape_string($mysqli, $rowCusAatt2['AttributeName']);
+														$cusAttId=mysqli_real_escape_string($mysqli, $rowCusAatt2['AttributeNameID']);
+														$cusValSql = "SELECT * FROM hera.customattributevalue where AttributeNameID=$cusAttId;";
+														$cusValResult = $mysqli->query($cusValSql);
+														
 
+
+													?>
+														<!--begin::Input group-->
+														<div class="mb-5">
+															<label class="fs-6 form-label fw-bold text-dark"><?php echo htmlspecialchars($rowCusAatt2['AttributeName']) ?></label>
+															<!--begin::Select-->
+															<select name="<?php echo htmlspecialchars($rowCusAatt2["AttributeName"]); ?>" class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+																<option value="0" <?php if ($filter['Employment_status']=='0') {echo 'selected="selected"';}  ?>>Not Selected</option>
+																<?php
+																while ($cusValRow = $cusValResult->fetch_assoc()){?>
+																<option value="<?php echo htmlspecialchars($cusValRow["AttributeValue"]); ?>" <?php if ($customFilter[$cusAttName]==$cusValRow["AttributeValue"]) {echo 'selected="selected"';}  ?>><?php echo htmlspecialchars($cusValRow["AttributeValue"]); ?></option>
+																<?php	}?>
+															</select>
+															<!--end::Select-->
+														</div>
+														<!--end::Input group-->
 													
+													<?php }
 
-
+													?>
 
 													<!--begin::Action-->
 													<div class="d-flex align-items-center justify-content-end">

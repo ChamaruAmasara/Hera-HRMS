@@ -109,7 +109,7 @@ class Login
                        
 
                     } else {
-                        $this->errors[] = "Wrong password. Try again.";
+                        $this->errors[] = "Incorrect Username or password. Try again.";
                     }
                 } else {
                     $this->errors[] = "This user does not exist.";
