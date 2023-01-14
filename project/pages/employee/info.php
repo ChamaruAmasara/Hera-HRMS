@@ -233,6 +233,42 @@
             <!--end::Col-->
         </div>
         <!--end::Input group-->
+
+        <?php
+											$sqlCusAatt = "SELECT * FROM hera.customattributename;";
+											$resultCusAatt = $mysqli->query($sqlCusAatt);
+
+											while ($rowCusAatt = $resultCusAatt->fetch_assoc()) {
+												$rowCusAattID=mysqli_real_escape_string($mysqli,$rowCusAatt['AttributeNameID']);
+
+												$sqlCusAttVal = "SELECT * FROM hera.customattributevalue where AttributeNameID=$rowCusAattID AND EmployeeID=$userDetailsArray[EmployeeID];";
+												$resultCusAttVal = $mysqli->query($sqlCusAttVal);
+												$rowCusAttVal = $resultCusAttVal->fetch_assoc();
+
+												if (!empty($rowCusAttVal) AND $rowCusAttVal["AttributeValue"] != "") {
+													$attVal=htmlspecialchars($rowCusAttVal["AttributeValue"]);
+												} else {
+													$attVal="Not Set";
+												}
+											?>
+												<!--end::Input group-->
+											<!--begin::Input group-->
+											<div class="row mb-10">
+												<!--begin::Label-->
+												<label class="col-lg-4 fw-semibold text-muted"><?php echo htmlspecialchars($rowCusAatt['AttributeName']) ?></label>
+												<!--begin::Label-->
+												<!--begin::Col-->
+												<div class="col-lg-8">
+													<span class="fw-bold fs-6 text-gray-800"><?php echo htmlspecialchars($attVal) ?></span>
+												</div>
+												<!--end::Col-->
+											</div>
+											<!--end::Input group-->
+
+											<?php
+
+											}
+											?>
         
     </div>
     <!--end::Card body-->

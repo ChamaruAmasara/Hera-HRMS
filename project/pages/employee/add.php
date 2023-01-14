@@ -592,6 +592,38 @@ if (isset($_POST["submit"])) {
 														<!--end::Input group-->
 
 
+														<?php
+													$sqlCusAatt2 = "SELECT * FROM hera.customattributename;";
+													$resultCusAatt2 = $mysqli->query($sqlCusAatt2);
+													while ($rowCusAatt2 = $resultCusAatt2->fetch_assoc()){
+														$cusAttName=mysqli_real_escape_string($mysqli, $rowCusAatt2['AttributeName']);
+														$cusAttId=mysqli_real_escape_string($mysqli, $rowCusAatt2['AttributeNameID']);
+														$cusValSql = "SELECT * FROM hera.customattributevalue where AttributeNameID=$cusAttId;";
+														$cusValResult = $mysqli->query($cusValSql);
+														
+
+
+													?>
+														<!--begin::Input group-->
+														<div class="mb-5">
+															<label class="fs-6 form-label fw-bold text-dark"><?php echo htmlspecialchars($rowCusAatt2['AttributeName']) ?></label>
+															<!--begin::Select-->
+															<select name="<?php echo htmlspecialchars($rowCusAatt2["AttributeName"]); ?>" class="form-select form-select-solid" data-control="select2" data-placeholder="In Progress" data-hide-search="true">
+																<option value="0" >Not Selected</option>
+																<?php
+																while ($cusValRow = $cusValResult->fetch_assoc()){?>
+																<option value="<?php echo htmlspecialchars($cusValRow["AttributeValue"]); ?>" ><?php echo htmlspecialchars($cusValRow["AttributeValue"]); ?></option>
+																<?php	}?>
+															</select>
+															<!--end::Select-->
+														</div>
+														<!--end::Input group-->
+													
+													<?php }
+
+													?>
+
+
 												</div>
 												<!--end::Card body-->
 												<!--begin::Actions-->

@@ -1,9 +1,9 @@
 
 
 			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Promote-Employees" or $page == "Edit-Branches" or $page == "Edit-Departments" or $page == "Edit-Organization" or $page == "leaveConfig" or $page == "Edit-Branch" or $page == "Edit-Department") { echo ' hover show'; } ?>">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php if ($page == "Promote-Employees" or $page == "Edit-Branches" or $page == "Edit-Departments" or $page == "Edit-Organization" or $page == "leaveConfig" or $page == "Edit-Branch" or $page == "Edit-Department" or $page == "Edit-CustomAttributes") { echo ' hover show'; } ?>">
 				<!--begin:Menu link-->
-				<span class="menu-link <?php if ($page == "Promote-Employees" or $page == "Edit-Branches" or $page == "Edit-Departments" or $page == "Edit-Organization" or $page == "leaveConfig" or $page == "Edit-Branch" or $page == "Edit-Department") { echo 'active'; } ?>">
+				<span class="menu-link <?php if ($page == "Promote-Employees" or $page == "Edit-Branches" or $page == "Edit-Departments" or $page == "Edit-Organization" or $page == "leaveConfig" or $page == "Edit-Branch" or $page == "Edit-Department" or $page == "Edit-CustomAttributes") { echo 'active'; } ?>">
 					<span class="menu-icon">
 						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
 						<span class="svg-icon svg-icon-2">
@@ -83,6 +83,19 @@
 								<span class="bullet bullet-dot"></span>
 							</span>
 							<span class="menu-title">Edit Departments</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link <?php if ($page == "Edit-CustomAttributes") { echo 'active'; } ?>"  href="?page=Edit-CustomAttributes">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Edit Custom Attributes</span>
 						</a>
 						<!--end:Menu link-->
 					</div>
