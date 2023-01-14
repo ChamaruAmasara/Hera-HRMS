@@ -42,6 +42,8 @@
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-37VKWSZBN0"></script>
 	<script>
+				headers.append('Access-Control-Allow-Origin', 'http://hera.chamaru.me');
+headers.append('Access-Control-Allow-Credentials', 'true');
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
