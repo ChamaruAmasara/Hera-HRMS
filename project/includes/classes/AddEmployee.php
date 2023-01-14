@@ -445,7 +445,7 @@ class AddEmployee
                         $EmailAddress = $this->db_connection->real_escape_string($_POST['EmailAddress']);
                         $passwordHash = password_hash($Password,PASSWORD_BCRYPT);
 
-
+                        
                 
                         // insert into emergencycontact
 

@@ -3,7 +3,7 @@
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
-<?php include '..\project\layout\partials\_profile-header.php'; 
+<?php include PROJECT_ROOT_PATH.'\layout\partials\_profile-header.php'; 
 	// $id=isset($_GET['ID']) ? $_GET['ID'] : 'no id found';
 	// echo $id;
 	// echo 'lololololol';
