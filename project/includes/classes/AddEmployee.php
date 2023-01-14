@@ -37,13 +37,21 @@ class AddEmployee
 
 
         if (isset($_POST['submit']) && ($_POST['submit']=="addEmployee")) {
-            $this->addEmployee();        
+            if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,6))){
+                $this->addEmployee();        
+            }
         }
         elseif (isset($_POST['submit']) && ($_POST['submit']=="editEmployee") ) {
-            $this->editEmployee($_POST['EmployeeID']);        
+            if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,6))){
+                $this->editEmployee($_POST['EmployeeID']);    
+            }
+                  
         }
         elseif (isset($_POST['submit']) && ($_POST['submit']=="promoteToUser") ) {
-            $this->promoteToUser($_POST['EmployeeID']);        
+            if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,6))){
+                $this->promoteToUser($_POST['EmployeeID']);         
+            }
+                 
         }
 
         $this->showErrors();
@@ -151,7 +159,7 @@ class AddEmployee
                         $SupervisorID = $this->db_connection->real_escape_string($_POST['SupervisorID']);
 
                 
-                        // insert into emergencycontact
+                        // prepared statement
 
                         try{
 

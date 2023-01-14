@@ -6,8 +6,9 @@
 		<div class="row g-5 g-xl-10 mb-5 mb-xl-10">
 			<!--begin::Col-->
 			<div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-				<?php include 'partials/widgets/cards/_widget-20.php' ?>
+				
 				<?php include 'partials/widgets/cards/_widget-17.php' ?>
+				<?php include 'partials/widgets/cards/_widget-20.php' ?>
 			</div>
 			<!--end::Col-->
 			<!--begin::Col-->

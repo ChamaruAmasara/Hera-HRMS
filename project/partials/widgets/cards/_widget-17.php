@@ -7,27 +7,20 @@
 			<!--begin::Info-->
 			<div class="d-flex align-items-center">
 				<!--begin::Currency-->
-				<span class="fs-4 fw-semibold text-gray-400 me-1 align-self-start">$</span>
+				<span class="fs-4 fw-semibold text-gray-400 me-1 align-self-start">Introducing</span>
 				<!--end::Currency-->
 				<!--begin::Amount-->
-				<span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">69,700</span>
+				<span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">Hera</span>
 				<!--end::Amount-->
 				<!--begin::Badge-->
-				<span class="badge badge-light-success fs-base">
-				<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-				<span class="svg-icon svg-icon-5 svg-icon-success ms-n1">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
-						<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="currentColor" />
-					</svg>
-				</span>
-				<!--end::Svg Icon-->
-				2.2%</span>
+				<span class="badge badge-light-primary fs-base">
+
+				HRM</span>
 				<!--end::Badge-->
 			</div>
 			<!--end::Info-->
 			<!--begin::Subtitle-->
-			<span class="text-gray-400 pt-1 fw-semibold fs-6">Projects Earnings in April</span>
+			<span class="text-gray-400 pt-1 fw-semibold fs-6">Modern | Secure | Scalable | Modular</span>
 			<!--end::Subtitle-->
 		</div>
 		<!--end::Title-->
@@ -48,10 +41,17 @@
 				<div class="bullet w-8px h-3px rounded-2 bg-success me-3"></div>
 				<!--end::Bullet-->
 				<!--begin::Label-->
-				<div class="text-gray-500 flex-grow-1 me-4">Leaf CRM</div>
+				<div class="text-gray-500 flex-grow-1 me-4">Employee PIM</div>
 				<!--end::Label-->
 				<!--begin::Stats-->
-				<div class="fw-bolder text-gray-700 text-xxl-end">$7,660</div>
+				<div class="fw-bolder text-gray-700 text-xxl-end">						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+						<span class="svg-icon svg-icon-2">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="currentColor" />
+								<rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor" />
+							</svg>
+						</span>
+						<!--end::Svg Icon--></div>
 				<!--end::Stats-->
 			</div>
 			<!--end::Label-->
@@ -61,10 +61,17 @@
 				<div class="bullet w-8px h-3px rounded-2 bg-primary me-3"></div>
 				<!--end::Bullet-->
 				<!--begin::Label-->
-				<div class="text-gray-500 flex-grow-1 me-4">Mivy App</div>
+				<div class="text-gray-500 flex-grow-1 me-4">Leaves</div>
 				<!--end::Label-->
 				<!--begin::Stats-->
-				<div class="fw-bolder text-gray-700 text-xxl-end">$2,820</div>
+				<div class="fw-bolder text-gray-700 text-xxl-end">						<!--begin::Svg Icon | path: icons/duotune/files/fil003.svg-->
+						<span class="svg-icon svg-icon-2">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22Z" fill="currentColor" />
+								<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor" />
+							</svg>
+						</span>
+						<!--end::Svg Icon--></div>
 				<!--end::Stats-->
 			</div>
 			<!--end::Label-->
@@ -74,10 +81,17 @@
 				<div class="bullet w-8px h-3px rounded-2 me-3" style="background-color: #E4E6EF"></div>
 				<!--end::Bullet-->
 				<!--begin::Label-->
-				<div class="text-gray-500 flex-grow-1 me-4">Others</div>
+				<div class="text-gray-500 flex-grow-1 me-4">Payroll</div>
 				<!--end::Label-->
 				<!--begin::Stats-->
-				<div class="fw-bolder text-gray-700 text-xxl-end">$45,257</div>
+				<div class="fw-bolder text-gray-700 text-xxl-end">						<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+						<span class="svg-icon svg-icon-2">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path opacity="0.3" d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z" fill="currentColor"></path>
+														<path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+													</svg>
+						</span>
+						<!--end::Svg Icon--></div>
 				<!--end::Stats-->
 			</div>
 			<!--end::Label-->

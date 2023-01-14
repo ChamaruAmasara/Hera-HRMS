@@ -94,7 +94,6 @@ class Login
                         $_SESSION['Username'] = $result_row->Username;
                         $_SESSION['Email'] = $result_row->Email;
                         $_SESSION['UserLoginStatus'] = 1;
-                        $_SESSION['User'] = new UserDetails(UID:$result_row->UserID);
                         // $_SESSION['User'] = new UserDetails(UID:$result_row->UserID);
                         // 1	Admin	EDIT	EDIT	1	1	1	1
                         // 2	Employee	VIEW	NO	0	1	0	0
@@ -106,6 +105,9 @@ class Login
                         $_SESSION['UserAccountLevelID'] = $result_row->UserAccountLevelID;
                         
                         header("Location: ?success=true");
+
+                        $_SESSION['User'] = new UserDetails(UID:$result_row->UserID);
+                        mysqli_close($this->db_connection );
                        
 
                     } else {

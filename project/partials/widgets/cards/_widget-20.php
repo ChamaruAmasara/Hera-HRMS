@@ -25,7 +25,7 @@
 
 
 	$totalCount=$pendingCount+$approvedCount+$rejectedCount;
-	$percentage=round($pendingCount/($totalCount)*100);
+	$percentage=100-round($pendingCount/($totalCount)*100);
 
 
 ?>
@@ -39,14 +39,23 @@
 			<span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2"><?php echo $pendingCount; ?></span>
 			<!--end::Amount-->
 			<!--begin::Subtitle-->
-			<span class="text-white opacity-75 pt-1 fw-semibold fs-6">Leave Requests to Moderate</span>
+			<span class="text-white opacity-75 pt-1 fw-semibold fs-6">Leave Requests to be moderated</span>
 			<!--end::Subtitle-->
 		</div>
 		<!--end::Title-->
 	</div>
-	<!--end::Header--><div class="card-body d-flex align-items-end pt-0">
-	<a href='?page=Leave-Approval' class="btn btn-sm btn-light-danger fw-bold">Moderate Leave Requests</a>
-	</div>
+	<!--end::Header-->
+	<?php
+	if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,5,6))){
+                echo <<<EOT
+				<div class="card-body d-flex align-items-end pt-0">
+				<a href='?page=Leave-Approval' class="btn btn-sm btn-light-danger fw-bold">Moderate Leave Requests</a>
+				</div>
+				EOT;       
+            }
+?>
+
+
 	<!--begin::Card body-->
 	<div class="card-body d-flex align-items-end pt-2">
 			<!--begin::Progress-->

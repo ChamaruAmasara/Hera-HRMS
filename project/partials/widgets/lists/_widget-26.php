@@ -3,7 +3,7 @@
 	<!--begin::Header-->
 	<div class="card-header pt-5">
 		<!--begin::Title-->
-		<h3 class="card-title text-gray-800 fw-bold">External Links</h3>
+		<h3 class="card-title text-gray-800 fw-bold">Links</h3>
 		<!--end::Title-->
 		<!--begin::Toolbar-->
 		<div class="card-toolbar">
@@ -61,7 +61,7 @@
 		<!--begin::Item-->
 		<div class="d-flex flex-stack">
 			<!--begin::Section-->
-			<a href="#" class="text-primary fw-semibold fs-6 me-2">Avg. Client Rating</a>
+			<a href="?page=Personal-Info" class="text-primary fw-semibold fs-6 me-2">My Profile</a>
 			<!--end::Section-->
 			<!--begin::Action-->
 			<button type="button" class="btn btn-icon btn-sm h-auto btn-color-gray-400 btn-active-color-primary justify-content-end">
@@ -84,10 +84,10 @@
 		<!--begin::Item-->
 		<div class="d-flex flex-stack">
 			<!--begin::Section-->
-			<a href="#" class="text-primary fw-semibold fs-6 me-2">Instagram Followers</a>
+			<a href="?page=Leave-Application" class="text-primary fw-semibold fs-6 me-2">Apply for a leave</a>
 			<!--end::Section-->
 			<!--begin::Action-->
-			<button type="button" class="btn btn-icon btn-sm h-auto btn-color-gray-400 btn-active-color-primary justify-content-end">
+			<button href="?page=Leave-Application" type="button" class="btn btn-icon btn-sm h-auto btn-color-gray-400 btn-active-color-primary justify-content-end">
 				<!--begin::Svg Icon | path: icons/duotune/arrows/arr095.svg-->
 				<span class="svg-icon svg-icon-2">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@
 		<!--begin::Item-->
 		<div class="d-flex flex-stack">
 			<!--begin::Section-->
-			<a href="#" class="text-primary fw-semibold fs-6 me-2">Google Ads CPC</a>
+			<a href="?page=Leave-Details" class="text-primary fw-semibold fs-6 me-2">Check Leave Application Status</a>
 			<!--end::Section-->
 			<!--begin::Action-->
 			<button type="button" class="btn btn-icon btn-sm h-auto btn-color-gray-400 btn-active-color-primary justify-content-end">

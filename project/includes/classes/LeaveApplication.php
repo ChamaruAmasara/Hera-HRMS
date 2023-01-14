@@ -39,6 +39,7 @@ class LeaveApplication
 
         // leave application via post data (if user just submitted a leave application form)
         if (isset($_POST["submit"])) {
+            
             $this->applyLeaveWithPostData();
         }
     }

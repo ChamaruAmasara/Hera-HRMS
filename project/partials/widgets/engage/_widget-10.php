@@ -21,7 +21,15 @@
 			</div>
 		-->
 			<div class="text-center">
+			<?php
+	if (in_array($_SESSION['UserAccountLevelID'],array(1,3,4,6))){
+                echo <<<EOT
+				
 				<a href='?page=Employee-Details' class="btn btn-sm btn-dark fw-bold">Explore Employees</a>
+				EOT;       
+            }
+?>
+
 			</div>
 			<!--begin::Action-->
 		</div>
