@@ -1,18 +1,22 @@
 <?php
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 	// check for if the previous Application was Accepted or Rejected and act accordingly
-	$act=isset($_GET['act']) ? $_GET['act'] : '';
-	$leaveId=isset($_GET['lid']) ? $_GET['lid'] : '';
+	$act=isset($_GET['act']) ? mysqli_real_escape_string($mysqli,$_GET['act']) : '';
+	$leaveId=isset($_GET['lid']) ?  mysqli_real_escape_string($mysqli,$_GET['lid']) : '';
 
 	$errors=array();
 	$success=array();
 	$messages=array();
 
+
+
 	if($act=='appr' && $leaveId!=''){
+		
 		$sql = "UPDATE hera.leave SET Approved = 'Approved' WHERE LeaveID = $leaveId;";
         $res = $mysqli->query($sql);
 		$success[] = "Leave Application Approved";
 	}elseif ($act=='rej' && $leaveId!='') {
+
 		$sql = "UPDATE hera.leave SET Approved = 'Rejected' WHERE LeaveID = $leaveId;";
         $res = $mysqli->query($sql);
 		$errors[] = "Leave Application Rejected";
