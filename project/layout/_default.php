@@ -21,7 +21,7 @@
 	                    include PROJECT_ROOT_PATH.'/layout/partials/_content.php'; 
 					}
 					else if ($SubPage == 'Employee-Edit' AND $page == 'Employee-Details') {
-						include PROJECT_ROOT_PATH.'\pages\employee\edit.php';
+						include PROJECT_ROOT_PATH.'/pages/employee/edit.php';
 					}
 					else if ($SubPage == 'Employee-Info' AND $page == 'Employee-Details') {
 						include PROJECT_ROOT_PATH.'/pages/employee/info.php';
@@ -48,13 +48,13 @@
 						include PROJECT_ROOT_PATH.'/pages/employee/add.php';
 					}
 					else if ($page == 'Leave-Approval' AND $SubPage == 'ViewLeaveAplication') {
-						include PROJECT_ROOT_PATH.'\pages\employee\ViewLeaveAplication.php';
+						include PROJECT_ROOT_PATH.'/pages/employee/ViewLeaveAplication.php';
 					}
 					else if ($page == 'Leave-Approval') {
 						include PROJECT_ROOT_PATH.'/pages/employee/leaveApproval.php';
 					}
 					else if ($page == 'Edit-Organization') {
-						include PROJECT_ROOT_PATH.'\pages\Settings\editOrganization.php';
+						include PROJECT_ROOT_PATH.'/pages/Settings/editOrganization.php';
 					}
 					else if ($page == 'Promote-Employees') {
 						include PROJECT_ROOT_PATH.'/pages/employee/promote.php';
