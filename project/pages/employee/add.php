@@ -54,6 +54,32 @@ if (isset($_POST["submit"])) {
 														<!--end::Col-->
 													</div>
 													<!--end::Input group-->
+
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">NID or Passport Number</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<input type="text" name="IDorPastportNum" class="form-control form-control-lg form-control-solid" placeholder="NID or Passport Number"  required/>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
+
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">EPF Number</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<input type="text" name="EPFnum" class="form-control form-control-lg form-control-solid" placeholder="EPF Number"  required/>
+														</div>
+														<!--end::Col-->
+													</div>
+													<!--end::Input group-->
 													
 													<!--begin::Input group-->
 													<div class="row mb-6">
@@ -138,6 +164,19 @@ if (isset($_POST["submit"])) {
 													<!--begin::Col-->
 													</div>
 													<!--end::Row-->
+													<!--end::Input group-->
+
+													<!--begin::Input group-->
+													<div class="row mb-6">
+														<!--begin::Label-->
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Email Address</label>
+														<!--end::Label-->
+														<!--begin::Col-->
+														<div class="col-lg-8 fv-row">
+															<input type="text" name="Email" class="form-control form-control-lg form-control-solid" placeholder="Email Address"  required/>
+														</div>
+														<!--end::Col-->
+													</div>
 													<!--end::Input group-->
 
 												

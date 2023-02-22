@@ -73,7 +73,7 @@
 										
 										
 											<!--begin::Form-->
-											<form method="POST" action="?page=Personal-Info&logout" class="form">
+											<form method="POST" action="" class="form">
 												<!--begin::Card body-->
 												<div class="card-body border-top p-9">
 												
@@ -152,7 +152,7 @@
 													<!--end::Card body-->
 													<!--begin::Actions-->
 													<div class="card-footer d-flex justify-content-end py-6 px-9">
-													<a href="?page=Personal-Info&logout">	
+													<a href="">	
 														<button  type="submit" name="submit" value="addEmployee" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
 													</a>
 													</div>

@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema hera
+-- Schema CompanyName_
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema hera
+-- Schema CompanyName_
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `hera` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `hera` ;
+CREATE SCHEMA IF NOT EXISTS `CompanyName_` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `CompanyName_` ;
 
 -- -----------------------------------------------------
--- Table `hera`.`country`
+-- Table `CompanyName_`.`country`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`country` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`country` (
   `CountryID` INT NOT NULL AUTO_INCREMENT,
   `CountryName` VARCHAR(20) NULL,
   PRIMARY KEY (`CountryID`),
@@ -31,9 +31,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`branch`
+-- Table `CompanyName_`.`branch`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`branch` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`branch` (
   `BranchID` INT NOT NULL AUTO_INCREMENT,
   `BranchName` VARCHAR(20) NULL DEFAULT NULL,
   `CountryID` INT NULL DEFAULT NULL,
@@ -43,19 +43,19 @@ CREATE TABLE IF NOT EXISTS `hera`.`branch` (
   UNIQUE INDEX `BranchID_UNIQUE` (`BranchID` ASC) VISIBLE,
   CONSTRAINT `branch_ibfk_1`
     FOREIGN KEY (`CountryID`)
-    REFERENCES `hera`.`country` (`CountryID`),
+    REFERENCES `CompanyName_`.`country` (`CountryID`),
   CONSTRAINT `organization_ibfk_1`
     FOREIGN KEY (`OrganizationID`)
-    REFERENCES `hera`.`organization` (`OrganizationID`))
+    REFERENCES `CompanyName_`.`organization` (`OrganizationID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`customattributename`
+-- Table `CompanyName_`.`customattributename`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`customattributename` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`customattributename` (
   `AttributeNameID` INT NOT NULL AUTO_INCREMENT,
   `AttributeName` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`AttributeNameID`),
@@ -66,9 +66,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`department`
+-- Table `CompanyName_`.`department`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`department` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`department` (
   `DeapartmentID` INT NOT NULL AUTO_INCREMENT,
   `DepartmentName` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`DeapartmentID`),
@@ -79,9 +79,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`employmentstatus`
+-- Table `CompanyName_`.`employmentstatus`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`employmentstatus` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`employmentstatus` (
   `EmploymentStatusID` INT NOT NULL AUTO_INCREMENT,
   `EmploymentStatusName` ENUM('Intern Fulltime', 'Intern Parttime', 'Contract Fulltime', 'Contract Parttime', 'Permanent', 'Freelance') NULL DEFAULT NULL ,
   PRIMARY KEY (`EmploymentStatusID`),
@@ -92,9 +92,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`paygrade`
+-- Table `CompanyName_`.`paygrade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`paygrade` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`paygrade` (
   `PayGradeID` INT NOT NULL AUTO_INCREMENT,
   `PayGradeName` ENUM('Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6') NULL DEFAULT NULL ,
   `ApprovedAnnualLeaveCount` INT NULL DEFAULT NULL,
@@ -109,9 +109,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`jobtitle`
+-- Table `CompanyName_`.`jobtitle`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`jobtitle` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`jobtitle` (
   `JobTitleID` INT NOT NULL AUTO_INCREMENT,
   `JobTitleName` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`JobTitleID`),
@@ -122,9 +122,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`emergencycontact`
+-- Table `CompanyName_`.`emergencycontact`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`emergencycontact` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`emergencycontact` (
   `EmergencyContactID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(1024) NULL DEFAULT NULL,
   `PrimaryPhoneNumber` VARCHAR(20) NULL DEFAULT NULL,
@@ -137,61 +137,49 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`employee`
+-- Table `CompanyName_`.`employee`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`employee` (
-  `EmployeeID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(1024) NULL DEFAULT NULL,
-  `BirthDate` DATE NULL DEFAULT NULL,
-  `Gender` ENUM('Male', 'Female') NULL DEFAULT NULL,
-  `MaritalStatus` ENUM('Married', 'Unmarried') NULL DEFAULT NULL,
-  `Address` VARCHAR(2048) NULL DEFAULT NULL,
-  `Country` VARCHAR(10) NULL DEFAULT NULL,
-  `EmergencyContactID` INT NULL DEFAULT NULL,
-  `DepartmentID` INT NULL DEFAULT NULL,
-  `BranchID` INT NULL DEFAULT NULL,
-  `JobTitleID` INT NULL DEFAULT NULL,
-  `PayGradeID` INT NULL DEFAULT NULL,
-  `EmploymentStatusID` INT NULL DEFAULT NULL,
-  `SupervisorID` INT NULL DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `employee` (
+  `EmployeeID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(1024) DEFAULT NULL,
+  `Email` varchar(45) DEFAULT NULL,
+  `IDorPastportNum` varchar(45) DEFAULT NULL,
+  `EPFnum` varchar(45) DEFAULT NULL,
+  `BirthDate` date DEFAULT NULL,
+  `Gender` enum('Male','Female') DEFAULT NULL,
+  `MaritalStatus` enum('Married','Unmarried') DEFAULT NULL,
+  `Address` varchar(2048) DEFAULT NULL,
+  `EmergencyContactID` int DEFAULT NULL,
+  `DepartmentID` int DEFAULT NULL,
+  `BranchID` int DEFAULT NULL,
+  `JobTitleID` int DEFAULT NULL,
+  `PayGradeID` int DEFAULT NULL,
+  `EmploymentStatusID` int DEFAULT NULL,
+  `SupervisorID` int DEFAULT NULL,
+  `Country` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`EmployeeID`),
-  INDEX `DepartmentID` (`DepartmentID` ASC) VISIBLE,
-  INDEX `employee_ibfk_7_idx` (`BranchID` ASC) VISIBLE,
-  INDEX `EmploymentStatusID` (`EmploymentStatusID` ASC) VISIBLE,
-  INDEX `PayGradeID` (`PayGradeID` ASC) VISIBLE,
-  INDEX `JobTitleID` (`JobTitleID` ASC) VISIBLE,
-  INDEX `SupervisorID` (`SupervisorID` ASC) VISIBLE,
-  INDEX `employee_IBFK_6_idx` (`EmergencyContactID` ASC) VISIBLE,
-  UNIQUE INDEX `EmployeeID_UNIQUE` (`EmployeeID` ASC) VISIBLE,
-  CONSTRAINT `employee_ibfk_1`
-    FOREIGN KEY (`DepartmentID`)
-    REFERENCES `hera`.`department` (`DeapartmentID`),
-  CONSTRAINT `employee_ibfk_2`
-    FOREIGN KEY (`EmploymentStatusID`)
-    REFERENCES `hera`.`employmentstatus` (`EmploymentStatusID`),
-  CONSTRAINT `employee_ibfk_3`
-    FOREIGN KEY (`PayGradeID`)
-    REFERENCES `hera`.`paygrade` (`PayGradeID`),
-  CONSTRAINT `employee_ibfk_4`
-    FOREIGN KEY (`JobTitleID`)
-    REFERENCES `hera`.`jobtitle` (`JobTitleID`),
-  CONSTRAINT `employee_ibfk_5`
-    FOREIGN KEY (`SupervisorID`)
-    REFERENCES `hera`.`employee` (`EmployeeID`),
-  CONSTRAINT `employee_IBFK_6`
-    FOREIGN KEY (`EmergencyContactID`)
-    REFERENCES `hera`.`emergencycontact` (`EmergencyContactID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  UNIQUE KEY `EmployeeID_UNIQUE` (`EmployeeID`),
+  KEY `DepartmentID` (`DepartmentID`),
+  KEY `EmploymentStatusID` (`EmploymentStatusID`),
+  KEY `PayGradeID` (`PayGradeID`),
+  KEY `JobTitleID` (`JobTitleID`),
+  KEY `SupervisorID` (`SupervisorID`),
+  KEY `employee_IBFK_6_idx` (`EmergencyContactID`),
+  KEY `employee_ibfk_7_idx` (`BranchID`),
+  CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`DepartmentID`) REFERENCES `department` (`DepartmentID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`EmploymentStatusID`) REFERENCES `employmentstatus` (`EmploymentStatusID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `employee_ibfk_3` FOREIGN KEY (`PayGradeID`) REFERENCES `paygrade` (`PayGradeID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `employee_ibfk_4` FOREIGN KEY (`JobTitleID`) REFERENCES `jobtitle` (`JobTitleID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `employee_ibfk_5` FOREIGN KEY (`SupervisorID`) REFERENCES `employee` (`EmployeeID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `employee_IBFK_6` FOREIGN KEY (`EmergencyContactID`) REFERENCES `emergencycontact` (`EmergencyContactID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `employee_ibfk_7` FOREIGN KEY (`BranchID`) REFERENCES `branch` (`BranchID`) ON DELETE SET NULL ON UPDATE SET NULL
+);
 
 
 -- -----------------------------------------------------
--- Table `hera`.`customattributevalue`
+-- Table `CompanyName_`.`customattributevalue`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`customattributevalue` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`customattributevalue` (
   `CustomAttributeValueID` INT NOT NULL AUTO_INCREMENT,
   `AttributeNameID` INT NULL DEFAULT NULL,
   `AttributeValue` VARCHAR(20) NULL DEFAULT NULL,
@@ -202,19 +190,19 @@ CREATE TABLE IF NOT EXISTS `hera`.`customattributevalue` (
   UNIQUE INDEX `CustomAttributeValueID_UNIQUE` (`CustomAttributeValueID` ASC) VISIBLE,
   CONSTRAINT `customattributevalue_ibfk_1`
     FOREIGN KEY (`AttributeNameID`)
-    REFERENCES `hera`.`customattributename` (`AttributeNameID`),
+    REFERENCES `CompanyName_`.`customattributename` (`AttributeNameID`),
   CONSTRAINT `customattributevalue_ibfk_2`
     FOREIGN KEY (`EmployeeID`)
-    REFERENCES `hera`.`employee` (`EmployeeID`))
+    REFERENCES `CompanyName_`.`employee` (`EmployeeID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`leave`
+-- Table `CompanyName_`.`leave`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`leave` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`leave` (
   `LeaveID` INT NOT NULL AUTO_INCREMENT,
   `LeaveLogDateTime` DATETIME NULL DEFAULT NULL,
   `EmployeeID` INT NULL DEFAULT NULL,
@@ -225,38 +213,51 @@ CREATE TABLE IF NOT EXISTS `hera`.`leave` (
   `LastAbsentDate` DATE NULL DEFAULT NULL,
   `LeaveDayCount` INT NULL DEFAULT NULL,
   `ApprovedDateTime` DATETIME NULL DEFAULT NULL,
+  `ApprovedByID` INT NULL DEFAULT NULL,
   PRIMARY KEY (`LeaveID`),
   INDEX `leave_ibfk_1_idx` (`EmployeeID` ASC) VISIBLE,
+  INDEX `leave_appId_idx` (`ApprovedByID` ASC) VISIBLE,
   UNIQUE INDEX `LeaveID_UNIQUE` (`LeaveID` ASC) VISIBLE,
   CONSTRAINT `leave_ibfk_1`
     FOREIGN KEY (`EmployeeID`)
-    REFERENCES `hera`.`employee` (`EmployeeID`)
+    REFERENCES `CompanyName_`.`employee` (`EmployeeID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `leave_appId`
+    FOREIGN KEY (`ApprovedByID`)
+    REFERENCES `CompanyName_`.`employee` (`EmployeeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
+
 -- -----------------------------------------------------
--- Table `hera`.`organization`
+-- Table `CompanyName_`.`organization`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`organization` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`organization` (
   `OrganizationID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(1024) NULL DEFAULT NULL,
   `Address` VARCHAR(2048) NULL DEFAULT NULL,
   `RegistrationNumber` VARCHAR(10) NULL DEFAULT NULL,
+  `TelephoneNumber` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`OrganizationID`),
-  UNIQUE INDEX `OrganizationID_UNIQUE` (`OrganizationID` ASC) VISIBLE)
+  UNIQUE INDEX `OrganizationID_UNIQUE` (`OrganizationID` ASC) VISIBLE
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
+
+
 -- -----------------------------------------------------
--- Table `hera`.`salary`
+-- Table `CompanyName_`.`salary`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`salary` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`salary` (
   `SalaryID` INT NOT NULL AUTO_INCREMENT,
   `JobTitleID` INT NULL DEFAULT NULL,
   `EmploymentStatusID` INT NULL DEFAULT NULL,
@@ -269,84 +270,68 @@ CREATE TABLE IF NOT EXISTS `hera`.`salary` (
   UNIQUE INDEX `SalaryID_UNIQUE` (`SalaryID` ASC) VISIBLE,
   CONSTRAINT `salary_ibfk_1`
     FOREIGN KEY (`JobTitleID`)
-    REFERENCES `hera`.`jobtitle` (`JobTitleID`),
+    REFERENCES `CompanyName_`.`jobtitle` (`JobTitleID`),
   CONSTRAINT `salary_ibfk_2`
     FOREIGN KEY (`EmploymentStatusID`)
-    REFERENCES `hera`.`employmentstatus` (`EmploymentStatusID`),
+    REFERENCES `CompanyName_`.`employmentstatus` (`EmploymentStatusID`),
   CONSTRAINT `salary_ibfk_3`
     FOREIGN KEY (`PayGradeID`)
-    REFERENCES `hera`.`paygrade` (`PayGradeID`))
+    REFERENCES `CompanyName_`.`paygrade` (`PayGradeID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hera`.`useraccountlevel`
+-- Table `CompanyName_`.`useraccountlevel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`useraccountlevel` (
   `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
-  `UserAccountLevelName` VARCHAR(200) NULL DEFAULT NULL ,
-  `OwnProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') NULL DEFAULT NULL,
-  `EveryProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') NULL DEFAULT NULL,
-  `CreateProfile` TINYINT(1) NULL DEFAULT NULL,
-  `CreateLeave` TINYINT(1) NULL DEFAULT NULL,
-  `ApproveLeave` TINYINT(1) NULL DEFAULT NULL,
-  `UserAccountLevelChange` TINYINT(1) NULL DEFAULT NULL,CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
-  `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
-  `UserAccountLevelName` VARCHAR(200) NULL DEFAULT NULL ,CREATE TABLE IF NOT EXISTS `hera`.`useraccountlevel` (
-  `UserAccountLevelID` INT NOT NULL AUTO_INCREMENT,
-  `UserAccountLevelName` VARCHAR(200) NULL DEFAULT NULL ,
+  `UserAccountLevelName` VARCHAR(100) DEFAULT NULL,
+  `OwnProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') DEFAULT NULL,
+  `EveryProfileDetailsAccess` ENUM('NO', 'VIEW', 'EDIT') DEFAULT NULL,
+  `CreateProfile` TINYINT(1) DEFAULT NULL,
+  `CreateLeave` TINYINT(1) DEFAULT NULL,
+  `ApproveLeave` TINYINT(1) DEFAULT NULL,
+  `UserAccountLevelChange` TINYINT(1) DEFAULT NULL,
   PRIMARY KEY (`UserAccountLevelID`),
-  UNIQUE INDEX `UserAccountLevelID_UNIQUE` (`UserAccountLevelID` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UserAccountLevelID_UNIQUE` (`UserAccountLevelID`)
+);
 
 
 -- -----------------------------------------------------
--- Table `hera`.`useraccount`
+-- Table `CompanyName_`.`useraccount`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hera`.`useraccount` (
-  `UserID` INT NOT NULL AUTO_INCREMENT,
-  `Username` VARCHAR(64) NULL DEFAULT NULL,
-  `Email` VARCHAR(64) NULL DEFAULT NULL,
-  `EmployeeID` INT NULL,
-  `PasswordHash` VARCHAR(20) NULL DEFAULT NULL,
-  `UserAccountLevelID` INT NULL DEFAULT NULL,
-  `ProfilePhoto` VARCHAR(2048) NULL,
-  PRIMARY KEY (`UserID`),
-  INDEX `UserAccountLevelID` (`UserAccountLevelID` ASC) VISIBLE,
-  INDEX `EmployeeID_idx` (`EmployeeID` ASC) VISIBLE,
-  UNIQUE INDEX `UserID_UNIQUE` (`UserID` ASC) VISIBLE,
-  CONSTRAINT `useraccount_ibfk_1`
-    FOREIGN KEY (`UserAccountLevelID`)
-    REFERENCES `hera`.`useraccountlevel` (`UserAccountLevelID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `EmployeeID`
-    FOREIGN KEY (`EmployeeID`)
-    REFERENCES `hera`.`employee` (`EmployeeID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `CompanyName_`.`useraccount` (
+  `UserID` int NOT NULL AUTO_INCREMENT,
+  `Username` varchar(64) DEFAULT NULL,
+  `Email` varchar(64) DEFAULT NULL,
+  `EmployeeID` int NOT NULL,
+  `PasswordHash` varchar(255) DEFAULT NULL,
+  `UserAccountLevelID` int DEFAULT NULL,
+  `ProfilePhoto` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`UserID`,`EmployeeID`),
+  UNIQUE KEY `UserID_UNIQUE` (`UserID`),
+  KEY `UserAccountLevelID` (`UserAccountLevelID`),
+  KEY `EmployeeID_idx` (`EmployeeID`),
+  KEY `Username_index` (`Username`),
+  KEY `Email_index` (`Email`),
+  CONSTRAINT `EmployeeID` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`EmployeeID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `useraccount_ibfk_1` FOREIGN KEY (`UserAccountLevelID`) REFERENCES `useraccountlevel` (`UserAccountLevelID`) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
-ALTER TABLE `hera`.`leave` 
-ADD COLUMN `ApprovedByID` INT NULL AFTER `ApprovedDateTime`,
-ADD INDEX `leave_appId_idx` (`ApprovedByID` ASC) VISIBLE;
-;
-ALTER TABLE `hera`.`leave` 
-ADD CONSTRAINT `leave_appId`
-  FOREIGN KEY (`ApprovedByID`)
-  REFERENCES `hera`.`employee` (`EmployeeID`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION;
-  
-ALTER TABLE `hera`.`organization` 
-ADD COLUMN `TelephoneNumber` VARCHAR(20) NULL AFTER `Address`;
+-- -----------------------------------------------------
+-- Table `CompanyName_`.`supervisors`
+-- -----------------------------------------------------
+
+CREATE TABLE  IF NOT EXISTS supervisors(
+	SupEmpID INT NOT NULL,
+    SupHeadID INT,
+    PRIMARY KEY (SupEmpID),
+    FOREIGN KEY (SupEmpID) REFERENCES employee(EmployeeID),
+    FOREIGN KEY (SupHeadID) REFERENCES employee(EmployeeID)
+);
 
 
 
@@ -362,10 +347,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 
 CREATE VIEW EmployeeLeaveData AS
-SELECT l.LeaveID,e.EmployeeID,l.Approved,l.Reason,l.LeaveType,l.FirstAbsentDate,l.LastAbsentDate,l.LeaveDayCount,l.ApprovedDateTime,
-e.Name,e.BirthDate,e.Gender,e.MaritalStatus,e.Address,d.DepartmentName AS Department,b.BranchName AS Branch,c.CountryName AS Country,
-o.name as Organization,u.ProfilePhoto,u.Email,j.JobTitleName as JobTitle,p.PayGradeName AS PayGrade,d.DepartmentName
-FROM hera.leave l
+SELECT l.LeaveID, e.EmployeeID, l.Approved, l.Reason, l.LeaveType, l.FirstAbsentDate, l.LastAbsentDate, l.LeaveDayCount, l.ApprovedDateTime,
+       e.Name, e.BirthDate, e.Gender, e.MaritalStatus, e.Address, d.DepartmentName AS Department, b.BranchName AS Branch, c.CountryName AS Country,
+       o.Name AS Organization, u.ProfilePhoto, e.Email, u.Username, j.JobTitleName AS JobTitle, p.PayGradeName AS PayGrade, d.DepartmentName AS DepartmentName
+FROM `CompanyName_`.leave l
 LEFT JOIN employee e ON l.EmployeeID=e.EmployeeID
 LEFT JOIN department d ON e.DepartmentID=d.DepartmentID
 LEFT JOIN branch b ON e.BranchID=b.BranchID
@@ -375,7 +360,8 @@ LEFT JOIN employmentstatus es ON e.EmploymentStatusID=es.EmploymentStatusID
 LEFT JOIN country c ON b.CountryID=c.CountryID
 LEFT JOIN organization o ON b.OrganizationID=o.OrganizationID
 LEFT JOIN useraccount u ON e.EmployeeID=u.EmployeeID
-LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID
+LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID;
+
 
 
 
@@ -408,4 +394,4 @@ LEFT JOIN organization o ON b.OrganizationID=o.OrganizationID
 LEFT JOIN jobtitle jt ON e.JobTitleID=jt.JobTitleID
 LEFT JOIN paygrade p ON e.PayGradeID=p.PayGradeID
 LEFT JOIN employmentstatus es ON e.EmploymentStatusID=es.EmploymentStatusID
-LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID
+LEFT JOIN employee sup ON e.SupervisorID=sup.EmployeeID;

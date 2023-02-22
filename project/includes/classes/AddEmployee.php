@@ -140,13 +140,17 @@ class AddEmployee
                         // $required = array('Name','BirthDate','Gender[]','MaritalStatus[]','Address','EmergencyContactName','EmergencyContactNumber','DepartmentID','BranchID','JobTitleID','PayGradeID','EmploymentStatusID','SupervisorID');
         
                         $Name = $this->db_connection->real_escape_string($_POST['Name']);
+                        $NIDorPP = $this->db_connection->real_escape_string($_POST['IDorPastportNum']);
+                        $EPFnum = $this->db_connection->real_escape_string($_POST['EPFnum']);
+                        
                         $BirthDate = $this->db_connection->real_escape_string($_POST['BirthDate']);
 
                         $Gender = $this->db_connection->real_escape_string($_POST['Gender'][0]);
                         $MaritalStatus = $this->db_connection->real_escape_string($_POST['MaritalStatus'][0]);
                         
                         $Country = $this->db_connection->real_escape_string($_POST['Country']);
-
+                        
+                        $Email = $this->db_connection->real_escape_string($_POST['Email']);
                         $Address = $this->db_connection->real_escape_string($_POST['Address']);
                         $EmergencyContactName = $this->db_connection->real_escape_string($_POST['EmergencyContactName']);
                         $EmergencyContactNumber = $this->db_connection->real_escape_string($_POST['EmergencyContactNumber']);
@@ -174,9 +178,12 @@ class AddEmployee
                         $statement1 -> execute();
 
                         $sql = "INSERT INTO hera.employee (Name,
+                                                            IDorPastportNum,
+                                                            EPFnum,
                                                             BirthDate,
                                                             Gender,
                                                             MaritalStatus,
+                                                            Email,
                                                             Address,
                                                             Country,
                                                             EmergencyContactID,
@@ -188,7 +195,10 @@ class AddEmployee
                                                             SupervisorID) 
                                                             VALUES (?, 
                                                                     ?, 
+                                                                    ?,
+                                                                    ?,
                                                                     ?, 
+                                                                    ?,
                                                                     ?, 
                                                                     ?, 
                                                                     ?,
@@ -200,7 +210,7 @@ class AddEmployee
                                                                     ?, 
                                                                     ?);";
                         $statement2 = $this->db_connection->prepare($sql);
-                        $statement2 -> bind_param('sssssssssiiiiii',$Name,$BirthDate,$Gender,$MaritalStatus,$Address,$Country,$EmergencyContactName,$EmergencyContactNumber,$EmergencyContactAddress,$DepartmentID,$BranchID,$JobTitleID,$PayGradeID,$EmploymentStatusID,$SupervisorID );
+                        $statement2 -> bind_param('ssssssssssssiiiiii',$Name,$NIDorPP,$EPFnum,$BirthDate,$Gender,$MaritalStatus,$Email ,$Address,$Country,$EmergencyContactName,$EmergencyContactNumber,$EmergencyContactAddress,$DepartmentID,$BranchID,$JobTitleID,$PayGradeID,$EmploymentStatusID,$SupervisorID );
                         $statement2 -> execute();
 
                         $sql="SELECT EmployeeID FROM hera.employee WHERE Name=? AND BirthDate=? ORDER BY EmployeeID DESC LIMIT 1;";

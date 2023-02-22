@@ -14,7 +14,8 @@
 	$userDetailsArray = $userDetails->getUserDetailArray();
 
 	$orgName = $userDetailsArray['OrganizationName'];
-	$userName = $userDetailsArray['Name'];;
+	$userName = $userDetailsArray['Name'];
+	$emial= $userDetailsArray['Email'];
 	$bDay = $userDetailsArray['BirthDate'];
 	$emgContName = $userDetailsArray['EmergencyContactName'];
 	$emgContPhone = $userDetailsArray['EmergencyContactPhoneNum'];
@@ -69,7 +70,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8 d-flex align-items-center">
-													<span class="fw-bold fs-6 text-gray-800 me-2"><?php echo $userName ?></span>
+													<span class="fw-bold fs-6 text-gray-800 me-2"><?php echo $emial ?></span>
 												</div>
 												<!--end::Col-->
 											</div>
