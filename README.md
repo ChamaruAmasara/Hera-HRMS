@@ -1,27 +1,25 @@
 # DBMS project - Hera-Human Resource Management System
 
-Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, manage leave applications and payrolls with the click of a button!
+Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, and manage leave applications and payrolls with the click of a button!
 
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Introduction
 
-Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, manage leave applications and payrolls with the click of a button!
+Hera - The Human Resource Management System - Get organized with your employee data. Streamline onboarding, access personal information, generate employee reports, and manage leave applications and payrolls with the click of a button!
 
 ## Features
 
-** Employees
+* Employees
   * Create a profile
   * Apply for leaves
   * check the history of leaves and details
-** management
+    
+* management
   * Approve/reject employees leaves
   * Check employee's details
   * Add, Remove or promote employees
